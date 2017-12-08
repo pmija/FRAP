@@ -1,27 +1,44 @@
-<!DOCTYPE html>
+
 <html lang="en">
 
+<head>
 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>FRAP | Account Creation Information</title>
+
+    <link href="css/montserrat.css" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
 
 <?php
-
     
-    
-    require_once("mysql_connect_FA.php");
-
-
-    
+    require_once("mysql_connect_FA.php");   
 
     $queryDept = "SELECT * FROM REF_DEPARTMENT";
     $resultDept = mysqli_query($dbc, $queryDept);
 
     $queryCiv = "SELECT * FROM CIV_STATUS";
     $resultCiv = mysqli_query($dbc, $queryCiv);
-
-
-
-
 
     if (isset($_POST['submit'])) {
 
@@ -59,9 +76,6 @@
             $queryID = "SELECT MEMBER_ID, MEMBERSHIP_STATUS FROM member WHERE member_id = {$idNum}";
             $resultID = mysqli_query($dbc, $queryID);
             $row = mysqli_fetch_array($resultID);
-
-            $memid = $row['MEMBER_ID'];
-            echo $idNum;
 
             if(empty($idNum) ){
 
@@ -126,16 +140,10 @@
 
                $civStat = $_POST['civStat'];
 
-               echo $civStat;
-
                $haddress = $_POST['haddress'];
                $honum = $_POST['honum'];
                $birthdate = $bYear . "-" . $bMonth . "-" . $bDay;
                $datehired = $hYear . "-" . $hMonth . "-" . $hDay;
-
-               echo $birthdate . " ";
-               echo $datehired; 
-
 
                if(!empty($_POST['bunum']) && !empty($_POST['baddress'])){
                      $bunum = $_POST['bunum'];
@@ -145,17 +153,12 @@
                      $query = "INSERT INTO MEMBER (MEMBER_ID, FIRSTNAME, LASTNAME,CIV_STATUS, MIDDLENAME,SEX, BIRTHDATE ,DATE_HIRED, HOME_NUM, BUSINESS_NUM, HOME_ADDRESS, BUSINESS_ADDRESS, 
                           DEPT_ID,USER_STATUS,MEMBERSHIP_STATUS,DATE_APPLIED) VALUES ('{$idNum}','{$fName}','{$lName}',{$civStat},'{$mName}',{$sex},'{$birthdate}','{$datehired}',{$honum},{$bunum},'{$haddress}','{$baddress}',{$dept},1,1,NOW())"; 
 
+                      $result = mysqli_query($dbc,$query);
 
-                    echo "<pre>Debug: $query</pre>\m";
-                    $result = mysqli_query($dbc, $query);
-                    if ( false===$result ) {
-                      printf("error: %s\n", mysqli_error($dbc));
-                    }
-                    else {
-                      echo 'done.';
-                    }
+                      $pw = "password";
 
-                      $result = mysqli_query($dbc,$query); 
+                      $query2 = "INSERT INTO MEMBER_ACCOUNT (MEMBER_ID, PASSWORD, FIRST_CHANGE_PW) VALUES ('{$idNum}', PASSWORD('{$pw}'), '1');";
+                $result2 = mysqli_query($dbc, $query2); 
 
                }
 
@@ -166,12 +169,12 @@
                           DEPT_ID,USER_STATUS,MEMBERSHIP_STATUS,DATE_APPLIED) VALUES ('{$idNum}','{$fName}','{$lName}','{$mName}',{$civStat},{$sex},'{$birthdate}','{$datehired}',{$honum},{$bunum},'{$haddress}',{$dept},1,1,NOW())"; 
 
 
-
-                        
-
                       $result = mysqli_query($dbc,$query); 
 
+                      $pw = "password";
 
+                      $query2 = "INSERT INTO MEMBER_ACCOUNT (MEMBER_ID, PASSWORD, FIRST_CHANGE_PW) VALUES ('{$idNum}', PASSWORD('{$pw}'), '1');";
+                $result2 = mysqli_query($dbc, $query2);
 
                }
 
@@ -182,85 +185,31 @@
                           DEPT_ID,USER_STATUS,MEMBERSHIP_STATUS,DATE_APPLIED) VALUES ('{$idNum}','{$fName}','{$lName}',{$civStat}, '{$mName}',{$sex},'{$birthdate}','{$datehired}',{$honum},'{$haddress}','{$baddress}',{$dept},1,1,NOW())"; 
 
 
-                 
-
-
                      $result = mysqli_query($dbc,$query); 
+
+                     $pw = "password";
+
+                     $query2 = "INSERT INTO MEMBER_ACCOUNT (MEMBER_ID, PASSWORD, FIRST_CHANGE_PW) VALUES ('{$idNum}', PASSWORD('{$pw}'), '1');";
+                $result2 = mysqli_query($dbc, $query2);
 
 
 
                }
 
-
-               
-
                $query = "INSERT INTO MEMBER (MEMBER_ID, FIRSTNAME, LASTNAME, CIV_STATUS,  MIDDLENAME,SEX, BIRTHDATE ,DATE_HIRED, HOME_NUM, HOME_ADDRESS, DEPT_ID, USER_STATUS,MEMBERSHIP_STATUS,DATE_APPLIED) 
                         VALUES ('{$idNum}','{$fName}','{$lName}',{$civStat}, '{$mName}','{$sex}','{$birthdate}','{$datehired}','{$honum}','{$haddress}',{$dept},1,1,NOW())"; 
 
-                        
-
                 $result = mysqli_query($dbc,$query); 
 
-              
+                $pw = "password";
 
+                $query2 = "INSERT INTO MEMBER_ACCOUNT (MEMBER_ID, PASSWORD, FIRST_CHANGE_PW) VALUES ('{$idNum}', PASSWORD('{$pw}'), '1');";
+                $result2 = mysqli_query($dbc, $query2);
 
             }
 
-
-
-
-
-
-
-
-            // after checking everything, then you should be able to add all of these to the member details. 
-
-
-
-
-
-
-
-
     }
-
-
-    
-
-
-
-
-
 ?>
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>FRAP | Account Creation Information</title>
-
-    <link href="css/montserrat.css" rel="stylesheet">
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
 
 <body>
 
