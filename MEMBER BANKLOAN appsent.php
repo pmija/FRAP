@@ -1,3 +1,14 @@
+<?php
+session_start();
+require_once('mysql_connect.php');
+$id = $_POST['details'];
+$query = "INSERT INTO loans(MEMBER_ID,LOAN_DETAIL_ID,AMOUNT,INTEREST,PAYMENT_TERMS,PAYABLE,PER_PAYMENT,APP_STATUS,LOAN_STATUS,DATE_APPLIED,PICKUP_STATUS)
+values({$_SESSION['id']},{$id},{$_POST['amount']},{$_POST['interest']},{$_POST['payT']},{$_POST['amountP']},{$_POST['monD']}/2,1,1,DATE(now()),1);";
+
+mysqli_query($dbc,$query);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -240,266 +251,31 @@
 
                 </div>
 
+                <div class="row"> <!-- Well -->
+
+                    <div class="col-lg-1 col-1">
+
+
+
+                    </div>
+
+                    <div class="col-lg-10 col-2 well">
+
+                    <p class="welltext justify">Congratulations! You have successfully completed the steps in applying for a Bank Loan.  The admins will process and evaluate your application.  You will receive a notification whether your application is approved or not. Once your application has been approved, you will receive further instructions.</p>
+
+                    <p class="welltext justify"><font color="red">Please review your submitted values from the form before proceeding.</font></p>
+
+                    </div>
+
+                </div>
+
                 <div class="row">
 
                     <div class="col-lg-12">
 
-                        <div class="panel panel-primary">
+                        <div align="center">
 
-                            <div class="panel-heading">
-
-                                <b>APPLICATION REQUIREMENTS</b>
-
-                            </div>
-
-                            <div class="panel-body">
-
-                            Requirements, upload here. Scan documents
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="row">
-
-                    <form method="POST" action="MEMBER BANK appsent.html"> <!-- SERVERSELF, REDIRECT TO NEXT PAGE -->
-
-                    <div class="col-lg-3 col-1">
-
-                        <div class="panel panel-green" align="center">
-
-                            <div class="panel-heading">
-
-                                <b>Income Tax Return</b>
-
-                            </div>
-
-                            <div class="panel-body">
-
-                            <div class="row">
-
-                                <div class="col-lg-2">
-
-                                </div>
-
-                                <div class="col-lg-10">
-
-                                    <input type="file">
-
-                                </div>
-
-                            </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-3 col-2">
-
-                        <div class="panel panel-green" align="center">
-
-                            <div class="panel-heading">
-
-                                <b>Payslip (current month)</b>
-
-                            </div>
-
-                            <div class="panel-body">
-
-                            <div class="row">
-
-                                <div class="col-lg-2">
-
-                                </div>
-
-                                <div class="col-lg-10">
-
-                                    <input type="file">
-
-                                </div>
-
-                            </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-3 col-3">
-
-                        <div class="panel panel-green" align="center">
-
-                            <div class="panel-heading">
-
-                                <b>Employee ID</b>
-
-                            </div>
-
-                            <div class="panel-body">
-
-                            <div class="row">
-
-                                <div class="col-lg-2">
-
-                                </div>
-
-                                <div class="col-lg-10">
-
-                                    <input type="file">
-
-                                </div>
-
-                            </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-3 col-4">
-
-                        <div class="panel panel-green" align="center">
-
-                            <div class="panel-heading">
-
-                                <b>Government ID</b>
-
-                            </div>
-
-                            <div class="panel-body">
-
-                            <div class="row">
-
-                                <div class="col-lg-2">
-
-                                </div>
-
-                                <div class="col-lg-10">
-
-                                    <input type="file">
-
-                                </div>
-
-                            </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    </form>
-
-                </div>
-
-                <hr>
-
-                    <div class="row">
-
-                        <div class="col-lg-3">
-
-
-                        </div>
-
-                        <div class="col-lg-6">
-
-                            <table class="table table-bordered">
-                            
-                            <thread>
-
-                                <tr>
-
-                                <td align="center"><b>Description</b></td>
-                                <td align="center"><b>Amount</b></td>
-
-                                </tr>
-
-                            </thread>
-
-                            <tbody>
-
-                                <tr>
-
-                                <td><b>Amount to Borrow</td>
-                                <td>₱ 20,000.00</td>
-
-                                </tr>
-
-                                <tr>
-
-                                <td><b>Amount Payable</td>
-                                <td>₱ 21,000.00</td>
-
-                                </tr>
-
-                                <tr>
-
-                                <td><b>Payment Terms</td>
-                                <td>5 months</td>
-
-                                </tr>
-
-                                <tr>
-
-                                <td><b>Monthly Deduction</td>
-                                <td>₱ 4,200.00</td>
-
-                                </tr>
-
-                                <tr>
-
-                                <td><b>Number of Payments</td>
-                                <td>10 payments</td>
-
-                                </tr>
-
-                                <tr>
-
-                                <td><b>Per Payment Deduction</td>
-                                <td>₱ 2,100.00</td>
-
-                                </tr>
-
-                            </tbody>
-
-                        </table>
-
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-lg-12">
-
-                            <div align="center">
-
-                            <form action="MEMBER BANKLOAN appsent.html" method="POST">
-
-                            <input type="submit" name="apply" class="btn btn-success" value="Submit">
-                            <a href="MEMBER BANKLOAN calculator.html" class="btn btn-default" role="button">Go Back</a>
-
-                            </form>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-lg-12">
-
-                            &nbsp;
+                            <a href="MEMBER dashboard.html" class="btn btn-success" role="button">OK</a>
 
                         </div>
 

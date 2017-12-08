@@ -1,3 +1,23 @@
+<?php session_start();
+require_once('mysql_connect.php');
+
+if(isset($_POST['choice'])){
+	$id = $_POST['choice'];
+	$query = "SELECT * 
+				from loan_plan
+				where bank_id = $id";
+	
+}
+else{
+$query = "SELECT * 
+				from loan_plan
+where bank_id != 1";}
+	$result = mysqli_query($dbc,$query);
+	
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +29,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>FRAP | Falp Application</title>
+    <title>FRAP | Bank Loan Application</title>
 
     <link href="css/montserrat.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
@@ -19,7 +39,9 @@
     <link href="css/sb-admin.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">]
+
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -234,25 +256,62 @@
                 
                     <div class="col-lg-12">
 
-                        <h1 class="page-header">Bank Loan Application</h1>
+                        <h1 class="page-header">Bank Loan List</h1>
                     
                     </div>
 
                 </div>
 
-                <div class="row"> <!-- Well -->
+                <div class="row">
 
-                    <div class="col-lg-1 col-1">
+                    <div class="col-lg-6">
 
+                        <div class="panel panel-green">
 
+                            <div class="panel-heading">
 
-                    </div>
+                                <b>Select Bank</b>
 
-                    <div class="col-lg-10 col-2 well">
+                            </div>
 
-                    <p class="welltext justify">Congratulations! You have successfully completed the steps in applying for a Bank Loan.  The admins will process and evaluate your application.  You will receive a notification whether your application is approved or not. Once your application has been approved, you will receive further instructions.</p>
+                            <div class="panel-body">
 
-                    <p class="welltext justify"><font color="red">Please review your submitted values from the form before proceeding.</font></p>
+                                <div class="row">
+
+                                    <div class="col-lg-9">
+
+                                    <form action="MEMBER BANKLOAN list.php" method="POST">
+
+                                        <select class="form-control" name = "choice">
+											<?php 
+											
+											$query1 = "SELECT * 
+															from banks
+															where bank_id != 1";
+											$result1 = mysqli_query($dbc,$query1);
+											while($ans = mysqli_fetch_assoc($result1)){
+											?>
+                                            <option value = <?php echo $ans['BANK_ID'];?>><?php echo $ans['BANK_NAME'];echo " ";echo $ans['BANK_ABBV'];?></option>
+                                            <?php }; ?>
+
+                                        </select>
+
+                                    
+
+                                    </div>
+
+                                    <div class="col-lg-3">
+
+                                        <input type="submit" class="btn btn-success" name="select_bank" value="Refresh Table">
+
+                                    </div>
+									</form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -262,11 +321,46 @@
 
                     <div class="col-lg-12">
 
-                        <div align="center">
+                        <form action="MEMBER BANKLOAN calculator.php" method="POST"> <!-- SERVER SELF -->
 
-                            <a href="MEMBER dashboard.html" class="btn btn-success" role="button">OK</a>
+                        <table id="table" class="table table-bordered table-striped">
+                            
+                            <thead>
 
-                        </div>
+                                <tr>
+								
+                                <td align="center"><b>Amount to Borrow (Range)</b></td>
+                                <td align="center"><b>Interest (Fixed)</b></td>
+                                <td align="center"><b>Payment Terms (Range)</b></td>
+                                <td align="center"><b>Minimum Monthly Salary</b></td>
+                                <td align="center"><b>Actions</b></td>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+								<?php while($ans = mysqli_fetch_assoc($result)){?>
+                                <tr>
+								
+                                <td align="center">₱ <?php echo $ans['MIN_AMOUNT'];?><input type = "text" name = "min" value = <?php echo $ans['MIN_AMOUNT'];?> hidden> - ₱ <?php echo $ans['MAX_AMOUNT'];?><input type = "text" name = "max" value = <?php echo $ans['MAX_AMOUNT'];?> hidden></td>
+                                <td align="center"><?php echo $ans['INTEREST'];?>%</td>
+                                <td align="center"><?php echo $ans['MIN_TERM'];?> months - <?php echo $ans['MAX_TERM'];?> months</td>
+                                <td align="center">₱ <?php echo $ans['MINIMUM_SALARY'];?>
+								<input type = "text" name = "interest" value = <?php echo $ans['INTEREST'];?> hidden>
+								<input type = "text" name = "minT" value = <?php echo $ans['MIN_TERM'];?> hidden>
+								<input type = "text" name = "maxT" value = <?php echo $ans['MAX_TERM'];?> hidden>
+								<input type = "text" name = "minS" value = <?php echo $ans['MINIMUM_SALARY'];?> hidden>
+								</td>
+                                <td align="center">&nbsp;&nbsp;&nbsp;<button type="submit" name="details" class="btn btn-success" value=<?php echo $ans['LOAN_ID'];?>>Details</button>&nbsp;&nbsp;&nbsp;</td>
+								
+                                </tr>
+								<?php };?>
+                            </tbody>
+
+                        </table>
+
+                        </form>
 
                     </div>
 
@@ -288,6 +382,18 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+	
+    <script>
+
+        $(document).ready(function(){
+    
+            $('#table').DataTable();
+
+        });
+
+    </script>
 
 </body>
 
