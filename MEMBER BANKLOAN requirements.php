@@ -302,7 +302,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                                 <div class="col-lg-10">
 
-                                    <input type="file">
+                                    <input type="file" name = "itr">
 
                                 </div>
 
@@ -334,7 +334,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                                 <div class="col-lg-10">
 
-                                    <input type="file">
+                                    <input type="file" name = "ps" > 
 
                                 </div>
 
@@ -366,7 +366,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                                 <div class="col-lg-10">
 
-                                    <input type="file">
+                                    <input type="file" type = "eid">
 
                                 </div>
 
@@ -398,7 +398,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                                 <div class="col-lg-10">
 
-                                    <input type="file">
+                                    <input type="file" name = "gid">
 
                                 </div>
 
