@@ -297,42 +297,42 @@
                                 <tr>
 
                                 <td><b>Amount to Borrow</td>
-                                <td>₱ 20,000.00</td>
+                                <td>₱ <?php echo $_POST['amount'];?></td>
 
                                 </tr>
 
                                 <tr>
 
                                 <td><b>Amount Payable</td>
-                                <td>₱ 21,000.00</td>
+                                <td>₱ <?php echo $_POST['amount']+($_POST['amount']*5/100);?></td>
 
                                 </tr>
 
                                 <tr>
 
                                 <td><b>Payment Terms</td>
-                                <td>5 months</td>
+                                <td><?php echo $_POST['terms'];?> months</td>
 
                                 </tr>
 
                                 <tr>
 
                                 <td><b>Monthly Deduction</td>
-                                <td>₱ 4,200.00</td>
+                                <td>₱ <?php echo ($_POST['amount']+($_POST['amount']*5/100))/$_POST['terms'];?></td>
 
                                 </tr>
 
                                 <tr>
 
                                 <td><b>Number of Payments</td>
-                                <td>10 payments</td>
+                                <td><?php echo $_POST['terms']*2;?> payments</td>
 
                                 </tr>
 
                                 <tr>
 
                                 <td><b>Per Payment Deduction</td>
-                                <td>₱ 2,100.00</td>
+                                <td>₱ <?php echo (($_POST['amount']+($_POST['amount']*5/100))/$_POST['terms'])/2;?></td>
 
                                 </tr>
 

@@ -494,8 +494,8 @@ function myFunction() {
 			
 			document.getElementById("totalI").innerHTML ="<b>Total Interest Payable: </b>₱"+ (amount*interest/100);
 			document.getElementById("totalP").innerHTML ="<b>Total Amount Payable: </b> ₱"+ (amount+amount*interest/100);
-			document.getElementById("PerP").innerHTML ="<b>Per Payment Period Payable: </b> ₱ "+ ((amount+amount*interest/100)/terms);
-			document.getElementById("Monthly").innerHTML ="<b>Monthly Payable: </b> ₱"+ ((amount+amount*interest/100)/terms*2);
+			document.getElementById("PerP").innerHTML ="<b>Per Payment Period Payable: </b> ₱ "+ ((amount+amount*interest/100)/terms/2);
+			document.getElementById("Monthly").innerHTML ="<b>Monthly Payable: </b> ₱"+ ((amount+amount*interest/100)/terms);
 			
 		}
 	</script>

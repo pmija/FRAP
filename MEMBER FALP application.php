@@ -348,7 +348,7 @@
 
                             <div class="panel-body">
 
-                            <form method="POST" action="MEMBER FALP requirements.html"> <!-- SERVERSELF, REDIRECT TO NEXT PAGE -->
+                            <form method="POST" action="MEMBER FALP requirements.php"> <!-- SERVERSELF, REDIRECT TO NEXT PAGE -->
 
                                 <div class="row">
 
@@ -381,7 +381,7 @@
                                                 <option value = 10>10</option>
 
                                             </select>
-
+											<input type = "text" name = "interest" value = 5 hidden>
                                         </div>
 
                                     </div>
@@ -473,8 +473,8 @@
 			
 			document.getElementById("totalI").innerHTML ="<b>Total Interest Payable: </b>₱"+ (amount*interest/100);
 			document.getElementById("totalP").innerHTML ="<b>Total Amount Payable: </b> ₱"+ (amount+amount*interest/100);
-			document.getElementById("PerP").innerHTML ="<b>Per Payment Period Payable: </b> ₱ "+ ((amount+amount*interest/100)/terms);
-			document.getElementById("Monthly").innerHTML ="<b>Monthly Payable: </b> ₱"+ ((amount+amount*interest/100)/terms*2);
+			document.getElementById("PerP").innerHTML ="<b>Per Payment Period Payable: </b> ₱ "+ ((amount+amount*interest/100)/terms/2);
+			document.getElementById("Monthly").innerHTML ="<b>Monthly Payable: </b> ₱"+ ((amount+amount*interest/100)/terms);
 			
 		}
 	</script>
