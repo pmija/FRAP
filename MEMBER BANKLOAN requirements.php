@@ -320,7 +320,9 @@ $ans = mysqli_fetch_assoc($result1);
 
                             <div class="panel-heading">
 
-                                <b>Payslip (current month)</b>
+                                <b>Payslip (current month) </b>
+
+
 
                             </div>
 
@@ -353,6 +355,7 @@ $ans = mysqli_fetch_assoc($result1);
                             <div class="panel-heading">
 
                                 <b>Employee ID</b>
+
 
                             </div>
 
@@ -399,6 +402,7 @@ $ans = mysqli_fetch_assoc($result1);
                                 <div class="col-lg-10">
 
                                     <input type="file" name = "gid">
+
 
                                 </div>
 
@@ -503,7 +507,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                             <div align="center">
 
-                            <form action="MEMBER BANKLOAN appsent.php" method="POST">
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
 								<input type = "text" name = "amount" value =<?php echo $_POST['amount']; ?> hidden>
 								<input type = "text" name = "amountP" value =<?php echo $_POST['amount']+$_POST['amount']*$_POST['interest']/100; ?>  hidden>
 								<input type = "text" name = "payT" value = <?php echo $_POST['terms'];?> hidden>

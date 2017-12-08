@@ -167,15 +167,7 @@
 
 
 
-                          echo "<pre>Debug: $query</pre>\m";
-                    $result = mysqli_query($dbc, $query);
-                    if ( false===$result ) {
-                      printf("error: %s\n", mysqli_error($dbc));
-                    }
-                    else {
-                      echo 'done.';
-                    }
-
+                        
 
                       $result = mysqli_query($dbc,$query); 
 
@@ -190,14 +182,7 @@
                           DEPT_ID,USER_STATUS,MEMBERSHIP_STATUS,DATE_APPLIED) VALUES ('{$idNum}','{$fName}','{$lName}',{$civStat}, '{$mName}',{$sex},'{$birthdate}','{$datehired}',{$honum},'{$haddress}','{$baddress}',{$dept},1,1,NOW())"; 
 
 
-                    echo "<pre>Debug: $query</pre>\m";
-                    $result = mysqli_query($dbc, $query);
-                    if ( false===$result ) {
-                      printf("error: %s\n", mysqli_error($dbc));
-                    }
-                    else {
-                      echo 'done.';
-                    }
+                 
 
 
                      $result = mysqli_query($dbc,$query); 
@@ -212,14 +197,7 @@
                $query = "INSERT INTO MEMBER (MEMBER_ID, FIRSTNAME, LASTNAME, CIV_STATUS,  MIDDLENAME,SEX, BIRTHDATE ,DATE_HIRED, HOME_NUM, HOME_ADDRESS, DEPT_ID, USER_STATUS,MEMBERSHIP_STATUS,DATE_APPLIED) 
                         VALUES ('{$idNum}','{$fName}','{$lName}',{$civStat}, '{$mName}','{$sex}','{$birthdate}','{$datehired}','{$honum}','{$haddress}',{$dept},1,1,NOW())"; 
 
-                         echo "<pre>Debug: $query</pre>\m";
-                    $result = mysqli_query($dbc, $query);
-                    if ( false===$result ) {
-                      printf("error: %s\n", mysqli_error($dbc));
-                    }
-                    else {
-                      echo 'done.';
-                    }
+                        
 
                 $result = mysqli_query($dbc,$query); 
 
@@ -557,7 +535,6 @@
                                 <div class="panel-heading">
 
                                     <b>Contact Information</b>
-
                                 </div>
 
                                 <div class="panel-body">
