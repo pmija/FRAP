@@ -302,7 +302,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                                 <div class="col-lg-10">
 
-                                    <input type="file">
+                                    <input type="file" name = "IncomeTax">
 
                                 </div>
 
@@ -334,7 +334,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                                 <div class="col-lg-10">
 
-                                    <input type="file">
+                                    <input type="file" name = "payslip">
 
                                 </div>
 
@@ -366,7 +366,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                                 <div class="col-lg-10">
 
-                                    <input type="file">
+                                    <input type="file" name = "emp_ID">
 
                                 </div>
 
@@ -398,7 +398,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                                 <div class="col-lg-10">
 
-                                    <input type="file">
+                                    <input type="file" name = "gov_ID">
 
                                 </div>
 
