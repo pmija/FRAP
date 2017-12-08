@@ -359,7 +359,7 @@
                                         <div class="form-group input-group">
 
                                             <span class="input-group-addon"><b>₱</b></span>
-                                            <input type="text" class="form-control" placeholder="Enter Amount">
+                                            <input type="text" name = "amount" id = "amount" class="form-control" placeholder="Enter Amount">
 
                                         </div>
 
@@ -371,14 +371,14 @@
 
                                             <label>Payment Terms</label>
 
-                                            <select class="form-control">
+                                            <select class="form-control" name = "terms" id = "terms">
 
-                                                <option>5</option>
-                                                <option>6</option>
-                                                <option>7</option>
-                                                <option>8</option>
-                                                <option>9</option>
-                                                <option>10</option>
+                                                <option value = 5>5</option>
+                                                <option value = 6>6</option>
+                                                <option value = 7>7</option>
+                                                <option value = 8>8</option>
+                                                <option value = 9>9</option>
+                                                <option value = 10>10</option>
 
                                             </select>
 
@@ -388,7 +388,7 @@
 
                                     <div class="col-lg-2 col-3">
 
-                                        <input type="submit" name="compute" class="btn btn-success" value="Compute" id="falpcompute">
+                                        <input type="button" name="compute" class="btn btn-success" value="Compute" id="falpcompute">
 
                                     </div>
 
@@ -405,13 +405,13 @@
 
                                         <div class="well" align="center">
 
-                                            <b>Total Interest Payable: </b> ₱ 1,000.00 <p>
+                                          <div id = "totalI">   </div> <p>
                                             <p>
-                                            <b>Total Amount Payable: </b> ₱ 21,000.00 <p>
+                                            <div id = "totalP"> </div><p>
                                             <p>
-                                            <b>Per Payment Period Payable: </b> ₱ 2,100.00 <p>
+                                            <div id = "PerP"></div><p>
                                             <p>
-                                            <b>Monthly Payable: </b> ₱ 4,200.00
+                                            <div id = "Monthly"></div>
 
                                         </div>
 
@@ -464,6 +464,20 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+	<script>
+		document.getElementById("falpcompute").onclick = function() {calculate()};
+		function calculate(){
+			var amount = parseInt(document.getElementById("amount").value);
+			var terms = parseInt(document.getElementById("terms").value);
+			var interest = 5;
+			
+			document.getElementById("totalI").innerHTML ="<b>Total Interest Payable: </b>₱"+ (amount*interest/100);
+			document.getElementById("totalP").innerHTML ="<b>Total Amount Payable: </b> ₱"+ (amount+amount*interest/100);
+			document.getElementById("PerP").innerHTML ="<b>Per Payment Period Payable: </b> ₱ "+ ((amount+amount*interest/100)/terms);
+			document.getElementById("Monthly").innerHTML ="<b>Monthly Payable: </b> ₱"+ ((amount+amount*interest/100)/terms*2);
+			
+		}
+	</script>
 
 </body>
 
