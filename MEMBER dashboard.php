@@ -1,14 +1,3 @@
-<?php session_start();
-require_once('mysql_connect_FA.php');
-$id = $_POST['details'];
-$query1 = "SELECT * 
-			from loan_plan
-			where loan_id = $id";
-$result1 = mysqli_query($dbc,$query1);
-$ans = mysqli_fetch_assoc($result1)
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +9,7 @@ $ans = mysqli_fetch_assoc($result1)
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>FRAP | Bank Loan Application</title>
+    <title>Faculty Record Access Portal</title>
 
     <link href="css/montserrat.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
@@ -50,7 +39,6 @@ $ans = mysqli_fetch_assoc($result1)
             <div class="navbar-header"> <!-- Logo -->
                 
                 <img src="images/I-FA Logo Edited.png" id="ifalogo">
-            
             
             <ul class="nav navbar-right top-nav"> <!-- Top Menu Items / Notifications area -->
                 
@@ -102,7 +90,7 @@ $ans = mysqli_fetch_assoc($result1)
 
                         <li>
 
-                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -127,7 +115,7 @@ $ans = mysqli_fetch_assoc($result1)
 
                         <li>
 
-                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -144,7 +132,7 @@ $ans = mysqli_fetch_assoc($result1)
 
                     <li id="top">
 
-                        <a href="MEMBER dashboard.php"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
+                        <a href="MEMBER dashboard.html"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
 
                     </li>
 
@@ -155,15 +143,15 @@ $ans = mysqli_fetch_assoc($result1)
                         <ul id="applicationformsdd" class="collapse">
 
                             <li>
-                                <a href="MEMBER FALP application.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Application</a>
+                                <a href="MEMBER FALP application.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Application</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER HA application.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Application</a>
+                                <a href="MEMBER HA application.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Application</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER LIFETIME form.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Member Application</a>
+                                <a href="MEMBER LIFETIME form.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Member Application</a>
                             </li>
 
                         </ul>
@@ -178,7 +166,7 @@ $ans = mysqli_fetch_assoc($result1)
 
                     <li>
 
-                    <a href="MEMBER DEDUCTION summary.php"><i class="fa fa-book" aria-hidden="true"></i> Salary Deduction Summary</a>
+                    <a href="MEMBER DEDUCTION summary.html"><i class="fa fa-book" aria-hidden="true"></i> Salary Deduction Summary</a>
 
                     </li>
 
@@ -189,7 +177,7 @@ $ans = mysqli_fetch_assoc($result1)
                         <ul id="loantrackingdd" class="collapse">
 
                             <li>
-                                <a href="MEMBER FALP summary.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loan</a>
+                                <a href="MEMBER FALP summary.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loan</a>
                             </li>
 
                             <li>
@@ -207,11 +195,11 @@ $ans = mysqli_fetch_assoc($result1)
                         <ul id="servicessummarydd" class="collapse">
 
                             <li>
-                                <a href="MEMBER HA summary.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Summary</a>
+                                <a href="MEMBER HA summary.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Summary</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER LIFETIME summary.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Membership Summary</a>
+                                <a href="MEMBER LIFETIME summary.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Membership Summary</a>
                             </li>
 
                         </ul>
@@ -220,13 +208,13 @@ $ans = mysqli_fetch_assoc($result1)
 
                     <li>
 
-                        <a href="MEMBER AUDITRAIL.php"><i class="fa fa-backward" aria-hidden="true"></i> Audit Trail</a>
+                        <a href="MEMBER AUDITRAIL.html"><i class="fa fa-backward" aria-hidden="true"></i> Audit Trail</a>
 
                     </li>
 
                     <li>
 
-                        <a href="MEMBER FILEREPO.php"><i class="fa fa-folder" aria-hidden="true"></i> File Repository</a>
+                        <a href="MEMBER FILEREPO.html"><i class="fa fa-folder" aria-hidden="true"></i> File Repository</a>
 
                     </li>
 
@@ -245,7 +233,7 @@ $ans = mysqli_fetch_assoc($result1)
                 
                     <div class="col-lg-12">
 
-                        <h1 class="page-header">Bank Loan Application</h1>
+                        <h1 class="page-header">User Overview <small>Current Information</small></h1>
                     
                     </div>
 
@@ -255,17 +243,19 @@ $ans = mysqli_fetch_assoc($result1)
 
                     <div class="col-lg-4 col-1">
 
-                        <div class="panel panel-success" align="center">
+                        <div class="well" align="center">
 
-                            <div class="panel-heading">
+                            <b>Current Employee Position</b>
 
-                            <b>Loan Amount Range</b>
+                            <div>
+
+                                &nbsp;
 
                             </div>
 
-                            <div class="panel-body">
+                            <div>
 
-                                ₱ <?PHP ECHO $ans['MIN_AMOUNT'];?> - ₱ <?PHP ECHO $ans['MAX_AMOUNT'];?>
+                                Faculty - Full Time Probisionary
 
                             </div>
 
@@ -275,19 +265,20 @@ $ans = mysqli_fetch_assoc($result1)
 
                     <div class="col-lg-4 col-2">
 
-                        <div class="panel panel-success" align="center">
+                        <div class="well" align="center">
 
-                            <div class="panel-heading">
-
-                            <b>Interest Amount (Fixed)</b>
+                            <b>Faculty Association Member Since</b>
                             
+                            <div>
+
+                                &nbsp;
+
                             </div>
 
-                            <div class="panel-body">
+                            <div>
 
-                                <?PHP ECHO $ans['INTEREST'];?>%
-								<input type = "text" name = "interest" id = "interest" value = <?PHP ECHO $ans['INTEREST'];?> hidden>
-		
+                                March 10, 2016
+
                             </div>
 
                         </div>
@@ -296,41 +287,19 @@ $ans = mysqli_fetch_assoc($result1)
 
                     <div class="col-lg-4 col-3">
 
-                        <div class="panel panel-success" align="center">
+                        <div class="well" align="center">
 
-                            <div class="panel-heading">
-
-                            <b>Payment Terms </b>
+                            <b>Campus</b>
                             
-                            </div>
+                            <div>
 
-                            <div class="panel-body">
-
-                                <?PHP ECHO $ans['MIN_TERM'];?> months - <?PHP ECHO $ans['MAX_TERM'];?> months
+                                &nbsp;
 
                             </div>
 
-                        </div>
+                            <div>
 
-                    </div>
-
-                </div>
-
-                <div class="row">
-
-                    <div class="col-lg-12">
-
-                        <div class="panel panel-primary">
-
-                            <div class="panel-heading">
-
-                                <b>APPLICATION REQUIREMENTS</b>
-
-                            </div>
-
-                            <div class="panel-body">
-
-                            Requirements, upload on next page
+                                De La Salle University - Manila Campus
 
                             </div>
 
@@ -344,123 +313,192 @@ $ans = mysqli_fetch_assoc($result1)
 
                 <div class="row">
 
-                    <div class="col-lg-2 col-1">
-
-                    </div>
-
-                    <div class="col-lg-8 col-2">
+                    <div class="col-lg-3 col-md-6">
 
                         <div class="panel panel-green">
 
                             <div class="panel-heading">
 
-                                <b>Loan Calculator</b>
+                                <div class="row">
+
+                                    <div class="col-xs-3">
+
+                                        <i class="fa fa-money fa-5x"></i>
+
+                                    </div>
+
+                                    <div class="col-xs-9 text-right">
+
+                                        <div class="huge">FALP</div>
+
+                                        <div>Loan Program</div>
+
+                                    </div>
+
+                                </div>
 
                             </div>
 
-                            <div class="panel-body">
+                            <a href="MEMBER loanpayablesFALP details.html">
+                    
+                                <div class="panel-footer">
+                    
+                                    <span class="pull-left">View Details</span>
 
-                            <form method="POST" action="MEMBER BANKLOAN requirements.php"> <!-- SERVERSELF, REDIRECT TO NEXT PAGE -->
-								<input type = "text" name = "interest" id = "interest" value = <?PHP ECHO $ans['INTEREST'];?> hidden>
-								
-                                <div class="row">
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
-                                    <div class="col-lg-6 col-1">
-
-                                        <label>Enter Amount to Borrow</label>
-
-                                        <div class="form-group input-group">
-
-                                            <span class="input-group-addon"><b>₱</b></span>
-                                            <input type="text" id = "amount" name = "amount" class="form-control" placeholder="Enter Amount">
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-lg-4 col-2">
-
-                                        <div class="form-group">
-
-                                            <label>Payment Terms</label>
-
-                                            <select class="form-control" name = "terms" id = "terms">
-												<?php for($i = $ans['MIN_TERM'];$i<=$ans['MAX_TERM'];$i++){
-													echo "<option>";
-													echo $i;
-													echo "</option>";
-                                                
-													}?>
-
-                                            </select>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-lg-2 col-3">
-
-                                        <input type="button" name="falpcompute" class="btn btn-success" value="Compute" id="falpcompute">
-
-                                    </div>
-
+                                    <div class="clearfix"></div>
+                    
                                 </div>
+                    
+                            </a>
+                    
+                        </div>
+                    
+                    </div>
+                    
+
+
+                    <div class="col-lg-3 col-md-6">
+
+                        <div class="panel panel-green">
+
+                            <div class="panel-heading">
 
                                 <div class="row">
 
-                                    <div class="col-lg-2 col-1">
+                                    <div class="col-xs-3">
 
+                                        <i class="fa fa-university fa-5x"></i>
 
                                     </div>
 
-                                    <div class="col-lg-8 col-2">
+                                    <div class="col-xs-9 text-right">
 
-                                        <div class="well" align="center">
-
-                                            <div id = "totalI">   </div> <p>
-                                            <p>
-                                            <div id = "totalP"> </div><p>
-                                            <p>
-                                            <div id = "PerP"></div><p>
-                                            <p>
-                                            <div id = "Monthly"></div>
-											
-
-                                        </div>
+                                        <div class="huge">Bank</div>
+                                        <div>Loan Program</div>
 
                                     </div>
 
                                 </div>
+
+                            </div>
+
+                            <a href="MEMBER loanpayablesBANK details.html">
+
+                                <div class="panel-footer">
+
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                    <div class="clearfix"></div>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+
+                        <div class="panel panel-red">
+
+                            <div class="panel-heading">
 
                                 <div class="row">
 
-                                    <div class="col-lg-12">
+                                    <div class="col-xs-3">
 
-                                        <div align="center">
-<input type = "text" name = "id" id = "id" value = <?PHP ECHO $ans['LOAN_ID'];?> hidden>
-                                        <input type="submit" name="apply" class="btn btn-success" value="Submit">
-                                        <a href="MEMBER dashboard.php" class="btn btn-default" role="button">Go Back</a>
+                                        <i class="fa fa-medkit fa-5x"></i>
 
-                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-9 text-right">
+
+                                        <div class="huge" id="dashboardhealthaid">Health</div>
+                                        <div>Aid Fund Program</div>
 
                                     </div>
 
                                 </div>
 
+                            </div>
+
+                            <a href="MEMBER healthaidsummary.html">
+
+                                <div class="panel-footer">
+
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                    <div class="clearfix"></div>
+
                                 </div>
 
-                            </form>
+                            </a>
 
                         </div>
 
                     </div>
 
-                    <div class="col-lg-2 col-3">
+                    <div class="col-lg-3 col-md-6">
+
+                        <div class="panel panel-primary">
+
+                            <div class="panel-heading">
+
+                                <div class="row">
+
+                                    <div class="col-xs-3">
+
+                                        <i class="fa fa-id-card-o fa-5x"></i>
+
+                                    </div>
+
+                                    <div class="col-xs-9 text-right">
+
+                                        <div class="huge">Lifetime</div>
+                                        <div>Membership</div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <a href="MEMBER lifetimesummary.html">
+
+                                <div class="panel-footer">
+
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                    <div class="clearfix"></div>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>    
+
+                <hr>
+
+                <div class="row">
+
+                    <div class="col-lg-12 col-1">
+
+                        <!-- PUT DEDUCTIONS SUMMARY HERE -->
 
                     </div>
 
                 </div>
-
                 <!-- /.row -->
 
             </div>
@@ -473,33 +511,10 @@ $ans = mysqli_fetch_assoc($result1)
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-
-<script>
-document.getElementById("demo").onclick = function() {myFunction()};
-
-function myFunction() {
-    document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
-}
-</script>
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-	<script>
-		document.getElementById("falpcompute").onclick = function() {calculate()};
-		function calculate(){
-			var amount = parseInt(document.getElementById("amount").value);
-			var terms = parseInt(document.getElementById("terms").value);
-			var interest = parseInt(document.getElementById("interest").value);
-			
-			document.getElementById("totalI").innerHTML ="<b>Total Interest Payable: </b>₱"+ (amount*interest/100);
-			document.getElementById("totalP").innerHTML ="<b>Total Amount Payable: </b> ₱"+ (amount+amount*interest/100);
-			document.getElementById("PerP").innerHTML ="<b>Per Payment Period Payable: </b> ₱ "+ ((amount+amount*interest/100)/terms/2);
-			document.getElementById("Monthly").innerHTML ="<b>Monthly Payable: </b> ₱"+ ((amount+amount*interest/100)/terms);
-			
-		}
-	</script>
-
 
 </body>
 

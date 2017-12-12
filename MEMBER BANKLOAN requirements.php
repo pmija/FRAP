@@ -1,12 +1,118 @@
 <?php 
+/*
 session_start();
-require_once('mysql_connect.php');
+require_once('mysql_connect_FA.php');
 $id = $_POST['id'];
 $query1 = "SELECT * 
 			from loan_plan
 			where loan_id = $id;";
 $result1 = mysqli_query($dbc,$query1);
 $ans = mysqli_fetch_assoc($result1);
+
+    
+
+
+
+
+    if (isset($_POST['submit'])) {
+
+        //first it is going to check every file to see if at least one is empty 
+    }if(isset($_FILES["file"]["name"])){
+            
+        $name = $_FILES["file"]["name"];
+            
+        $tmp_name = $_FILES['file']['tmp_name'];
+            
+        if(!empty($name)){ 
+                
+            $location = 'docs/';
+            
+            if(move_uploaded_file($tmp_name,$location.$name)){ // If file move is sucessful, executes the data to be put in the data base
+            
+            $location.=$name;
+            
+            echo $location;
+            
+            $realest = realpath($location);
+            
+            echo $realest;
+            
+            $realest = normalizePath($realest);
+            
+            echo $realest;
+            
+            // inserting in health claim
+            
+            $query= "INSERT into health_claim(member_id, app_status, date_applied,pick_up_status) values(11223345,'1',DATE(NOW()),1);";
+                        
+            mysqli_query($con,$query);
+                        
+            // select the claim id to put into the claim docs
+                        
+            $query3= " SELECT CLAIM_ID from health_claim WHERE '".$_SESSION["username"]."' ORDER BY CLAIM_ID DESC LIMIT 1";
+                        
+            $result=mysqli_query($con,$query3);
+                        
+            $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+                        
+            // inserting to claim docs
+            
+            
+            $query = "INSERT into claim_documents(CLAIM_ID, DOC_ADDRESS) values ( {$row['CLAIM_ID']} ,'{$realest}');";
+            
+            mysqli_query($con,$query);
+            
+                        
+            // inserting to the transactions table
+            $query = "INSERT into transactions(member_id,amount,txn_date,txn_type,txn_status,emp_id_involved) values('".$_SESSION["username"]."',0,DATE(NOW()),1,'Pending','".$_SESSION["username"]."');";
+            
+            mysqli_query($con,$query);
+            
+            
+            
+                
+            //redirects back to member dashboard and informs that they have sucessfully uploaded file
+                
+            $_SESSION['message'] = 'FIle sucessfully uploaded';
+            /*  
+            header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/member.php");
+            */   
+
+            /*       
+            }else{
+                        
+                echo 'failed to upload :(';
+                        
+            }
+    
+
+
+
+    
+
+
+        }else{
+
+            echo '<script language="javascript">';
+            echo 'alert("You forgot to fill upload all the files!")';
+            echo '</script>';
+
+
+        }
+
+
+
+
+        */
+
+
+
+
+    
+
+
+
+
 
 
 
@@ -105,7 +211,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                         <li>
 
-                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -130,7 +236,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                         <li>
 
-                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -147,7 +253,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                     <li id="top">
 
-                        <a href="MEMBER dashboard.html"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
+                        <a href="MEMBER dashboard.php"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
 
                     </li>
 
@@ -158,15 +264,15 @@ $ans = mysqli_fetch_assoc($result1);
                         <ul id="applicationformsdd" class="collapse">
 
                             <li>
-                                <a href="MEMBER FALP application.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Application</a>
+                                <a href="MEMBER FALP application.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Application</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER HA application.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Application</a>
+                                <a href="MEMBER HA application.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Application</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER LIFETIME form.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Member Application</a>
+                                <a href="MEMBER LIFETIME form.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Member Application</a>
                             </li>
 
                         </ul>
@@ -175,13 +281,13 @@ $ans = mysqli_fetch_assoc($result1);
 
                     <li>
 
-                        <a href="MEMBER BANKLOAN list.html"><i class="fa fa-dollar" aria-hidden="true"></i> Bank Loans</a>
+                        <a href="MEMBER BANKLOAN list.php"><i class="fa fa-dollar" aria-hidden="true"></i> Bank Loans</a>
 
                     </li>
 
                     <li>
 
-                    <a href="MEMBER DEDUCTION summary.html"><i class="fa fa-book" aria-hidden="true"></i> Salary Deduction Summary</a>
+                    <a href="MEMBER DEDUCTION summary.php"><i class="fa fa-book" aria-hidden="true"></i> Salary Deduction Summary</a>
 
                     </li>
 
@@ -192,11 +298,11 @@ $ans = mysqli_fetch_assoc($result1);
                         <ul id="loantrackingdd" class="collapse">
 
                             <li>
-                                <a href="MEMBER FALP summary.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loan</a>
+                                <a href="MEMBER FALP summary.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loan</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER BANKLOAN summary.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan</a>
+                                <a href="MEMBER BANKLOAN summary.php"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan</a>
                             </li>
 
                         </ul>
@@ -210,11 +316,11 @@ $ans = mysqli_fetch_assoc($result1);
                         <ul id="servicessummarydd" class="collapse">
 
                             <li>
-                                <a href="MEMBER HA summary.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Summary</a>
+                                <a href="MEMBER HA summary.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Summary</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER LIFETIME summary.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Membership Summary</a>
+                                <a href="MEMBER LIFETIME summary.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Membership Summary</a>
                             </li>
 
                         </ul>
@@ -223,13 +329,13 @@ $ans = mysqli_fetch_assoc($result1);
 
                     <li>
 
-                        <a href="MEMBER AUDITRAIL.html"><i class="fa fa-backward" aria-hidden="true"></i> Audit Trail</a>
+                        <a href="MEMBER AUDITRAIL.php"><i class="fa fa-backward" aria-hidden="true"></i> Audit Trail</a>
 
                     </li>
 
                     <li>
 
-                        <a href="MEMBER FILEREPO.html"><i class="fa fa-folder" aria-hidden="true"></i> File Repository</a>
+                        <a href="MEMBER FILEREPO.php"><i class="fa fa-folder" aria-hidden="true"></i> File Repository</a>
 
                     </li>
 
@@ -280,7 +386,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                 <div class="row">
 
-                    <form method="POST" action="MEMBER BANK appsent.html"> <!-- SERVERSELF, REDIRECT TO NEXT PAGE -->
+                    <form method="POST" action="MEMBER BANK appsent.php"> <!-- SERVERSELF, REDIRECT TO NEXT PAGE -->
 
                     <div class="col-lg-3 col-1">
 
@@ -483,13 +589,13 @@ $ans = mysqli_fetch_assoc($result1);
 
                                 <td><b>Per Payment Deduction</td>
                                 <td>₱ <?php echo (($_POST['amount']+$_POST['amount']*$_POST['interest']/100)/$_POST['terms'])/2;?></td>
-								<input type = "text" name = "amount" value =<?php echo $_POST['amount']; ?> hidden>
-								<input type = "text" name = "interest" value =<?php echo $_POST['interest']; ?> hidden>
-								<input type = "text" name = "terms" value =<?php echo $_POST['terms']; ?> hidden>
-								<input type = "text" name = "amountP" value =<?php echo $_POST['amount']+$_POST['amount']*$_POST['interest']/100; ?>  hidden>
-								<input type = "text" name = "payT" value = <?php echo $_POST['terms'];?> hidden>
-								<input type = "text" name = "monD" value = <?php echo ($_POST['amount']+$_POST['amount']*$_POST['interest']/100)/$_POST['terms'];?> hidden>
-								<input type = "text" name = "numP" value = <?php echo $_POST['terms']*2;?> hidden>
+								<input type = "text" name = "amount" value ="<?php echo $_POST['amount']; ?>" hidden>
+								<input type = "text" name = "interest" value ="<?php echo $_POST['interest']; ?>" hidden>
+								<input type = "text" name = "terms" value ="<?php echo $_POST['terms']; ?>" hidden>
+								<input type = "text" name = "amountP" value ="<?php echo $_POST['amount']+$_POST['amount']*$_POST['interest']/100; ?>"  hidden>
+								<input type = "text" name = "payT" value = "<?php echo $_POST['terms'];?>" hidden>
+								<input type = "text" name = "monD" value = "<?php echo ($_POST['amount']+$_POST['amount']*$_POST['interest']/100)/$_POST['terms'];?>" hidden>
+								<input type = "text" name = "numP" value = "<?php echo $_POST['terms']*2;?> hidden>
 								
                                 </tr>
 
@@ -507,7 +613,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                             <div align="center">
 
-                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                            <form action="MEMBER BANKLOAN appsent.php" method="POST">
 								<input type = "text" name = "amount" value =<?php echo $_POST['amount']; ?> hidden>
 								<input type = "text" name = "amountP" value =<?php echo $_POST['amount']+$_POST['amount']*$_POST['interest']/100; ?>  hidden>
 								<input type = "text" name = "payT" value = <?php echo $_POST['terms'];?> hidden>
