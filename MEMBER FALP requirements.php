@@ -266,7 +266,7 @@
 
                 <hr>
 
-                    <form method="POST" action="MEMBER FALP appsent.html"> <!-- SERVERSELF, REDIRECT TO NEXT PAGE -->
+                    <form method="POST" action="MEMBER FALP appsent.php"> <!-- SERVERSELF, REDIRECT TO NEXT PAGE -->
 
                     
 
@@ -351,8 +351,14 @@
                             <div align="center">
 
                             <input type="submit" name="apply" class="btn btn-success" value="Submit">
-                            <a href="MEMBER FALP application.html" class="btn btn-default" role="button">Go Back</a>
-
+                            <a href="MEMBER FALP application.php" class="btn btn-default" role="button">Go Back</a>
+							<input type = "text" name = "amount" value =<?php echo $_POST['amount']; ?> hidden>
+								<input type = "text" name = "interest" value =<?php echo $_POST['interest']; ?> hidden>
+								<input type = "text" name = "terms" value =<?php echo $_POST['terms']; ?> hidden>
+								<input type = "text" name = "amountP" value =<?php echo $_POST['amount']+$_POST['amount']*$_POST['interest']/100; ?>  hidden>
+								<input type = "text" name = "payT" value = <?php echo $_POST['terms'];?> hidden>
+								<input type = "text" name = "monD" value = <?php echo ($_POST['amount']+$_POST['amount']*$_POST['interest']/100)/$_POST['terms'];?> hidden>
+								<input type = "text" name = "numP" value = <?php echo $_POST['terms']*2;?> hidden>
                             </div>
 
                         </div>
