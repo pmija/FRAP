@@ -9,7 +9,17 @@ values({$_SESSION['idnum']},1,{$_POST['amount']},{$_POST['interest']},{$_POST['p
 
 mysqli_query($dbc,$query);
 
+$query = "SELECT MAX(loan_ID) as 'ID' FROM LOANS WHERE MEMBER_ID = {$_SESSION['idnum']};";
 
+$result = mysqli_query($dbc,$query);
+
+$ans = mysqli_fetch_assoc($result);
+
+
+$query = "INSERT INTO txn_reference(MEMBER_ID,TXN_TYPE,AMOUNT,TXN_DESC,TXN_DATE,LOAN_REF)
+values({$_SESSION['idnum']},1,0,'FALP Application',DATE(now()),{$ans['ID']});";
+
+mysqli_query($dbc,$query);
 ?>
 <head>
 
