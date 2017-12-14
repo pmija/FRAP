@@ -143,7 +143,7 @@ mysqli_query($dbc,$query);
 
                     <li id="top">
 
-                        <a href="MEMBER dashboard.html"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
+                        <a href="MEMBER dashboard.php"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
 
                     </li>
 
@@ -274,7 +274,7 @@ mysqli_query($dbc,$query);
 
                         <div align="center">
 
-                            <a href="MEMBER dashboard.html" class="btn btn-success" role="button">OK</a>
+                            <a href="MEMBER dashboard.php" class="btn btn-success" role="button">OK</a>
 
                         </div>
 

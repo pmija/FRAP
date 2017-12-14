@@ -133,7 +133,7 @@
 
                     <li id="top">
 
-                        <a href="MEMBER dashboard.html"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
+                        <a href="MEMBER dashboard.php"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
 
                     </li>
 

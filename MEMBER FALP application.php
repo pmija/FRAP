@@ -133,7 +133,7 @@
 
                     <li id="top">
 
-                        <a href="MEMBER dashboard.html"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
+                        <a href="MEMBER dashboard.php"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
 
                     </li>
 
@@ -426,7 +426,7 @@
                                         <div align="center">
 
                                         <input type="submit" name="apply" class="btn btn-success" value="Submit">
-                                        <a href="MEMBER dashboard.html" class="btn btn-default" role="button">Go Back</a>
+                                        <a href="MEMBER dashboard.php" class="btn btn-default" role="button">Go Back</a>
 
                                         </div>
 
