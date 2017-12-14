@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-session_start();
-require_once('mysql_connect.php');
-$id = $_POST['details'];
-$query = "INSERT INTO loans(MEMBER_ID,LOAN_DETAIL_ID,AMOUNT,INTEREST,PAYMENT_TERMS,PAYABLE,PER_PAYMENT,APP_STATUS,LOAN_STATUS,DATE_APPLIED,PICKUP_STATUS)
-values({$_SESSION['idnum']},1,{$_POST['amount']},{$_POST['interest']},{$_POST['payT']},{$_POST['amountP']},{$_POST['monD']}/2,1,1,DATE(now()),1);";
 
-mysqli_query($dbc,$query);
-
-
-?>
 <head>
 
     <meta charset="utf-8">
@@ -19,7 +9,7 @@ mysqli_query($dbc,$query);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>FRAP | Falp Application</title>
+    <title>Faculty Record Access Portal</title>
 
     <link href="css/montserrat.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
@@ -49,7 +39,6 @@ mysqli_query($dbc,$query);
             <div class="navbar-header"> <!-- Logo -->
                 
                 <img src="images/I-FA Logo Edited.png" id="ifalogo">
-            
             
             <ul class="nav navbar-right top-nav"> <!-- Top Menu Items / Notifications area -->
                 
@@ -171,7 +160,7 @@ mysqli_query($dbc,$query);
 
                     <li>
 
-                        <a href="MEMBER BANKLOAN list.html"><i class="fa fa-dollar" aria-hidden="true"></i> Bank Loans</a>
+                        <a href="MEMBER BANKLOAN list.php"><i class="fa fa-dollar" aria-hidden="true"></i> Bank Loans</a>
 
                     </li>
 
@@ -192,7 +181,7 @@ mysqli_query($dbc,$query);
                             </li>
 
                             <li>
-                                <a href="MEMBER BANKLOAN summary.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan</a>
+                                <a href="MEMBER BANKLOAN summary.php"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan</a>
                             </li>
 
                         </ul>
@@ -244,37 +233,75 @@ mysqli_query($dbc,$query);
                 
                     <div class="col-lg-12">
 
-                        <h1 class="page-header"><?php echo $query;?></h1>
+                        <h1 class="page-header">User Overview <small>Current Information</small></h1>
                     
-                    </div>
-
-                </div>
-
-                <div class="row"> <!-- Well -->
-
-                    <div class="col-lg-1 col-1">
-
-
-
-                    </div>
-
-                    <div class="col-lg-10 col-2 well">
-
-                    <p class="welltext justify">Congratulations! You have successfully completed the steps in applying for a FALP Loan.  The admins will process and evaluate your application.  You will receive a notification whether your application is approved or not. Once your application has been approved, you will receive further instructions.</p>
-
-                    <p class="welltext justify"><font color="red">Please review your submitted values from the form before proceeding.</font></p>
-
                     </div>
 
                 </div>
 
                 <div class="row">
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-4 col-1">
 
-                        <div align="center">
+                        <div class="well" align="center">
 
-                            <a href="MEMBER dashboard.html" class="btn btn-success" role="button">OK</a>
+                            <b>Current Employee Position</b>
+
+                            <div>
+
+                                &nbsp;
+
+                            </div>
+
+                            <div>
+
+                                Faculty - Full Time Probisionary
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4 col-2">
+
+                        <div class="well" align="center">
+
+                            <b>Faculty Association Member Since</b>
+                            
+                            <div>
+
+                                &nbsp;
+
+                            </div>
+
+                            <div>
+
+                                March 10, 2016
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4 col-3">
+
+                        <div class="well" align="center">
+
+                            <b>Campus</b>
+                            
+                            <div>
+
+                                &nbsp;
+
+                            </div>
+
+                            <div>
+
+                                De La Salle University - Manila Campus
+
+                            </div>
 
                         </div>
 
@@ -282,6 +309,196 @@ mysqli_query($dbc,$query);
 
                 </div>
 
+                <hr>
+
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6">
+
+                        <div class="panel panel-green">
+
+                            <div class="panel-heading">
+
+                                <div class="row">
+
+                                    <div class="col-xs-3">
+
+                                        <i class="fa fa-money fa-5x"></i>
+
+                                    </div>
+
+                                    <div class="col-xs-9 text-right">
+
+                                        <div class="huge">FALP</div>
+
+                                        <div>Loan Program</div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <a href="MEMBER loanpayablesFALP details.html">
+                    
+                                <div class="panel-footer">
+                    
+                                    <span class="pull-left">View Details</span>
+
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                    <div class="clearfix"></div>
+                    
+                                </div>
+                    
+                            </a>
+                    
+                        </div>
+                    
+                    </div>
+                    
+
+
+                    <div class="col-lg-3 col-md-6">
+
+                        <div class="panel panel-green">
+
+                            <div class="panel-heading">
+
+                                <div class="row">
+
+                                    <div class="col-xs-3">
+
+                                        <i class="fa fa-university fa-5x"></i>
+
+                                    </div>
+
+                                    <div class="col-xs-9 text-right">
+
+                                        <div class="huge">Bank</div>
+                                        <div>Loan Program</div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <a href="MEMBER loanpayablesBANK details.html">
+
+                                <div class="panel-footer">
+
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                    <div class="clearfix"></div>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+
+                        <div class="panel panel-red">
+
+                            <div class="panel-heading">
+
+                                <div class="row">
+
+                                    <div class="col-xs-3">
+
+                                        <i class="fa fa-medkit fa-5x"></i>
+
+                                    </div>
+
+                                    <div class="col-xs-9 text-right">
+
+                                        <div class="huge" id="dashboardhealthaid">Health</div>
+                                        <div>Aid Fund Program</div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <a href="MEMBER healthaidsummary.html">
+
+                                <div class="panel-footer">
+
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                    <div class="clearfix"></div>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+
+                        <div class="panel panel-primary">
+
+                            <div class="panel-heading">
+
+                                <div class="row">
+
+                                    <div class="col-xs-3">
+
+                                        <i class="fa fa-id-card-o fa-5x"></i>
+
+                                    </div>
+
+                                    <div class="col-xs-9 text-right">
+
+                                        <div class="huge">Lifetime</div>
+                                        <div>Membership</div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <a href="MEMBER lifetimesummary.html">
+
+                                <div class="panel-footer">
+
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                    <div class="clearfix"></div>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>    
+
+                <hr>
+
+                <div class="row">
+
+                    <div class="col-lg-12 col-1">
+
+                        <!-- PUT DEDUCTIONS SUMMARY HERE -->
+
+                    </div>
+
+                </div>
                 <!-- /.row -->
 
             </div>
