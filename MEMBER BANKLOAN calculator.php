@@ -482,9 +482,9 @@ $ans = mysqli_fetch_assoc($result1)
 	<script>
 		document.getElementById("falpcompute").onclick = function() {calculate()};
 		function calculate(){
-			var amount = parseInt(document.getElementById("amount").value);
-			var terms = parseInt(document.getElementById("terms").value);
-			var interest = parseInt(document.getElementById("interest").value);
+			var amount = parseFloat(document.getElementById("amount").value);
+			var terms = parseFloat(document.getElementById("terms").value);
+			var interest = parseFloat(document.getElementById("interest").value);
 			
 			document.getElementById("totalI").innerHTML ="<b>Total Interest Payable: </b>₱"+ parseFloat((amount*interest/100)).toFixed(2);
 			document.getElementById("totalP").innerHTML ="<b>Total Amount Payable: </b> ₱"+ parseFloat((amount+amount*interest/100)).toFixed(2);
@@ -497,12 +497,12 @@ $ans = mysqli_fetch_assoc($result1)
 			
 			var amount = parseFloat(document.getElementById("amount").value);
 			
-			if(amount<<?php echo $ans['MIN_TERM'];?>){
+			if(amount<<?php echo $ans['MIN_AMOUNT']?>){
 				alert("Amount entered is below minimum. Please enter amount within the range.");
 				return false;
 				
 			}
-			else if(amount ><?php echo $ans['MAX_TERM'];?>){
+			else if(amount ><?php echo $ans['MAX_AMOUNT'];?>){
 				alert("Amount entered is above maximum.Please enter amount within the range.");
 				return false;
 			}
