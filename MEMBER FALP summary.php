@@ -1,25 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
+<?php 
 session_start();
 require_once('mysql_connect.php');
-$id = $_POST['details'];
-$query = "INSERT INTO loans(MEMBER_ID,LOAN_DETAIL_ID,AMOUNT,INTEREST,PAYMENT_TERMS,PAYABLE,PER_PAYMENT,APP_STATUS,LOAN_STATUS,DATE_APPLIED,PICKUP_STATUS)
-values({$_SESSION['idnum']},1,{$_POST['amount']},{$_POST['interest']},{$_POST['payT']},{$_POST['amountP']},{$_POST['monD']}/2,1,1,DATE(now()),1);";
-
-mysqli_query($dbc,$query);
-
-$query = "SELECT MAX(loan_ID) as 'ID' FROM LOANS WHERE MEMBER_ID = {$_SESSION['idnum']};";
-
+$query = "SELECT * FROM LOANS where MEMBER_ID = {$_SESSION['idnum']} 
+		  AND loan_detail_id = 1 AND 	loan_status != 3";
 $result = mysqli_query($dbc,$query);
-
 $ans = mysqli_fetch_assoc($result);
 
+$query = "SELECT l2.STATUS as 'Status' FROM LOANS l1 JOIN LOAN_STATUS l2 ON l1.LOAN_STATUS = l2.STATUS_ID where l1.MEMBER_ID = {$_SESSION['idnum']} 
+		  AND l1.loan_detail_id = 1 AND 	l1.loan_status != 3";
+$result = mysqli_query($dbc,$query);
+$ans1 = mysqli_fetch_assoc($result);
 
-$query = "INSERT INTO txn_reference(MEMBER_ID,TXN_TYPE,AMOUNT,TXN_DESC,TXN_DATE,LOAN_REF)
-values({$_SESSION['idnum']},1,0,'FALP Application',DATE(now()),{$ans['ID']});";
-
-mysqli_query($dbc,$query);
 ?>
 <head>
 
@@ -29,7 +22,7 @@ mysqli_query($dbc,$query);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>FRAP | Falp Application</title>
+    <title>FRAP | Falp Summary</title>
 
     <link href="css/montserrat.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
@@ -153,7 +146,7 @@ mysqli_query($dbc,$query);
 
                     <li id="top">
 
-                        <a href="MEMBER dashboard.php"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
+                        <a href="MEMBER dashboard.html"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
 
                     </li>
 
@@ -254,37 +247,196 @@ mysqli_query($dbc,$query);
                 
                     <div class="col-lg-12">
 
-                        <h1 class="page-header">FALP</h1>
+                        <h1 class="page-header">FALP Loan Summary</h1>
                     
                     </div>
 
                 </div>
 
-                <div class="row"> <!-- Well -->
+                    <div class="row">
 
-                    <div class="col-lg-1 col-1">
+                        <div class="col-lg-6">
 
+                            <div class="panel panel-primary">
 
+                                <div class="panel-heading">
+
+                                    <b>Current FALP Loan Plan</b>
+
+                                </div>
+
+                                <div class="panel-body">
+
+                                <table class="table table-bordered" style="width: 100%;">
+                                
+                                <thread>
+
+                                    <tr>
+
+                                    <td align="center"><b>Description</b></td>
+                                    <td align="center"><b>Amount</b></td>
+
+                                    </tr>
+
+                                </thread>
+
+                                <tbody>
+
+                                    <tr>
+
+                                    <td>Amount to Borrow</td>
+                                    <td>₱ <?php echo $ans['AMOUNT'];?></td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                    <td>Amount Payable</td>
+                                    <td>₱ <?php echo $ans['PAYABLE'];?></td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                    <td>Payment Terms</td>
+                                    <td><?php echo $ans['PAYMENT_TERMS'];?> months</td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                    <td>Monthly Deduction</td>
+                                    <td>₱ <?php echo $ans['PER_PAYMENT'];?></td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                    <td>Number of Payments</td>
+                                    <td><?php echo $ans['PAYMENT_TERMS']*2;?> payments</td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                    <td>Per Payment Deduction</td>
+                                    <td>₱ <?php echo $ans['PER_PAYMENT'];?></td>
+
+                                    </tr>
+
+                                </tbody>
+
+                                </table>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6">
+
+                            <div class="panel panel-green">
+
+                                <div class="panel-heading">
+
+                                    <b>Current FALP Loan Summary</b>
+
+                                </div>
+
+                                <div class="panel-body">
+
+                                    <table class="table table-bordered" style="width: 100%;">
+                                
+                                <thread>
+
+                                    <tr>
+
+                                    <td align="center"><b>Description</b></td>
+                                    <td align="center"><b>Amount</b></td>
+
+                                    </tr>
+
+                                </thread>
+
+                                <tbody>
+
+                                    <tr>
+
+                                    <td>Date Approved</td>
+                                    <td><?php echo $ans['DATE_APPROVED'];?></td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                    <td>Payments Made</td>
+                                    <td><?php echo $ans['PAYMENTS_MADE'];?> Payments</td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                    <td>Payments Left</td>
+                                    <td><?php echo $ans['PAYMENT_TERMS'] - $ans['PAYMENTS_MADE'];?> Payments</td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                    <td>Total Amount Paid</td>
+                                    <td>₱ <?php echo $ans['AMOUNT_PAID'];?></td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                    <td>Outstanding Balance</td>
+                                    <td>₱ <?php echo $ans['PAYABLE']-$ans['AMOUNT_PAID'];?></td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                    <td>Status</td>
+                                    <td><?php echo $ans1['Status'];?></td>
+
+                                    </tr>
+
+                                </tbody>
+
+                                </table>
+
+                                </div>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
-                    <div class="col-lg-10 col-2 well">
 
-                    <p class="welltext justify">Congratulations! You have successfully completed the steps in applying for a FALP Loan.  The admins will process and evaluate your application.  You will receive a notification whether your application is approved or not. Once your application has been approved, you will receive further instructions.</p>
 
-                    <p class="welltext justify"><font color="red">Please review your submitted values from the form before proceeding.</font></p>
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            <div align="center">
+
+                            <a href="MEMBER FALP activity.html" class="btn btn-success" role="button">View Payment Activity</a>
+                            <a href="MEMBER dashboard.html" class="btn btn-default" role="button">Go Back</a>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
-                </div>
+                    <div class="row">
 
-                <div class="row">
+                        <div class="col-lg-12">
 
-                    <div class="col-lg-12">
-
-                        <div align="center">
-
-                            <a href="MEMBER dashboard.php" class="btn btn-success" role="button">OK</a>
+                            &nbsp;
 
                         </div>
 
