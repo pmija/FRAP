@@ -5,14 +5,17 @@ if(isset($_POST['choice'])){
 	$id = $_POST['choice'];
 	$query = "SELECT * 
 				from loan_plan
-				where bank_id = $id";
+				where bank_id = $id AND l.status != 2";
 	
 }
 else{
-$query = "SELECT * 
-				from loan_plan
-where bank_id != 1";}
-	$result = mysqli_query($dbc,$query);
+	$query = "	SELECT * 
+from loan_plan l 
+join (SELECT bank_id,status as 'Bank_Status' from Banks) b
+on l.BANK_ID = b.bank_id
+where l.bank_id != 1 AND b.Bank_Status = 1 AND l.status != 2";
+}
+$result = mysqli_query($dbc,$query);
 	
 
 ?>
