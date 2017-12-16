@@ -1,5 +1,5 @@
 <?php session_start();
-require_once('mysql_connect.php');
+require_once('mysql_connect_FA.php');
 $id = $_POST['details'];
 $query1 = "SELECT * 
 			from loan_plan
@@ -102,7 +102,7 @@ $ans = mysqli_fetch_assoc($result1)
 
                         <li>
 
-                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -127,7 +127,7 @@ $ans = mysqli_fetch_assoc($result1)
 
                         <li>
 
-                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -144,7 +144,7 @@ $ans = mysqli_fetch_assoc($result1)
 
                     <li id="top">
 
-                        <a href="MEMBER dashboard.html"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
+                        <a href="MEMBER dashboard.php"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
 
                     </li>
 
@@ -155,15 +155,15 @@ $ans = mysqli_fetch_assoc($result1)
                         <ul id="applicationformsdd" class="collapse">
 
                             <li>
-                                <a href="MEMBER FALP application.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Application</a>
+                                <a href="MEMBER FALP application.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Application</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER HA application.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Application</a>
+                                <a href="MEMBER HA application.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Application</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER LIFETIME form.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Member Application</a>
+                                <a href="MEMBER LIFETIME form.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Member Application</a>
                             </li>
 
                         </ul>
@@ -172,13 +172,13 @@ $ans = mysqli_fetch_assoc($result1)
 
                     <li>
 
-                        <a href="MEMBER BANKLOAN list.html"><i class="fa fa-dollar" aria-hidden="true"></i> Bank Loans</a>
+                        <a href="MEMBER BANKLOAN list.php"><i class="fa fa-dollar" aria-hidden="true"></i> Bank Loans</a>
 
                     </li>
 
                     <li>
 
-                    <a href="MEMBER DEDUCTION summary.html"><i class="fa fa-book" aria-hidden="true"></i> Salary Deduction Summary</a>
+                    <a href="MEMBER DEDUCTION summary.php"><i class="fa fa-book" aria-hidden="true"></i> Salary Deduction Summary</a>
 
                     </li>
 
@@ -189,11 +189,11 @@ $ans = mysqli_fetch_assoc($result1)
                         <ul id="loantrackingdd" class="collapse">
 
                             <li>
-                                <a href="MEMBER FALP summary.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loan</a>
+                                <a href="MEMBER FALP summary.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loan</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER BANKLOAN summary.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan</a>
+                                <a href="MEMBER BANKLOAN summary.php"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan</a>
                             </li>
 
                         </ul>
@@ -207,11 +207,11 @@ $ans = mysqli_fetch_assoc($result1)
                         <ul id="servicessummarydd" class="collapse">
 
                             <li>
-                                <a href="MEMBER HA summary.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Summary</a>
+                                <a href="MEMBER HA summary.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Summary</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER LIFETIME summary.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Membership Summary</a>
+                                <a href="MEMBER LIFETIME summary.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Membership Summary</a>
                             </li>
 
                         </ul>
@@ -220,13 +220,13 @@ $ans = mysqli_fetch_assoc($result1)
 
                     <li>
 
-                        <a href="MEMBER AUDITRAIL.html"><i class="fa fa-backward" aria-hidden="true"></i> Audit Trail</a>
+                        <a href="MEMBER AUDITRAIL.php"><i class="fa fa-backward" aria-hidden="true"></i> Audit Trail</a>
 
                     </li>
 
                     <li>
 
-                        <a href="MEMBER FILEREPO.html"><i class="fa fa-folder" aria-hidden="true"></i> File Repository</a>
+                        <a href="MEMBER FILEREPO.php"><i class="fa fa-folder" aria-hidden="true"></i> File Repository</a>
 
                     </li>
 
@@ -360,7 +360,7 @@ $ans = mysqli_fetch_assoc($result1)
 
                             <div class="panel-body">
 
-                            <form method="POST" action="MEMBER BANKLOAN requirements.php"> <!-- SERVERSELF, REDIRECT TO NEXT PAGE -->
+                            <form method="POST" action="MEMBER BANKLOAN requirements.php" onSubmit ="return checkform()"> <!-- SERVERSELF, REDIRECT TO NEXT PAGE -->
 								<input type = "text" name = "interest" id = "interest" value = <?PHP ECHO $ans['INTEREST'];?> hidden>
 								
                                 <div class="row">
@@ -439,7 +439,7 @@ $ans = mysqli_fetch_assoc($result1)
                                         <div align="center">
 <input type = "text" name = "id" id = "id" value = <?PHP ECHO $ans['LOAN_ID'];?> hidden>
                                         <input type="submit" name="apply" class="btn btn-success" value="Submit">
-                                        <a href="MEMBER dashboard.html" class="btn btn-default" role="button">Go Back</a>
+                                        <a href="MEMBER dashboard.php" class="btn btn-default" role="button">Go Back</a>
 
                                         </div>
 
@@ -474,13 +474,7 @@ $ans = mysqli_fetch_assoc($result1)
 
     <!-- jQuery -->
 
-<script>
-document.getElementById("demo").onclick = function() {myFunction()};
 
-function myFunction() {
-    document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
-}
-</script>
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
@@ -492,10 +486,31 @@ function myFunction() {
 			var terms = parseInt(document.getElementById("terms").value);
 			var interest = parseInt(document.getElementById("interest").value);
 			
-			document.getElementById("totalI").innerHTML ="<b>Total Interest Payable: </b>₱"+ (amount*interest/100);
-			document.getElementById("totalP").innerHTML ="<b>Total Amount Payable: </b> ₱"+ (amount+amount*interest/100);
-			document.getElementById("PerP").innerHTML ="<b>Per Payment Period Payable: </b> ₱ "+ ((amount+amount*interest/100)/terms/2);
-			document.getElementById("Monthly").innerHTML ="<b>Monthly Payable: </b> ₱"+ ((amount+amount*interest/100)/terms);
+			document.getElementById("totalI").innerHTML ="<b>Total Interest Payable: </b>₱"+ parseFloat((amount*interest/100)).toFixed(2);
+			document.getElementById("totalP").innerHTML ="<b>Total Amount Payable: </b> ₱"+ parseFloat((amount+amount*interest/100)).toFixed(2);
+			document.getElementById("PerP").innerHTML ="<b>Per Payment Period Payable: </b> ₱ "+ parseFloat(((amount+amount*interest/100)/terms/2)).toFixed(2);
+			document.getElementById("Monthly").innerHTML ="<b>Monthly Payable: </b> ₱"+ parseFloat(((amount+amount*interest/100)/terms)).toFixed(2);
+			
+		}
+		
+		function checkform(){
+			
+			var amount = parseFloat(document.getElementById("amount").value);
+			
+			if(amount<<?php echo $ans['MIN_TERM'];?>){
+				alert("Amount entered is below minimum. Please enter amount within the range.");
+				return false;
+				
+			}
+			else if(amount ><?php echo $ans['MAX_TERM'];?>){
+				alert("Amount entered is above maximum.Please enter amount within the range.");
+				return false;
+			}
+			else if(isNaN(amount)){
+				alert("Invalid Input");
+				return false;
+			}
+			return true;
 			
 		}
 	</script>
