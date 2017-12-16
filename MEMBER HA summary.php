@@ -29,7 +29,12 @@
     <![endif]-->
 
 </head>
-
+<?php 
+    session_start();
+    require_once('mysql_connect_FA.php');
+     //Test value
+    $_SESSION['idnum']=1141231234;
+?>
 <body>
 
     <div id="wrapper">
@@ -263,11 +268,15 @@
                     <div class="col-lg-8">
 
                         <div class="well" align="center">
-
-                            <b>Health Aid Program Member Since:</b> March 28, 2016
+                            <?php
+                                $query = "SELECT DATE_APPROVED FROM HEALTH_AID WHERE MEMBER_ID = ". $_SESSION['idnum'] .";";
+                                $result = mysqli_query($dbc, $query);
+                                $row = mysqli_fetch_array($result);
+                            ?>
+                            <b>Health Aid Program Member Since:</b> <?php echo $row['DATE_APPROVED']; ?>
 
                             <div>
-
+                                <!-- Insert code here to update every month -->
                                 <b>Total Health Aid Contribution:</b> ₱ 1,800.00
 
                             </div>
@@ -327,10 +336,18 @@
                                                 <tbody>
 
                                                     <tr>
+                                                    <?php 
+                                                        $query = "SELECT * FROM FATHER WHERE MEMBER_ID =" . $_SESSION['idnum'].";";
+                                                        $result = mysqli_query($dbc, $query);
+                                                        $row = mysqli_fetch_array($result);
 
-                                                    <td align="center">Thomas James Tiam-lee</td>
-                                                    <td align="center">23</td>
-                                                    <td align="center">April 7, 1994</td>
+                                                        $today = date("Y-m-d");
+                                                        $diff = date_diff(date_create($row['BIRTHDATE']), date_create($today));
+                                                        $diff->format('%y');
+                                                    ?>
+                                                    <td align="center"><?php echo $row['FIRSTNAME']. " ". $row['LASTNAME']; ?></td>
+                                                    <td align="center"><?php echo $diff->format('%y'); ?></td>
+                                                    <td align="center"><?php echo $row['BIRTHDATE']; ?></td>
 
                                                     </tr>
 
@@ -370,9 +387,18 @@
 
                                                     <tr>
 
-                                                    <td align="center">Thomas James Tiam-lee</td>
-                                                    <td align="center">23</td>
-                                                    <td align="center">April 7, 1994</td>
+                                                    <?php 
+                                                        $query = "SELECT * FROM MOTHER WHERE MEMBER_ID =" . $_SESSION['idnum'].";";
+                                                        $result = mysqli_query($dbc, $query);
+                                                        $row = mysqli_fetch_array($result);
+
+                                                        $today = date("Y-m-d");
+                                                        $diff = date_diff(date_create($row['BIRTHDATE']), date_create($today));
+                                                        $diff->format('%y');
+                                                    ?>
+                                                    <td align="center"><?php echo $row['FIRSTNAME']. " ". $row['LASTNAME']; ?></td>
+                                                    <td align="center"><?php echo $diff->format('%y'); ?></td>
+                                                    <td align="center"><?php echo $row['BIRTHDATE']; ?></td>
 
                                                     </tr>
 
@@ -412,9 +438,17 @@
 
                                                     <tr>
 
-                                                    <td align="center">Thomas James Tiam-lee</td>
-                                                    <td align="center">23</td>
-                                                    <td align="center">April 7, 1994</td>
+                                                    <?php 
+                                                        $query = "SELECT * FROM SPOUSE WHERE MEMBER_ID =" . $_SESSION['idnum'].";";
+                                                        $result = mysqli_query($dbc, $query);
+                                                        $row = mysqli_fetch_array($result);
+
+                                                        $today = date("Y-m-d");
+                                                        $diff = date_diff(date_create($row['BIRTHDATE']), date_create($today));
+                                                    ?>
+                                                    <td align="center"><?php echo $row['FIRSTNAME']. " ". $row['LASTNAME']; ?></td>
+                                                    <td align="center"><?php echo $diff->format('%y'); ?></td>
+                                                    <td align="center"><?php echo $row['BIRTHDATE']; ?></td>
 
                                                     </tr>
 
@@ -454,9 +488,23 @@
 
                                                     <tr>
 
-                                                    <td align="center">Thomas James Tiam-lee</td>
-                                                    <td align="center">23</td>
-                                                    <td align="center">April 7, 1994</td>
+                                                    <?php 
+                                                        $query = "SELECT * FROM SIBLINGS WHERE MEMBER_ID =" . $_SESSION['idnum'].";";
+                                                        $result = mysqli_query($dbc, $query);
+
+                                                        foreach ($result as $resultRow) {
+                                                            $today = date("Y-m-d");
+                                                            $diff = date_diff(date_create($resultRow['BIRTHDATE']), date_create($today));
+
+                                                            echo"
+                                                                <tr>
+                                                                    <td align='center'>". $resultRow['FIRSTNAME'] ." ". $resultRow['LASTNAME'] ."</td>
+                                                                    <td align='center'>". $diff->format('%y') ."</td>
+                                                                    <td align='center'>". $resultRow['BIRTHDATE'] ."</td>
+                                                                </tr>
+                                                            ";
+                                                        }
+                                                    ?>
 
                                                     </tr>
 
@@ -496,9 +544,23 @@
 
                                                     <tr>
 
-                                                    <td align="center">Thomas James Tiam-lee</td>
-                                                    <td align="center">23</td>
-                                                    <td align="center">April 7, 1994</td>
+                                                    <?php 
+                                                        $query = "SELECT * FROM CHILDREN WHERE MEMBER_ID =" . $_SESSION['idnum'].";";
+                                                        $result = mysqli_query($dbc, $query);
+
+                                                        foreach ($result as $resultRow) {
+                                                            $today = date("Y-m-d");
+                                                            $diff = date_diff(date_create($resultRow['BIRTHDATE']), date_create($today));
+
+                                                            echo"
+                                                                <tr>
+                                                                    <td align='center'>". $resultRow['FIRSTNAME'] ." ". $resultRow['LASTNAME'] ."</td>
+                                                                    <td align='center'>". $diff->format('%y') ."</td>
+                                                                    <td align='center'>". $resultRow['BIRTHDATE'] ."</td>
+                                                                </tr>
+                                                            ";
+                                                        }
+                                                    ?>
 
                                                     </tr>
 
