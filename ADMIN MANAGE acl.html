@@ -31,6 +31,14 @@
 
 </head>
 
+<style>
+
+    input[type=checkbox] {
+        transform: scale(2);
+    }
+
+</style>
+
 <body>
 
     <div id="wrapper">
@@ -305,7 +313,7 @@
                     <div class="col-lg-12">
 
                         <h1 class="page-header">
-                            Admin Management
+                            Edit Access for Patrick Mijares
                         </h1>
                     
                     </div>
@@ -313,11 +321,21 @@
                 </div>
                 <!-- alert -->
                 <div class="row">
+
                     <div class="col-lg-12">
+
+                        <div class="alert alert-info">
+
+                            <strong>Here, you can edit if this admin can access the modules listed below</strong>
+
+                        </div>
 
                        <div class="row">
 
-                            <div class="col-lg-12">
+                            <div class="col-lg-2">
+                            </div>
+
+                            <div class="col-lg-8">
 
                                 <form action="ADMIN MANAGE acl.html" method="POST"> <!-- SERVER SELF -->
 
@@ -327,9 +345,8 @@
 
                                         <tr>
 
-                                        <td align="center" width="300px"><b>ID Number</b></td>
-                                        <td align="center" width="600px"><b>Name</b></td>
-                                        <td align="center"><b>Manage Access Control List</b></td>
+                                        <td align="center" width="600px"><b>Module Name</b></td>
+                                        <td align="center"><b>Edit Access</b></td>
 
                                         </tr>
 
@@ -339,31 +356,170 @@
 
                                         <tr>
 
-                                        <td align="center">11436786</td>
-                                        <td align="center">Patrick Mijares </td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="center">Add Admin Account</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
 
                                         </tr>
 
                                         <tr>
 
-                                        <td align="center">11436786</td>
-                                        <td align="center">Patrick Mijares </td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="center">Evaluate Membership Applications</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
 
                                         </tr>
 
                                         <tr>
 
-                                        <td align="center">11436786</td>
-                                        <td align="center">Patrick Mijares </td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="center">Evaluate FALP Applications</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">Evaluate Bank Loan Applications</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">Evaluate Health Aid Applications</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">Add Lifetime Member</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">Add Partner Bank</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">Enable/Disable Partner Banks</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">Add Bank Loan Plan</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">Enable/Disable Bank Loan Plans</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">View All Members</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">View Member's Services</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">View On-going FALP Loans</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">View On-going Bank Loans</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">View General Deductions</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">View Detailed Deductions</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">View Completed Loans</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">View New Deductions</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">View Monthly Report</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">View Documents Uploaded</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">Upload Documents</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                        <td align="center">Manage Admins</td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="details" width="50px" value="Details">&nbsp;&nbsp;&nbsp;</td>
 
                                         </tr>
 
                                     </tbody>
 
                                 </table>
+
+                                <hr>
+
+                                <div align="center">
+
+                                <input type="submit" value="Apply Changes" name="submit" class="btn btn-success">
+                                <a href="ADMIN MANAGE.html" class="btn btn-default">Go Back</a><p><p>&nbsp;
+
+                                </div>
 
                                 </form>
 
@@ -390,15 +546,7 @@
     <script src="js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="DataTables/datatables.min.js"></script>
-    <script>
 
-        $(document).ready(function(){
-    
-            $('#table').DataTable();
-
-        });
-
-    </script>
 
 </body>
 
