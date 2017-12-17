@@ -367,7 +367,7 @@ else {
                                             <option value = "0">This Current Date</option>  
                                         <?php
                                         $query="SELECT DISTINCT MONTH(txn_date) as 'Month',YEAR(txn_date) as 'Year', DAY(txn_date) as 'Day' from txn_reference
-                                            where txn_type = 2";
+                                            where txn_type = 2 AND service_type != 4";
                                         $result1 = mysqli_query($dbc,$query);
 
                                         while($ans = mysqli_fetch_assoc($result1)){?>
