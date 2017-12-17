@@ -6,16 +6,16 @@ if(!isset($_POST['select_date'])){
    $query = "SELECT max(day(txn_date)) as 'Day',max(month(txn_date)) as 'Month',max(Year(txn_date)) as 'Year' from txn_reference where txn_type = 2";
    $result = mysqli_query($dbc,$query);
    $row = mysqli_fetch_assoc($result);
-   $date = $row['Day']." ".$row['Month']."-".$row['Year'];
-   $day =$row['Day'];
+   $date = $row['Month']."-".$row['Year'];
+   
    $month =$row['Month'];
    $year =$row['Year'];
 }
 else {
     if($_POST['date'] != "0"){
         $date = $_POST['date'];
-        $day = substr($date,0,strpos($date," "));
-        $month = substr($date,strpos($date," ")+1,strpos($date,"-")-strpos($date," ")-1);
+
+        $month = substr($date,0,strpos($date,"-"));
         $year = substr($date,strpos($date,"-")+1);
         }
     
@@ -23,8 +23,8 @@ else {
         $query = "SELECT max(day(txn_date)) as 'Day',max(month(txn_date)) as 'Month',max(Year(txn_date)) as 'Year' from txn_reference where txn_type = 2";
         $result = mysqli_query($dbc,$query);
         $row = mysqli_fetch_assoc($result);
-        $date = $row['Day']." ".$row['Month']."-".$row['Year'];
-        $day =$row['Day'];
+        $date = $row['Month']."-".$row['Year'];
+        
            $month =$row['Month'];
            $year =$row['Year'];
     }
@@ -366,7 +366,7 @@ else {
                                         
                                             <option value = "0">This Current Date</option>  
                                         <?php
-                                        $query="SELECT DISTINCT MONTH(txn_date) as 'Month',YEAR(txn_date) as 'Year', DAY(txn_date) as 'Day' from txn_reference
+                                        $query="SELECT DISTINCT MONTH(txn_date) as 'Month',YEAR(txn_date) as 'Year' from txn_reference
                                             where txn_type = 2 AND service_type != 4";
                                         $result1 = mysqli_query($dbc,$query);
 
@@ -374,7 +374,7 @@ else {
                                             <option value = "<?php echo $ans['Day']." ".$ans['Month']."-".$ans['Year'];
                                                                 
                                                                 ?>" <?php if(isset($_POST['date'])){
-                                                                    if($_POST['date']== $ans['Day']." ".$ans['Month']."-".$ans['Year']){
+                                                                    if($_POST['date']== $ans['Month']."-".$ans['Year']){
                                                                         echo " selected";
                                                                     }
                                                                 }?> >
@@ -419,7 +419,7 @@ else {
 
 
 
-                                                echo $ans['Day']." ".$month1." ".$ans['Year']?></option>
+                                                echo $month1." ".$ans['Year']?></option>
                                         <?php }?>
                                         </select>
 
@@ -462,7 +462,7 @@ else {
                                                 left join txn_reference t
                                                 on t.SERVICE_TYPE = s.SERVICE_ID
                                                 join (SELECT max(txn_date) as 'Date' from txn_reference where txn_type = 2) latest
-                                                where $month = Month(txn_date) AND $year = Year(txn_date) AND $day = DAY(txn_date)  AND t.TXN_TYPE = 2 AND s.SERVICE_ID = 1 
+                                                where $month = Month(txn_date) AND $year = Year(txn_date)  AND t.TXN_TYPE = 2 AND s.SERVICE_ID = 1 
                                                 group by t.SERVICE_TYPE ";
                                     $result1 = mysqli_query($dbc,$query1);
                                     $row1 = mysqli_fetch_assoc($result1);
@@ -506,7 +506,7 @@ else {
                                                 left join txn_reference t
                                                 on t.SERVICE_TYPE = s.SERVICE_ID
                                                 join (SELECT max(txn_date) as 'Date' from txn_reference where txn_type = 2) latest
-                                                where $month = Month(txn_date) AND $year = Year(txn_date) AND $day = DAY(txn_date)  AND t.TXN_TYPE = 2 AND s.SERVICE_ID = 2 
+                                                where $month = Month(txn_date) AND $year = Year(txn_date)  AND t.TXN_TYPE = 2 AND s.SERVICE_ID = 2 
                                                 group by t.SERVICE_TYPE ";
                                     $result1 = mysqli_query($dbc,$query1);
                                     $row1 = mysqli_fetch_assoc($result1);
@@ -551,7 +551,7 @@ else {
                                                 left join txn_reference t
                                                 on t.SERVICE_TYPE = s.SERVICE_ID
                                                 join (SELECT max(txn_date) as 'Date' from txn_reference where txn_type = 2) latest
-                                                where $month = Month(txn_date) AND $year = Year(txn_date) AND $day = DAY(txn_date)  AND t.TXN_TYPE = 2 AND s.SERVICE_ID = 3 
+                                                where $month = Month(txn_date) AND $year = Year(txn_date)  AND t.TXN_TYPE = 2 AND s.SERVICE_ID = 3 
                                                 group by t.SERVICE_TYPE ";
                                     $result1 = mysqli_query($dbc,$query1);
                                     $row1 = mysqli_fetch_assoc($result1);
