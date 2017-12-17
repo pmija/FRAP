@@ -104,6 +104,8 @@ $requirementID3 = $requirementID2;
 
         $id = $_POST['details'];
 
+        $loan_id = $_POST['loan_ids'];
+
         $query1 = "SELECT * 
                 from loan_plan
                 where loan_id = $id;";

@@ -488,7 +488,6 @@ $ans = mysqli_fetch_assoc($result1);
 								<input type = "text" name = "monD" value = <?php echo ($_POST['amount']+$_POST['amount']*$_POST['interest']/100)/$_POST['terms'];?> hidden>
 								<input type = "text" name = "numP" value = <?php echo $_POST['terms']*2;?> hidden>
 								
-                                <?php echo $loan_id ?>
                                 </tr>
 
                             </tbody>

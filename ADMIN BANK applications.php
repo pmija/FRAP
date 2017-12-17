@@ -1,3 +1,24 @@
+<?php
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?> 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -335,7 +356,7 @@
 
                             <div class="col-lg-12">
 
-                                <form action="ADMIN BANK appdetails.html" method="POST"> <!-- SERVER SELF -->
+                                <form action="ADMIN BANK appdetails.php" method="POST"> <!-- SERVER SELF -->
 
                                 <table id="table" class="table table-bordered table-striped">
                                     
