@@ -1,12 +1,15 @@
 <?php 
 session_start();
-require_once('mysql_connect.php');
+require_once('mysql_connect_FA.php');
+
+
 $id = $_POST['id'];
 $query1 = "SELECT * 
-			from loan_plan
-			where loan_id = $id;";
+                from loan_plan
+                where loan_id = $id;";
 $result1 = mysqli_query($dbc,$query1);
 $ans = mysqli_fetch_assoc($result1);
+
 
 
 
@@ -37,10 +40,10 @@ $ans = mysqli_fetch_assoc($result1);
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+    <!-- [if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    [endif] --> 
 
 </head>
 
@@ -280,7 +283,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                 <div class="row">
 
-                    <form method="POST" action="MEMBER BANK appsent.html"> <!-- SERVERSELF, REDIRECT TO NEXT PAGE -->
+                    <form action="MEMBER BANKLOAN appsent.php" method = "post" enctype="multipart/form-data" onsubmit="return checkForm()">  <!-- SERVERSELF, REDIRECT TO NEXT PAGE -->
 
                     <div class="col-lg-3 col-1">
 
@@ -302,7 +305,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                                 <div class="col-lg-10">
 
-                                    <input type="file" name = "IncomeTax">
+                                    <input type="file" accept = ".jpeg, .jpg, .png, .pdf, .doc, .docx" name = "IncomeTax" id = "IncomeTax" >
 
                                 </div>
 
@@ -334,7 +337,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                                 <div class="col-lg-10">
 
-                                    <input type="file" name = "payslip">
+                                    <input type="file" accept = ".jpeg, .jpg, .png, .pdf, .doc, .docx" name = "payslip" id="payslip">
 
                                 </div>
 
@@ -366,7 +369,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                                 <div class="col-lg-10">
 
-                                    <input type="file" name = "emp_ID">
+                                    <input type="file" accept = ".jpeg, .jpg, .png, .pdf, .doc, .docx" name = "emp_ID" id = "emp_ID">
 
                                 </div>
 
@@ -398,7 +401,7 @@ $ans = mysqli_fetch_assoc($result1);
 
                                 <div class="col-lg-10">
 
-                                    <input type="file" name = "gov_ID">
+                                    <input type="file" accept = ".jpeg, .jpg, .png, .pdf, .doc, .docx" name = "gov_ID" id = "gov_ID">
 
                                 </div>
 
@@ -409,8 +412,6 @@ $ans = mysqli_fetch_assoc($result1);
                         </div>
 
                     </div>
-
-                    </form>
 
                 </div>
 
@@ -487,6 +488,7 @@ $ans = mysqli_fetch_assoc($result1);
 								<input type = "text" name = "monD" value = <?php echo ($_POST['amount']+$_POST['amount']*$_POST['interest']/100)/$_POST['terms'];?> hidden>
 								<input type = "text" name = "numP" value = <?php echo $_POST['terms']*2;?> hidden>
 								
+                                <?php echo $loan_id ?>
                                 </tr>
 
                             </tbody>
@@ -502,16 +504,15 @@ $ans = mysqli_fetch_assoc($result1);
                         <div class="col-lg-12">
 
                             <div align="center">
-
-                            <form action="MEMBER BANKLOAN appsent.php" method="POST">
+                            
 								<input type = "text" name = "amount" value =<?php echo $_POST['amount']; ?> hidden>
 								<input type = "text" name = "amountP" value =<?php echo $_POST['amount']+$_POST['amount']*$_POST['interest']/100; ?>  hidden>
 								<input type = "text" name = "payT" value = <?php echo $_POST['terms'];?> hidden>
 								<input type = "text" name = "monD" value = <?php echo ($_POST['amount']+$_POST['amount']*$_POST['interest']/100)/$_POST['terms'];?> hidden>
 								<input type = "text" name = "numP" value = <?php echo $_POST['terms']*2;?> hidden>
-								<input type="submit" name="apply" class="btn btn-success" value="Submit">
 								<input type = "text" name = "details" value = <?php echo $_POST['id'];?> hidden>
 								<input type = "text" name = "interest" value =<?php echo $_POST['interest']; ?> hidden>
+                                <input type="submit" id="submitForm" name="submit" class="btn btn-success" value="Submit" >
                             </form>
 							<form action="MEMBER BANKLOAN calculator.php" method = "post" >
 								<button type="submit" class="btn btn-default">Go Back</button>
@@ -545,7 +546,30 @@ $ans = mysqli_fetch_assoc($result1);
 
     </div>
     <!-- /#wrapper -->
+    <script>
 
+
+        function checkForm(){
+            
+            if(document.getElementById("IncomeTax").files.length == 0){ // checks if the income tax field is emptty 
+                 alert("please enter incomeTax");
+                 return false; 
+            }else if(document.getElementById("payslip").files.length == 0){ // checks if the payslip is empty
+                alert("please enter payslip");
+                return false; 
+            }else if(document.getElementById("emp_ID").files.length == 0){ // checks if the emp_id is empty
+                alert("no files selected for emp_id");
+                return false; 
+            }else if(document.getElementById("gov_ID").files.length == 0){ // checks if the gov_id is empty 
+                alert("No Files selected for gov_ID");
+                return false; 
+            }else{
+                alert("All files uploaded!");
+                return true; 
+            }
+            
+        }
+    </script>
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 

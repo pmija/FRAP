@@ -1,5 +1,5 @@
 <?php session_start();
-require_once('mysql_connect.php');
+require_once('mysql_connect_FA.php');
 
 if(isset($_POST['choice'])){
 	$id = $_POST['choice'];
