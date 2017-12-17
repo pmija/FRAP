@@ -3,6 +3,10 @@
 <?php
 require_once('mysql_connect_FA.php');
 $flag=0;
+if(isset($_POST['print'])){
+    $_SESSION['date']=$_POST['date'];
+    header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/generateGOD.php");
+}
 if(!isset($_POST['select_date'])){
    
         $query="SELECT m.member_ID as 'ID', firstname as 'First',lastname as 'Last',middlename as 'Middle',DEPT_NAME,sum(t.amount) as 'Total'
@@ -351,7 +355,7 @@ $result=mysqli_query($dbc,$query);
 
                         <h1 class="page-header">
                             General Deductions Report
-                            <?php echo $query;?>
+                            
                         </h1>
                     
                     </div>
