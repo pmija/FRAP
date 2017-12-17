@@ -520,12 +520,18 @@
 
             }
 				
-                $queryMem = "INSERT INTO HEALTH_AID (MEMBER_ID, APP_STATUS, DATE_APPLIED, DATE_APPROVED, EMP_ID) 
+            $queryMem = "INSERT INTO HEALTH_AID (MEMBER_ID, APP_STATUS, DATE_APPLIED, DATE_APPROVED, EMP_ID) 
 
-                VALUES('{$idnum}', '1', CURDATE(), NULL, '{$idnum}'); ";
+            VALUES('{$idnum}', '1', NOW(), NULL, '{$idnum}'); ";
 
-                $resultMem = mysqli_query($dbc, $queryMem);
-			
+            $resultMem = mysqli_query($dbc, $queryMem);
+		
+            //Insert into transaction table
+            $queryTnx = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF, EMP_ID, SERVICE_TYPE) 
+            VALUES('{$idnum}', '1', 'Health Aid Application', 0, NOW(), NULL, NULL, '2'); ";
+            $resultTnx = mysqli_query($dbc, $queryTnx);
+
+
 			//This retrieves the Health Aid Table's maximum 
 			$queryHARI = "SELECT MAX(RECORD_ID) as RECORD_ID FROM HEALTH_AID;";
 			$resultHARI = mysqli_query($dbc, $queryHARI);
