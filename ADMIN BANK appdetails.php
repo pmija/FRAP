@@ -1,3 +1,94 @@
+<?php
+session_start();
+require_once("mysql_connect_FA.php");
+
+$bank_loan_id = $_SESSION['bank_loan_id'];
+
+
+
+// checks if the shit that was posted was loan_id
+// first we would want to get the personal information
+$query = "select m.member_id,m.firstname, m.lastname, m.middlename
+from loans l
+join member m
+on l.member_id = m.member_id
+where l.loan_id ={$bank_loan_id}" ;
+        
+$result= mysqli_query($dbc,$query);
+
+$personal_info = mysqli_fetch_array($result,MYSQLI_ASSOC); // use this when referring to the personal information of the person
+
+// first we would want to get the loan information
+$query2 = "select b.bank_name, l.payable, l.amount, l.payment_terms, l.per_payment
+            from loans l 
+            join loan_plan lp 
+            on l.loan_detail_id = lp.loan_id
+            join banks b
+            on lp.bank_id = b.bank_id
+            where l.loan_ID = {$bank_loan_id}" ;
+
+$result2= mysqli_query($dbc,$query2);
+
+$loan_info = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+
+// first we would want to get the directories of the files 
+$query3= " select br.ICR_DIR, br.PAYSLIP_DIR, br.EMP_ID_DIR, br.GOV_ID_DIR
+            from loans l
+            join bank_requirements br
+            on l.loan_id = br.loan_id
+            where l.loan_id = {$bank_loan_id}" ;
+
+$result3= mysqli_query($dbc,$query3);
+
+$directories = mysqli_fetch_array($result3,MYSQLI_ASSOC);
+
+
+
+
+    if(isset($_POST['Accept'])){     // checks if it was the accept/reject
+
+            // just update the loans condition to accepted or something
+
+
+
+    }else if(isset($_POST['Reject'])){ // checks if it was reject
+
+               // just update the loans condition to rejected and shit 
+
+
+    }else if(isset($_POST['ITR'])){ // if the icr was clicked
+
+        $ITR = $directories['ICR_DIR'];
+
+        header("Location:http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/downloadFile.php?loanID=".urlencode(''.$ITR) ); 
+
+     
+    }else if(isset($_POST['payslip'])){ // if the payslip
+
+        $ITR = $directories['PAYSLIP_DIR'];
+
+        header("Location:http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/downloadFile.php?loanID=".urlencode(''.$ITR) ); 
+
+    }else if(isset($_POST['empID'])){ // if the shit was clikced
+
+        $ITR = $directories['EMP_ID_DIR'];
+
+        header("Location:http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/downloadFile.php?loanID=".urlencode(''.$ITR) ); 
+
+    }else if(isset($_POST['govID'])){
+
+        $ITR = $directories['GOV_ID_DIR'];
+
+        header("Location:http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/downloadFile.php?loanID=".urlencode(''.$ITR) ); 
+
+
+    }else{
+
+            echo "I dont the hell know what you clicked. Seriously. wtf. ";
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,7 +191,7 @@
 
                         <li>
 
-                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -118,13 +209,13 @@
 
                     <li id="top">
 
-                        <a href="ADMIN dashboard.html"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
+                        <a href="ADMIN dashboard.php"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
 
                     </li>
 
                     <li>
 
-                        <a href="ADMIN addaccount.html"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Admin Account</a>
+                        <a href="ADMIN addaccount.php"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Admin Account</a>
 
                     </li>
 
@@ -135,19 +226,19 @@
                         <ul id="applications" class="collapse">
 
                             <li>
-                                <a href="ADMIN MEMBERSHIP applications.html"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;Membership Pending Applications</a>
+                                <a href="ADMIN MEMBERSHIP applications.php"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;Membership Pending Applications</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN FALP applications.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;FALP Pending Applications</a>
+                                <a href="ADMIN FALP applications.php"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;FALP Pending Applications</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK applications.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan Pending Applications</a>
+                                <a href="ADMIN BANK applications.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan Pending Applications</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN HEALTHAID applications.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Pending Applications</a>
+                                <a href="ADMIN HEALTHAID applications.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Pending Applications</a>
                             </li>
 
                         </ul>
@@ -156,7 +247,7 @@
 
                     <li>
 
-                        <a href="ADMIN LIFETIME addmember.html"><i class="fa fa-id-card-o" aria-hidden="true"></i> Add Lifetime Member</a>
+                        <a href="ADMIN LIFETIME addmember.php"><i class="fa fa-id-card-o" aria-hidden="true"></i> Add Lifetime Member</a>
 
                     </li>
 
@@ -167,19 +258,19 @@
                         <ul id="bankloans" class="collapse">
 
                             <li>
-                                <a href="ADMIN BANK addbank.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Add Partner Bank</a>
+                                <a href="ADMIN BANK addbank.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Add Partner Bank</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK editbank.html"><i class="fa fa-gears" aria-hidden="true"></i>&nbsp;&nbsp;Enable/Disable Partner Bank</a>
+                                <a href="ADMIN BANK editbank.php"><i class="fa fa-gears" aria-hidden="true"></i>&nbsp;&nbsp;Enable/Disable Partner Bank</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK addplan.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Add Bank Loan Plan</a>
+                                <a href="ADMIN BANK addplan.php"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Add Bank Loan Plan</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK editplan.html"><i class="fa fa-gears" aria-hidden="true"></i>&nbsp;&nbsp;Enable/Disable Bank Loan Plan</a>
+                                <a href="ADMIN BANK editplan.php"><i class="fa fa-gears" aria-hidden="true"></i>&nbsp;&nbsp;Enable/Disable Bank Loan Plan</a>
                             </li>
 
                         </ul>
@@ -193,11 +284,11 @@
                         <ul id="members" class="collapse">
 
                             <li>
-                                <a href="ADMIN MEMBERS viewmembers.html"><i class="fa fa-group" aria-hidden="true"></i>&nbsp;&nbsp;View All Members</a>
+                                <a href="ADMIN MEMBERS viewmembers.php"><i class="fa fa-group" aria-hidden="true"></i>&nbsp;&nbsp;View All Members</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN MEMBERS viewstatus.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Member's Services</a>
+                                <a href="ADMIN MEMBERS viewstatus.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Member's Services</a>
                             </li>
 
                         </ul>
@@ -211,11 +302,11 @@
                         <ul id="loans" class="collapse">
 
                             <li>
-                                <a href="ADMIN FALP viewactive.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loans</a>
+                                <a href="ADMIN FALP viewactive.php"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loans</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK viewactive.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loans</a>
+                                <a href="ADMIN BANK viewactive.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loans</a>
                             </li>
 
                         </ul>
@@ -229,11 +320,11 @@
                         <ul id="dreports" class="collapse">
 
                             <li>
-                                <a href="ADMIN DREPORT general.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;General Deductions</a>
+                                <a href="ADMIN DREPORT general.php"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;General Deductions</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN DREPORT detailed.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;Detailed Deductions</a>
+                                <a href="ADMIN DREPORT detailed.php"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;Detailed Deductions</a>
                             </li>
 
                         </ul>
@@ -247,11 +338,11 @@
                         <ul id="preports" class="collapse">
 
                             <li>
-                                <a href="ADMIN PREPORT completed.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;Completed Loans</a>
+                                <a href="ADMIN PREPORT completed.php"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;Completed Loans</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN PREPORT new.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;New Deductions</a>
+                                <a href="ADMIN PREPORT new.php"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;New Deductions</a>
                             </li>
 
                         </ul>
@@ -260,7 +351,7 @@
 
                                         <li>
 
-                        <a href="ADMIN MREPORT report.html"><i class="fa fa-table" aria-hidden="true"></i> Monthly Report</a>
+                        <a href="ADMIN MREPORT report.php"><i class="fa fa-table" aria-hidden="true"></i> Monthly Report</a>
 
                     </li>
 
@@ -271,12 +362,12 @@
                         <ul id="repo" class="collapse">
 
                             <li>
-                                <a href="ADMIN FILEREPO.html"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;&nbsp;View Documents</a>
+                                <a href="ADMIN FILEREPO.php"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;&nbsp;View Documents</a>
                             </li>
 
                             <li>
 
-                                <a href="ADMIN FILEREPO upload.html"><i class="fa fa-upload" aria-hidden="true"></i> Upload Documents</a>
+                                <a href="ADMIN FILEREPO upload.php"><i class="fa fa-upload" aria-hidden="true"></i> Upload Documents</a>
 
                             </li>
 
@@ -286,7 +377,7 @@
 
                     <li>
 
-                        <a href="ADMIN MANAGE.html"><i class="fa fa-gears" aria-hidden="true"></i> Admin Management</a>
+                        <a href="ADMIN MANAGE.php"><i class="fa fa-gears" aria-hidden="true"></i> Admin Management</a>
 
                     </li>
 
@@ -331,10 +422,10 @@
 
                                         <div class="panel-body"><p>
 
-                                            <b>ID Number:</b> <p>
-                                            <b>First Name:</b> <p>
-                                            <b>Last Name:</b> <p>
-                                            <b>Middle Name:</b> <p>
+                                            <b>ID Number: <?php echo $personal_info['member_id'];?> </b> <p>
+                                            <b>First Name: <?php echo $personal_info['firstname'];?></b> <p>
+                                            <b>Last Name: <?php echo $personal_info['lastname'];?></b> <p>
+                                            <b>Middle Name: <?php echo $personal_info['middlename'];?></b> <p>
                                             
                                         </div>
 
@@ -351,13 +442,13 @@
 
                                         <div class="panel-body"><p>
 
-                                            <b>Bank of Choice:</b> <p>
-                                            <b>Amount to Borrow:</b> <p>
-                                            <b>Amount Payable:</b> <p>
-                                            <b>Payment Terms:</b> <p>
-                                            <b>Monthly Deductions:</b> <p>
-                                            <b>Number of Payments:</b> <p>
-                                            <b>Per Payment Deduction:</b> <p>
+                                            <b>Bank of Choice:  <?php echo $loan_info['bank_name'];?></b> <p>
+                                            <b>Amount to Borrow:  <?php echo $loan_info['amount'];?></b> <p>
+                                            <b>Amount Payable:  <?php echo $loan_info['payable'];?></b> <p>
+                                            <b>Payment Terms:  <?php echo $loan_info['payment_terms'];?></b> <p>
+                                            <b>Monthly Deductions:  <?php echo ($loan_info['per_payment']*2); ?></b> <p>
+                                            <b>Number of Payments:  <?php echo ($loan_info['payment_terms']*2);?></b> <p>
+                                            <b>Per Payment Deduction:  <?php echo $loan_info['per_payment'];?></b> <p>
 
                                         </div>
 
@@ -372,11 +463,13 @@
                                         </div>
 
                                         <div class="panel-body"><p>
+                                         
 
-                                            <input type="submit" class="btn btn-primary" name="accept" value="Download Income Tax Return">
-                                            <input type="submit" class="btn btn-primary" name="accept" value="Download Payslip">
-                                            <input type="submit" class="btn btn-primary" name="accept" value="Download Government ID">
-                                            <input type="submit" class="btn btn-primary" name="accept" value="Download Employee ID">
+                                            <input type="submit" class="btn btn-primary"  name="ITR" value="Download Income Tax Return">
+                                            <input type="submit" class="btn btn-primary"  name="payslip" value="Download Payslip">
+                                            <input type="submit" class="btn btn-primary"  name="govID" value="Download Government ID">
+                                            <input type="submit" class="btn btn-primary"  name="empID" value="Download Employee ID">
+
 
                                         </div>
 
@@ -388,14 +481,15 @@
                                         <div class="panel-heading">
 
                                             <b>Actions</b>
-
+                                            <?php echo $bank_loan_id; ?>
                                         </div>
 
                                         <div class="panel-body"><p>
 
-                                            <input type="submit" class="btn btn-success" name="accept" value="Accept Application">
-                                            <input type="submit" class="btn btn-danger" name="reject" value="Reject Application">
+                                            <input type="submit" class="btn btn-success" name="Accept" value="Accept Application">
+                                            <input type="submit" class="btn btn-danger" name="Reject" value="Reject Application">
 
+                                            </form>
                                         </div>
 
                                     </div>

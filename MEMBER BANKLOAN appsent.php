@@ -2,11 +2,6 @@
 session_start();
 require_once('mysql_connect_FA.php');
 
-
-
-
-
-
 $query2 = "SELECT MAX(REQ_ID) from bank_requirements";
 
 $user_id = 11443081;
