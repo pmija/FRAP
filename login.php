@@ -41,7 +41,7 @@
         if (empty($_POST['idnum'])) {
 
             $_SESSION['idnum'] = NULL;
-            $message.='<p>You forgot to enter your username!';
+            $message.='<p>You forgot to enter your ID Number!';
 
         }
 
@@ -52,7 +52,7 @@
         if (empty($_POST['password'])) {
 
             $_SESSION['password'] = NULL;
-            $message.='<p>You forgot to enter your username!';
+            $message.='<p>You forgot to enter your password!';
 
         }
 
@@ -66,25 +66,76 @@
                 $password = $_SESSION['password'];
 
                 require_once('mysql_connect_FA.php');
-                $queryMem = "SELECT MEMBER_ID, PASSWORD FROM MEMBER_ACCOUNT WHERE MEMBER_ID = '{$idnum}' AND PASSWORD = PASSWORD('{$password}')";
+                $queryMem = "SELECT MEMBER_ID, PASSWORD, FIRST_CHANGE_PW FROM MEMBER_ACCOUNT WHERE MEMBER_ID = '{$idnum}' AND PASSWORD = PASSWORD('{$password}')";
                 $resultMem = mysqli_query($dbc, $queryMem);
                 $rowMem = mysqli_fetch_array($resultMem);
 
-                $queryEmp = "SELECT MEMBER_ID, PASSWORD, APP_STATUS_ID FROM EMPLOYEE WHERE MEMBER_ID = '{$idnum}' AND PASSWORD = PASSWORD('{$password}')";
+                $queryEmp = "SELECT EMP_ID, PASSWORD, ACC_STATUS, FIRST_CHANGE_PW FROM EMPLOYEE WHERE EMP_ID = '{$idnum}' AND PASSWORD = PASSWORD('{$password}')";
                 $resultEmp = mysqli_query($dbc, $queryEmp);
                 $rowEmp = mysqli_fetch_array($resultEmp);
 
                 if ($rowMem['MEMBER_ID'] == $_SESSION['idnum']) {
 
-                    header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/MEMBER dashboard.php");
-                    $_SESSION['usertype'] = "2";
+                	$queryPending = "SELECT MEMBERSHIP_STATUS, USER_STATUS FROM MEMBER WHERE MEMBER_ID = '{$_SESSION['idnum']}'";
+                	$resultPending = mysqli_query($dbc, $queryPending);
+                	$rowPending = mysqli_fetch_array($resultPending);
+
+                	if ($rowPending['MEMBERSHIP_STATUS'] == 2 && $rowPending['USER_STATUS'] == 1 && $rowMem['FIRST_CHANGE_PW'] == 1) {
+
+                    	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/MEMBER dashboard.php");
+                    	$_SESSION['usertype'] = "1";
+
+                	}
+
+                	else if ($rowPending['MEMBERSHIP_STATUS'] == 2 && $rowPending['USER_STATUS'] == 1 && $queryMem['FIRST_CHANGE_PW'] === 0) {
+
+                		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/MEMBER changepw.php");
+                    	$_SESSION['usertype'] = "1";
+
+                	}
+
+                	else {
+
+                		$message .= "This account is not recognized by the Faculty Association. Please contact the administrator.";
+
+                	}
 
                 }
 
-                else if ($rowEmp['MEMBER_ID'] == $_SESSION['idnum'] && $rowEmp['APP_STATUS_ID'] == 2) {
+                else if ($rowEmp['MEMBER_ID'] == $_SESSION['idnum']) {
 
-                    header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/admin homepage.php");
-                    $_SESSION['usertype'] = "1";
+                	if ($rowEmp['ACC_STATUS'] == 1 && $rowEmp['FIRST_CHANGE_PW'] == 1) {
+
+                    	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/ADMIN dashboard.php");
+                    	$_SESSION['usertype'] = "2";
+
+                	}
+
+                	else if ($rowEmp['ACC_STATUS'] == 1 && $rowEmp['FIRST_CHANGE_PW'] === 0) {
+
+                		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/MEMBER changepw.php");
+                    	$_SESSION['usertype'] = "2";
+
+                	}
+
+                	else {
+
+                		$message .= "This account is not recognized by the Faculty Association. Please contact the administrator.";
+
+                	}
+
+                }
+
+                else if ($rowEmp['MEMBER_ID'] == 000000001) { /* sir meltons ID number */
+
+                    header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/ADMIN dashboard.php");
+                    $_SESSION['usertype'] = "3";
+
+                }
+
+                else {
+
+                	$message .= "This account is not recognized by the Faculty Association.";
 
                 }
 
@@ -112,7 +163,6 @@
 
             <div class="container-fluid">
 
-                
                 <div class="row"> <!-- Image -->
 
                     <div class="col-lg-3 col-1"> <!-- For center alignment -->
@@ -130,7 +180,28 @@
                     </div>
                    
                 </div>
-                
+
+                <?php if (isset($message)) { ?>
+
+                <div class="row">
+
+            		<div class="col-lg-3 col-1"> <!-- For center alignment -->
+
+                    </div>
+
+                    <div class="col-lg-6">
+
+                    		<div class="alert alert-info">
+
+                            	<strong><?php echo $message ?></strong>
+
+                        	</div>
+
+                    </div>
+
+            	</div>
+
+            	<?php } ?>
 
                 <div class="row"> <!-- Fields -->
 
@@ -145,7 +216,7 @@
 
                             <div>
                                 <label id="emaillabel">ID Number</label>
-                                <input type="text" id="emaillogin" class="form-control" placeholder="e.g. 11700000" name="idnum">
+                                <input type="text" id="emaillogin" class="form-control" minlength="8" maxlength="8" placeholder="e.g. 11700000" name="idnum">
                             </div>
 
                             <div>
