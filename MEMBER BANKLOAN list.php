@@ -2,21 +2,22 @@
 require_once('mysql_connect_FA.php');
 
 if(isset($_POST['choice'])){
-	$id = $_POST['choice'];
-	$query = "SELECT * 
-				from loan_plan
-				where bank_id = $id AND l.status != 2";
-	
+    $id = $_POST['choice'];
+    $query = "SELECT LOAN_ID as 'ID',BANK_ID as 'BID', MIN_AMOUNT,MAX_AMOUNT,INTEREST,MIN_TERM,MAX_TERM,MINIMUM_SALARY 
+                from loan_plan
+                where bank_id = $id AND status != 2";
+    
 }
 else{
-	$query = "	SELECT * 
+    $query = "SELECT LOAN_ID as 'ID',l.BANK_ID as 'BID', MIN_AMOUNT,MAX_AMOUNT,INTEREST,MIN_TERM,MAX_TERM,MINIMUM_SALARY
 from loan_plan l 
 join (SELECT bank_id,status as 'Bank_Status' from Banks) b
 on l.BANK_ID = b.bank_id
 where l.bank_id != 1 AND b.Bank_Status = 1 AND l.status != 2";
 }
+
 $result = mysqli_query($dbc,$query);
-	
+    
 
 ?>
 
@@ -286,15 +287,20 @@ $result = mysqli_query($dbc,$query);
                                     <form action="MEMBER BANKLOAN list.php" method="POST">
 
                                         <select class="form-control" name = "choice">
-											<?php 
-											
-											$query1 = "SELECT * 
-															from banks
-															where bank_id != 1";
-											$result1 = mysqli_query($dbc,$query1);
-											while($ans = mysqli_fetch_assoc($result1)){
-											?>
-                                            <option value = <?php echo $ans['BANK_ID'];?>><?php echo $ans['BANK_NAME'];echo " ";echo $ans['BANK_ABBV'];?></option>
+                                            <?php 
+                                            
+                                            $query1 = "SELECT * 
+                                                            from banks
+                                                            where bank_id != 1 AND status != 2";
+                                            $result1 = mysqli_query($dbc,$query1);
+                                            while($ans = mysqli_fetch_assoc($result1)){
+                                            ?>
+                                            <option value = <?php echo $ans['BANK_ID'];
+                                            if(isset($_POST['choice'])){
+                                                if($ans['BANK_ID']==$_POST['choice']){
+                                                    echo " selected";
+                                                }
+                                            }?>><?php echo $ans['BANK_NAME'];echo " ";echo $ans['BANK_ABBV'];?></option>
                                             <?php }; ?>
 
                                         </select>
@@ -308,7 +314,7 @@ $result = mysqli_query($dbc,$query);
                                         <input type="submit" class="btn btn-success" name="select_bank" value="Refresh Table">
 
                                     </div>
-									</form>
+                                    </form>
 
                                 </div>
 
@@ -331,7 +337,7 @@ $result = mysqli_query($dbc,$query);
                             <thead>
 
                                 <tr>
-								
+                                
                                 <td align="center"><b>Amount to Borrow (Range)</b></td>
                                 <td align="center"><b>Interest (Fixed)</b></td>
                                 <td align="center"><b>Payment Terms (Range)</b></td>
@@ -343,22 +349,22 @@ $result = mysqli_query($dbc,$query);
                             </thead>
 
                             <tbody>
-								<?php while($ans = mysqli_fetch_assoc($result)){?>
+                                <?php while($ans = mysqli_fetch_assoc($result)){?>
                                 <tr>
-								
+                                
                                 <td align="center">₱ <?php echo $ans['MIN_AMOUNT'];?><input type = "text" name = "min" value = <?php echo $ans['MIN_AMOUNT'];?> hidden> - ₱ <?php echo $ans['MAX_AMOUNT'];?><input type = "text" name = "max" value = <?php echo $ans['MAX_AMOUNT'];?> hidden></td>
                                 <td align="center"><?php echo $ans['INTEREST'];?>%</td>
                                 <td align="center"><?php echo $ans['MIN_TERM'];?> months - <?php echo $ans['MAX_TERM'];?> months</td>
                                 <td align="center">₱ <?php echo $ans['MINIMUM_SALARY'];?>
-								<input type = "text" name = "interest" value = <?php echo $ans['INTEREST'];?> hidden>
-								<input type = "text" name = "minT" value = <?php echo $ans['MIN_TERM'];?> hidden>
-								<input type = "text" name = "maxT" value = <?php echo $ans['MAX_TERM'];?> hidden>
-								<input type = "text" name = "minS" value = <?php echo $ans['MINIMUM_SALARY'];?> hidden>
-								</td>
-                                <td align="center">&nbsp;&nbsp;&nbsp;<button type="submit" name="details" class="btn btn-success" value=<?php echo $ans['LOAN_ID'];?>>Details</button>&nbsp;&nbsp;&nbsp;</td>
-								
+                                <input type = "text" name = "interest" value = <?php echo $ans['INTEREST'];?> hidden>
+                                <input type = "text" name = "minT" value = <?php echo $ans['MIN_TERM'];?> hidden>
+                                <input type = "text" name = "maxT" value = <?php echo $ans['MAX_TERM'];?> hidden>
+                                <input type = "text" name = "minS" value = <?php echo $ans['MINIMUM_SALARY'];?> hidden>
+                                </td>
+                                <td align="center">&nbsp;&nbsp;&nbsp;<button type="submit" name="details" class="btn btn-success" value=<?php echo $ans['ID'];?>>Details</button>&nbsp;&nbsp;&nbsp;</td>
+                                
                                 </tr>
-								<?php };?>
+                                <?php };?>
                             </tbody>
 
                         </table>
@@ -387,7 +393,7 @@ $result = mysqli_query($dbc,$query);
     <script src="js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="DataTables/datatables.min.js"></script>
-	
+    
     <script>
 
         $(document).ready(function(){
