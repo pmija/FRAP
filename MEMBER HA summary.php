@@ -343,7 +343,7 @@
 
                                                         $today = date("Y-m-d");
                                                         $diff = date_diff(date_create($row['BIRTHDATE']), date_create($today));
-                                                        $diff->format('%y');
+                                                        $diff->format('%y'); //Displays computed age
                                                     ?>
                                                     <td align="center"><?php echo $row['FIRSTNAME']. " ". $row['LASTNAME']; ?></td>
                                                     <td align="center"><?php echo $diff->format('%y'); ?></td>
