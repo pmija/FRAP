@@ -333,18 +333,18 @@
                         <p><i>Fields with <big class="req">*</big> are required to be filled out and those without are optional.</i></p>
 
                         <!--Insert success page--> 
-                        <form method="POST" action=" " id="addAccount">
+                        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" id="addAccount">
 
                             <div class="addaccountdiv">
                                 <label class="signfieldlabel">Bank Name</label><big class="req"> *</big>
-                                <input type="text" id="singupID" class="form-control signupfield" placeholder="Bank Name" name="idnum">
+                                <input type="text" id="bankName" class="form-control signupfield" placeholder="Bank Name" name="idnum">
                             </div><p>
 
                             <div class="row">
 
                                 <div class="col-lg-12">
                                     <label class="signfieldlabel">Bank Abbreviation</label><big class="req"> *</big>
-                                    <input type="text" id="singupID" class="form-control signupfield" placeholder="Bank Abbv." name="idnum">
+                                    <input type="text" id="bankAbbr" class="form-control signupfield" placeholder="Bank Abbv." name="idnum">
                                 </div>
 
                             </div><p>
