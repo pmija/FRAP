@@ -16,8 +16,8 @@ $result = mysqli_query($dbc,$query);
 $ans = mysqli_fetch_assoc($result);
 
 
-$query = "INSERT INTO txn_reference(MEMBER_ID,TXN_TYPE,AMOUNT,TXN_DESC,TXN_DATE,LOAN_REF)
-values({$_SESSION['idnum']},1,0,'FALP Application',DATE(now()),{$ans['ID']});";
+$query = "INSERT INTO txn_reference(MEMBER_ID,TXN_TYPE,AMOUNT,SERVICE_TYPE,TXN_DATE,LOAN_REF)
+values({$_SESSION['idnum']},1,0,3,DATE(now()),{$ans['ID']});";
 
 mysqli_query($dbc,$query);
 ?>
