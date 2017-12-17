@@ -528,7 +528,7 @@
 		
             //Insert into transaction table
             $queryTnx = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF, EMP_ID, SERVICE_TYPE) 
-            VALUES('{$idnum}', '1', 'Health Aid Application', 0, NOW(), NULL, NULL, '2'); ";
+            VALUES({$idnum}, '1', 'Health Aid Application', 0, NOW(), NULL, NULL, '2'); ";
             $resultTnx = mysqli_query($dbc, $queryTnx);
 
 

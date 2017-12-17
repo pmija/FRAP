@@ -35,7 +35,6 @@
     require_once('mysql_connect_FA.php');
      //Test value
     $_SESSION['idnum']=1141231234;
-    $_SESSION['Adminidnum']=9971231234;
 
     if(isset($_POST['action'])){
         if($_POST['action'] == "Accept Application"){
@@ -45,7 +44,7 @@
 
            //Insert into transaction table
             $queryTnx = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF, EMP_ID, SERVICE_TYPE) 
-            VALUES('{$_SESSION['Adminidnum']}', '1', 'Health Aid Approved', 0, NOW(), NULL, NULL, '2'); ";
+            VALUES({$_SESSION['idnum']}, '1', 'Health Aid Approved', 0, NOW(), NULL, NULL, '2'); ";
             $resultTnx = mysqli_query($dbc, $queryTnx);
 
         }
@@ -56,7 +55,7 @@
 
            //Insert into transaction table
             $queryTnx = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF, EMP_ID, SERVICE_TYPE) 
-            VALUES('{$_SESSION['Adminidnum']}', '1', 'Health Aid Rejected', 0, NOW(), NULL, NULL, '2'); ";
+            VALUES('{$_SESSION['idnum']}', '1', 'Health Aid Rejected', 0, NOW(), NULL, NULL, '2'); ";
             $resultTnx = mysqli_query($dbc, $queryTnx);
         }
     }
