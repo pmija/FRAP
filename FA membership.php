@@ -539,7 +539,7 @@
                             </div>
 
                             <input class="btn btn-success" type="submit" name="submit" value="Sumbit">
-                            <a class="btn btn-default" href="login.php">Go Back</a><p><p>
+                            <a class="btn btn-default" href="index.php">Go Back</a><p><p>
 
                        </form>
 
