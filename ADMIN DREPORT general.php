@@ -23,7 +23,8 @@ if(!isset($_POST['select_date'])){
 else {
     if($_POST['date'] != "0"){
         $date = $_POST['date'];
-        $month = substr($date,0,strpos($date,"-"));
+        $day = substr($date,0,strpos($date," "));
+        $month = substr($date,(strpos($date," ")+1),strpos($date,"-")-strpos($date," ")-1);
         $year = substr($date,strpos($date,"-")+1);
         $query="SELECT m.member_ID as 'ID', firstname as 'First',lastname as 'Last',middlename as 'Middle',DEPT_NAME,sum(t.amount) as 'Total'
         from member m
@@ -31,7 +32,7 @@ else {
         on m.dept_id = d.dept_id
         join txn_reference t
         on t.MEMBER_ID = m.MEMBER_ID
-        where TXN_TYPE =2 and $month = Month(txn_date) AND $year = Year(txn_date)
+        where TXN_TYPE =2 and $month = Month(txn_date) AND $year = Year(txn_date) AND $day = DAY(txn_date)
         group by m.member_ID";
     }
     else{
@@ -356,6 +357,7 @@ $result=mysqli_query($dbc,$query);
                         <h1 class="page-header">
                             General Deductions Report
                             
+                            
                         </h1>
                     
                     </div>
@@ -386,15 +388,15 @@ $result=mysqli_query($dbc,$query);
                                         <select class="form-control" name = "date">
                                             <option value = "0">This Current Date</option>  
                                         <?php
-                                        $query="SELECT DISTINCT MONTH(txn_date) as 'Month',YEAR(txn_date) as 'Year' from txn_reference
+                                        $query="SELECT DISTINCT MONTH(txn_date) as 'Month',YEAR(txn_date) as 'Year', DAY(txn_date) as 'Day' from txn_reference
                                             where txn_type = 2";
                                         $result1 = mysqli_query($dbc,$query);
 
                                         while($ans = mysqli_fetch_assoc($result1)){?>
-                                            <option value = "<?php echo $ans['Month']."-".$ans['Year'];
+                                            <option value = "<?php echo $ans['Day']." ".$ans['Month']."-".$ans['Year'];
                                                                 
                                                                 ?>" <?php if(isset($_POST['date'])){
-                                                                    if($_POST['date']== $ans['Month']."-".$ans['Year']){
+                                                                    if($_POST['date']== $ans['Day']." ".$ans['Month']."-".$ans['Year']){
                                                                         echo " selected";
                                                                     }
                                                                 }?> >
@@ -439,7 +441,7 @@ $result=mysqli_query($dbc,$query);
 
 
 
-                                                echo $month." ".$ans['Year']?></option>
+                                                echo $ans['Day']." ".$month." ".$ans['Year']?></option>
                                         <?php }?>
                                             
                                             
