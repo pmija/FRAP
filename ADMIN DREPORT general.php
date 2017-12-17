@@ -1,6 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+require_once('mysql_connect_FA.php');
+$flag=0;
+if(!isset($_POST['select_date'])){
+   
+        $query="SELECT m.member_ID as 'ID', firstname as 'First',lastname as 'Last',middlename as 'Middle',DEPT_NAME,sum(t.amount) as 'Total'
+        from member m
+        join ref_department d
+        on m.dept_id = d.dept_id
+        join txn_reference t
+        on t.MEMBER_ID = m.MEMBER_ID
+        join (SELECT max(txn_date) as 'Date' from txn_reference where txn_type = 2) latest
+        where TXN_TYPE =2 and latest.Date = txn_date
+        group by m.member_ID";
 
+}
+else {
+    if($_POST['date'] != "0"){
+        $date = $_POST['date'];
+        $month = substr($date,0,strpos($date,"-"));
+        $year = substr($date,strpos($date,"-")+1);
+        $query="SELECT m.member_ID as 'ID', firstname as 'First',lastname as 'Last',middlename as 'Middle',DEPT_NAME,sum(t.amount) as 'Total'
+        from member m
+        join ref_department d
+        on m.dept_id = d.dept_id
+        join txn_reference t
+        on t.MEMBER_ID = m.MEMBER_ID
+        where TXN_TYPE =2 and $month = Month(txn_date) AND $year = Year(txn_date)
+        group by m.member_ID";
+    }
+    else{
+        $query="SELECT m.member_ID as 'ID', firstname as 'First',lastname as 'Last',middlename as 'Middle',DEPT_NAME,sum(t.amount) as 'Total'
+        from member m
+        join ref_department d
+        on m.dept_id = d.dept_id
+        join txn_reference t
+        on t.MEMBER_ID = m.MEMBER_ID
+        join (SELECT max(txn_date) as 'Date' from txn_reference where txn_type = 2) latest
+        where TXN_TYPE =2 and latest.Date = txn_date
+        group by m.member_ID";
+    }
+}
+$result=mysqli_query($dbc,$query);
+
+
+?>
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +54,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>FRAP | Bank Loan Summary</title>
+    <title>SB Admin - Bootstrap Admin Template</title>
 
     <link href="css/montserrat.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
@@ -20,6 +65,7 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -85,28 +131,11 @@
 
                 <li class="dropdown sideicons">
 
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Jo, Melton <b class="caret"></b></a>
 
                     <ul class="dropdown-menu">
 
                         <li>
-
-                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-
-                        </li>
-
-                    </ul>
-
-                </li>
-
-            </ul>
-            </div>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-
-                <ul class="nav navbar-nav side-nav">
-
-                    <li>
 
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
 
@@ -125,6 +154,7 @@
                 </li>
 
             </ul>
+			
             </div>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -331,130 +361,117 @@
 
             <div class="container-fluid">
 
-                <!-- Page Heading -->
                 <div class="row">
                 
                     <div class="col-lg-12">
 
-                        <h1 class="page-header">Bank Loan Activity</h1>
+                        <h1 class="page-header">
+                            General Deductions Report
+                            <?php echo $query;?>
+                        </h1>
                     
                     </div>
-
+                    
                 </div>
+                <!-- alert -->
 
-                    <div class="row">
+                <div class="row">
 
-                        <div class="col-lg-12">
+                    <div class="col-lg-6">
 
-                            <div class="panel panel-green">
+                        <div class="panel panel-green">
 
-                                <div class="panel-heading">
+                            <div class="panel-heading">
 
-                                    <b>Bank Loan Payment Activity</b>
+                                <b>View Report for (Month & Year)</b>
 
-                                </div>
+                            </div>
 
-                                <div class="panel-body">
+                            <div class="panel-body">
 
-                                    <table class="table table-bordered">
-                                        
-                                        <thread>
+                                <div class="row">
 
-                                            <tr>
+                                    <div class="col-lg-6">
 
-                                            <td align="center"><b>Date</b></td>
-                                            <td align="center"><b>Deducted Amount</b></td>
-                                            <td align="center"><b>Status</b></td>
+                                    <form action="ADMIN DREPORT general.php" method="POST">
 
-                                            </tr>
+                                        <select class="form-control" name = "date">
+                                            <option value = "0">This Current Date</option>  
+                                        <?php
+                                        $query="SELECT DISTINCT MONTH(txn_date) as 'Month',YEAR(txn_date) as 'Year' from txn_reference
+                                            where txn_type = 2";
+                                        $result1 = mysqli_query($dbc,$query);
 
-                                        </thread>
+                                        while($ans = mysqli_fetch_assoc($result1)){?>
+                                            <option value = "<?php echo $ans['Month']."-".$ans['Year'];
+                                                                
+                                                                ?>" <?php if(isset($_POST['date'])){
+                                                                    if($_POST['date']== $ans['Month']."-".$ans['Year']){
+                                                                        echo " selected";
+                                                                    }
+                                                                }?> >
+                                                <?php 
+                                                $month = "January";
+                                                if($ans['Month']=="1"){
+                                                    $month = "January";
+                                                }
+                                                else if($ans['Month']=="2"){
+                                                    $month = "February";
+                                                }
+                                                else if($ans['Month']=="3"){
+                                                    $month = "March";
+                                                }
+                                                else if($ans['Month']=="4"){
+                                                    $month = "April";
+                                                }
+                                                else if($ans['Month']=="5"){
+                                                    $month = "May";
+                                                }
+                                                else if($ans['Month']=="6"){
+                                                    $month = "June";
+                                                }
+                                                else if($ans['Month']=="7"){
+                                                    $month = "July";
+                                                }
+                                                else if($ans['Month']=="8"){
+                                                    $month = "August";
+                                                }
+                                                else if($ans['Month']=="9"){
+                                                    $month = "September";
+                                                }
+                                                else if($ans['Month']=="10"){
+                                                    $month = "October";
+                                                }
+                                                else if($ans['Month']=="11"){
+                                                    $month = "November";
+                                                }
+                                                else if($ans['Month']=="12"){
+                                                    $month = "December";
+                                                }
 
-                                        <tbody>
 
-                                            <tr>
 
-                                            <td align="center">12/15/2016</td>
-                                            <td align="center">₱ 2,100.00</td>
-                                            <td align="center">Completed</td>
+                                                echo $month." ".$ans['Year']?></option>
+                                        <?php }?>
+                                            
+                                            
+                                        </select>
 
-                                            </tr>
+                                    
 
-                                            <tr>
+                                    </div>
 
-                                            <td align="center">12/31/2016</td>
-                                            <td align="center">₱ 2,100.00</td>
-                                            <td align="center">Completed</td>
+                                    <div class="col-lg-3" align="left">
 
-                                            </tr>
+                                        <input type="submit" class="btn btn-success" name="select_date" value="Generate Report">
 
-                                            <tr>
+                                    </div>
 
-                                            <td align="center">04/15/2017</td>
-                                            <td align="center">--</td>
-                                            <td align="center">Incomplete</td>
+                                    <div class="col-lg-3" align="left">
 
-                                            </tr>
-
-                                            <tr>
-
-                                            <td align="center">04/15/2017</td>
-                                            <td align="center">--</td>
-                                            <td align="center">Incomplete</td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                            <td align="center">04/15/2017</td>
-                                            <td align="center">--</td>
-                                            <td align="center">Incomplete</td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                            <td align="center">04/15/2017</td>
-                                            <td align="center">--</td>
-                                            <td align="center">Incomplete</td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                            <td align="center">04/15/2017</td>
-                                            <td align="center">--</td>
-                                            <td align="center">Incomplete</td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                            <td align="center">04/15/2017</td>
-                                            <td align="center">--</td>
-                                            <td align="center">Incomplete</td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                            <td align="center">04/15/2017</td>
-                                            <td align="center">--</td>
-                                            <td align="center">Incomplete</td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                            <td align="center">04/30/2017</td>
-                                            <td align="center">--</td>
-                                            <td align="center">Incomplete</td>
-
-                                            </tr>
-
-                                        </tbody>
-
-                                    </table>
+                                        <input type="submit" class="btn btn-default" name="print" value="Print Report">
+                                        </form>
+                                    </div>
 
                                 </div>
 
@@ -464,15 +481,56 @@
 
                     </div>
 
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-12">
+
+                       <div class="row">
+
+                            <div class="col-lg-12">
+
+                                <form action="ADMIN BANK appdetails.php" method="POST"> <!-- SERVER SELF -->
+
+                                <table id="table" class="table table-bordered table-striped">
+                                    
+                                    <thead>
+
+                                        <tr>
+
+                                        <td align="center" width="250px"><b>ID Number</b></td>
+                                        <td align="center"><b>Name</b></td>
+                                        <td align="center" width="200px"><b>Department</b></td>
+                                        <td align="center" width="200px"><b>Total Salary Deduction</b></td>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+                                        <?php 
+                                        while($ans = mysqli_fetch_assoc($result)){
 
 
-                    <div class="row">
+                                        ?>
+                                        <tr>
 
-                        <div class="col-lg-12">
+                                        <td align="center"><?php echo $ans['ID'];?></td>
+                                        <td align="center"><?php echo $ans['First']." ".$ans['Middle']." ".$ans['Last'];?></td>
+                                        <td align="center"><?php echo $ans['DEPT_NAME'];?></td>
+                                        <td align="center"><?php echo $ans['Total'];?></td>
 
-                            <div align="center">
+                                        </tr>
+                                        <?php } ?>
 
-                            <a href="MEMBER FALP summary.html" class="btn btn-default" role="button">Go Back</a>
+                                     
+
+                                    </tbody>
+
+                                </table>
+
+                                </form>
 
                             </div>
 
@@ -480,22 +538,9 @@
 
                     </div>
 
-                    <div class="row">
-
-                        <div class="col-lg-12">
-
-                            &nbsp;
-
-                        </div>
-
-                    </div>
-
                 </div>
-
-                <!-- /.row -->
 
             </div>
-            <!-- /.container-fluid -->
 
         </div>
         <!-- /#page-wrapper -->
@@ -508,6 +553,17 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+    <script>
+
+        $(document).ready(function(){
+    
+            $('#table').DataTable();
+
+        });
+
+    </script>
 
 </body>
 

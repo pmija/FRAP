@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+session_start();
+require_once("mysql_connect_FA.php");
 
+?>
 <head>
 
     <meta charset="utf-8">
@@ -345,46 +349,56 @@
                                 </thread>
 
                                 <tbody>
+                                    <?php
+                                        $query = "SELECT * FROM LOANS where LOAN_ID = {$_POST['details']} 
+                                                  AND loan_detail_id = 1 AND    loan_status != 3";
+                                        $result = mysqli_query($dbc,$query);
+                                        $ans = mysqli_fetch_assoc($result);
 
+                                        $query1 = "SELECT l2.STATUS as 'Status' FROM LOANS l1 JOIN LOAN_STATUS l2 ON l1.LOAN_STATUS = l2.STATUS_ID where l1.LOAN_ID = {$_POST['details']} 
+                                                  AND l1.loan_detail_id = 1 AND     l1.loan_status != 3";
+                                        $result = mysqli_query($dbc,$query1);
+                                        $ans1 = mysqli_fetch_assoc($result);
+                                    ?>
                                     <tr>
 
                                     <td>Amount to Borrow</td>
-                                    <td>₱ 20,000.00</td>
+                                    <td>₱ <?php echo $ans['AMOUNT'];?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Amount Payable</td>
-                                    <td>₱ 21,000.00</td>
+                                    <td>₱ <?php echo $ans['PAYABLE'];?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Payment Terms</td>
-                                    <td>5 months</td>
+                                    <td><?php echo $ans['PAYMENT_TERMS'];?> months</td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Monthly Deduction</td>
-                                    <td>₱ 4,200.00</td>
+                                    <td>₱ <?php echo $ans['PER_PAYMENT'];?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Number of Payments</td>
-                                    <td>10 payments</td>
+                                    <td><?php echo $ans['PAYMENT_TERMS']*2;?> payments</td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Per Payment Deduction</td>
-                                    <td>₱ 2,100.00</td>
+                                    <td>₱ <?php echo $ans['PER_PAYMENT'];?></td>
 
                                     </tr>
 
@@ -425,45 +439,45 @@
 
                                 <tbody>
 
-                                    <tr>
+                                     <tr>
 
                                     <td>Date Approved</td>
-                                    <td>10/23/2017</td>
+                                    <td><?php echo $ans['DATE_APPROVED'];?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Payments Made</td>
-                                    <td>2 Payments</td>
+                                    <td><?php echo (int)$ans['PAYMENTS_MADE'];?> Payments</td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Payments Left</td>
-                                    <td>8 Payments</td>
+                                    <td><?php echo $ans['PAYMENT_TERMS'] - $ans['PAYMENTS_MADE'];?> Payments</td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Total Amount Paid</td>
-                                    <td>₱ 4,200.00</td>
+                                    <td>₱ <?php echo sprintf("%.2f",(float)$ans['AMOUNT_PAID']);?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Outstanding Balance</td>
-                                    <td>₱ 16,800.00</td>
+                                    <td>₱ <?php echo sprintf("%.2f",$ans['PAYABLE']-$ans['AMOUNT_PAID']);?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Status</td>
-                                    <td>Active</td>
+                                    <td><?php echo $ans1['Status'];?></td>
 
                                     </tr>
 
@@ -486,10 +500,11 @@
                         <div class="col-lg-12">
 
                             <div align="center">
+                            <form action = "ADMIN FALP viewactivity.php" method = "POST">
+                            <button type = "submit" class="btn btn-success" role="button" value = <?php echo $_POST['details']?> name = "details" >View Payment Activity</button>
 
-                            <a href="ADMIN FALP viewactivity.html" class="btn btn-success" role="button">View Payment Activity</a>
                             <a href="ADMIN dashboard.html" class="btn btn-default" role="button">Go Back</a>
-
+                            </form>
                             </div>
 
                         </div>

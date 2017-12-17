@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+session_start();
+require_once('mysql_connect_FA.php');
 
+
+
+?>
 <head>
 
     <meta charset="utf-8">
@@ -321,77 +327,21 @@
                     <div class="col-lg-12">
 
                         <h1 class="page-header">
-                            General Deductions Report
+                            On-going FALP Loans
                         </h1>
                     
                     </div>
                     
                 </div>
                 <!-- alert -->
-
                 <div class="row">
-
-                    <div class="col-lg-6">
-
-                        <div class="panel panel-green">
-
-                            <div class="panel-heading">
-
-                                <b>View Report for (Month & Year)</b>
-
-                            </div>
-
-                            <div class="panel-body">
-
-                                <div class="row">
-
-                                    <div class="col-lg-6">
-
-                                    <form action="POST" method="#">
-
-                                        <select class="form-control">
-                                        
-                                            <option>This Current Date</option>
-                                            <option>November 2017</option>
-                                            <option>October 2017</option>
-
-                                        </select>
-
-                                    </form>
-
-                                    </div>
-
-                                    <div class="col-lg-3" align="left">
-
-                                        <input type="submit" class="btn btn-success" name="select_bank" value="Generate Report">
-
-                                    </div>
-
-                                    <div class="col-lg-3" align="left">
-
-                                        <input type="submit" class="btn btn-default" name="print" value="Print Report">
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="row">
-
                     <div class="col-lg-12">
 
                        <div class="row">
 
                             <div class="col-lg-12">
 
-                                <form action="ADMIN BANK appdetails.html" method="POST"> <!-- SERVER SELF -->
+                                <form action="ADMIN FALP viewdetails.php" method="POST"> <!-- SERVER SELF -->
 
                                 <table id="table" class="table table-bordered table-striped">
                                     
@@ -399,44 +349,39 @@
 
                                         <tr>
 
-                                        <td align="center" width="250px"><b>ID Number</b></td>
-                                        <td align="center"><b>Name</b></td>
-                                        <td align="center" width="200px"><b>Department</b></td>
-                                        <td align="center" width="200px"><b>Total Salary Deduction</b></td>
+                                        <td align="center" width="250px"><b>Name</b></td>
+                                        <td align="center"><b>Department</b></td>
+                                        <td align="center" width="150px"><b>Amount Paid</b></td>
+                                        <td align="center" width="150px"><b>Amount Payable</b></td>
+                                        <td align="center"><b>Actions</b></td>
 
                                         </tr>
 
                                     </thead>
 
                                     <tbody>
-
+										<?php 
+										$query = "	SELECT m.LASTNAME,m.FIRSTNAME,r.DEPT_NAME,l.PAYABLE,l.AMOUNT_PAID,l.LOAN_ID FROM LOANS l 
+													join member m 
+													on l.member_id = m.member_id 
+													join ref_department r
+													on r.dept_id = m.dept_id
+													WHERE LOAN_STATUS = 2 AND LOAN_DETAIL_ID = 1";
+										$result = mysqli_query($dbc,$query);
+										while($ans = mysqli_fetch_assoc($result)){
+											
+											?>
                                         <tr>
 
-                                        <td align="center">11436786</td>
-                                        <td align="center">James Patrick Mijares</td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">3800.00</td>
+                                        <td align="center"><?php echo $ans['FIRSTNAME'].$ans['LASTNAME'];?></td>
+                                        <td align="center"><?php echo $ans['DEPT_NAME'];?></td>
+                                        <td align="center"><?php echo $ans['AMOUNT_PAID'];?></td>
+                                        <td align="center"><?php echo $ans['PAYABLE'];?></td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<button type="submit" name="details" class="btn btn-success" value=<?php echo $ans['LOAN_ID'];?>>Details</button>&nbsp;&nbsp;&nbsp;</td>
 
                                         </tr>
-
-                                        <tr>
-
-                                        <td align="center">11436786</td>
-                                        <td align="center">James Patrick Mijares</td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">3800.00</td>
-
-                                        </tr>
-
-                                        <tr>
-
-                                        <td align="center">11436786</td>
-                                        <td align="center">James Patrick Mijares</td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">3800.00</td>
-
-                                        </tr>
-
+										<?php } ?>
+                                        
                                     </tbody>
 
                                 </table>

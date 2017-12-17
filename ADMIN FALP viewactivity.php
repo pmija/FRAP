@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+session_start();
+require_once('mysql_connect.php');
+$query = "SELECT * FROM LOANS 
+          where LOAN_ID = {$_POST['details']} 
+          AND loan_detail_id = 1 AND    loan_status != 3";
+$result = mysqli_query($dbc,$query);
+$ans = mysqli_fetch_assoc($result);
 
+$query1 = "SELECT TXN_DATE,SUM(AMOUNT) as 'AMOUNT' FROM txn_reference where LOAN_REF ={$ans['LOAN_ID']} AND txn_type = 2 AND SERVICE_TYPE = 3 group by TXN_DATE";
+$result = mysqli_query($dbc,$query1);
+
+
+?>
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +22,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>FRAP | Falp Summary</title>
 
     <link href="css/montserrat.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
@@ -20,7 +33,6 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -86,11 +98,28 @@
 
                 <li class="dropdown sideicons">
 
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Jo, Melton <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
 
                     <ul class="dropdown-menu">
 
                         <li>
+
+                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+            </ul>
+            </div>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+                <ul class="nav navbar-nav side-nav">
+
+                    <li>
 
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
 
@@ -109,7 +138,6 @@
                 </li>
 
             </ul>
-			
             </div>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -316,80 +344,71 @@
 
             <div class="container-fluid">
 
+                <!-- Page Heading -->
                 <div class="row">
                 
                     <div class="col-lg-12">
 
-                        <h1 class="page-header">
-                            On-going FALP Loans
-                        </h1>
+                        <h1 class="page-header">FALP Loan Activity<?php echo $query; ?></h1>
                     
                     </div>
-                    
+
                 </div>
-                <!-- alert -->
-                <div class="row">
-                    <div class="col-lg-12">
 
-                       <div class="row">
+                    <div class="row">
 
-                            <div class="col-lg-12">
+                        <div class="col-lg-12">
 
-                                <form action="ADMIN FALP viewdetails.html" method="POST"> <!-- SERVER SELF -->
+                            <div class="panel panel-green">
 
-                                <table id="table" class="table table-bordered table-striped">
-                                    
-                                    <thead>
+                                <div class="panel-heading">
 
-                                        <tr>
+                                    <b>FALP Loan Payment Activity</b>
 
-                                        <td align="center" width="250px"><b>Name</b></td>
-                                        <td align="center"><b>Department</b></td>
-                                        <td align="center" width="150px"><b>Amount Paid</b></td>
-                                        <td align="center" width="150px"><b>Amount Payable</b></td>
-                                        <td align="center"><b>Actions</b></td>
+                                </div>
 
-                                        </tr>
+                                <div class="panel-body">
 
-                                    </thead>
+                                    <table class="table table-bordered">
+                                        
+                                        <thread>
 
-                                    <tbody>
+                                            <tr>
 
-                                        <tr>
+                                            <td align="center"><b>Date</b></td>
+                                            <td align="center"><b>Deducted Amount</b></td>
+                                            <td align="center"><b>Status</b></td>
 
-                                        <td align="center">Patrick Mijares</td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">800.00</td>
-                                        <td align="center">1000.00</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
+                                            </tr>
 
-                                        </tr>
+                                        </thread>
 
-                                        <tr>
+                                        <tbody>
 
-                                        <td align="center">Patrick Mijares</td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">800.00</td>
-                                        <td align="center">1000.00</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
+                                            <?php
+                                            
+                                            
+                                            while($ans= mysqli_fetch_assoc($result)){
+                                            $dt = new DateTime($ans['TXN_DATE']);
+                                            $date = $dt->format('d/m/Y');
+                                            $amount = $ans['AMOUNT'];
+                                            $status = "Complete";
+                                            
+                                            ?>
+                                            <tr>
+                                            
+                                            <td align="center"><?php echo $date;?></td>
+                                            <td align="center">₱ <?php echo $amount;?></td>
+                                            <td align="center">Completed</td>
+                                            
+                                            </tr>
+                                            <?php } ?>
 
-                                        </tr>
+                                        </tbody>
 
-                                        <tr>
+                                    </table>
 
-                                        <td align="center">Patrick Mijares</td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">800.00</td>
-                                        <td align="center">1000.00</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-
-                                        </tr>
-
-                                    </tbody>
-
-                                </table>
-
-                                </form>
+                                </div>
 
                             </div>
 
@@ -397,9 +416,38 @@
 
                     </div>
 
+
+
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            <div align="center">
+
+                            <a href="ADMIN FALP viewdetails.html" class="btn btn-default" role="button">Go Back</a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            &nbsp;
+
+                        </div>
+
+                    </div>
+
                 </div>
 
+                <!-- /.row -->
+
             </div>
+            <!-- /.container-fluid -->
 
         </div>
         <!-- /#page-wrapper -->
@@ -412,17 +460,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
-    <script>
-
-        $(document).ready(function(){
-    
-            $('#table').DataTable();
-
-        });
-
-    </script>
 
 </body>
 
