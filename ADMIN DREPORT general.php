@@ -371,7 +371,7 @@ $result=mysqli_query($dbc,$query);
 
                             <div class="panel-heading">
 
-                                <b>View Report for (Month & Year)</b>
+                                <b>View Report for (Month, Day, Year)</b>
 
                             </div>
 
