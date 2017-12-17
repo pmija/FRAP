@@ -102,7 +102,14 @@
 
                 }
 
-                else if ($rowEmp['MEMBER_ID'] == $_SESSION['idnum']) {
+                else if ($rowEmp['EMP_ID'] == 99999999) { /* sir meltons ID number */
+
+                    header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/ADMIN dashboard.php");
+                    $_SESSION['usertype'] = "3";
+
+                }
+
+                else if ($rowEmp['EMP_ID'] == $_SESSION['idnum']) {
 
                 	if ($rowEmp['ACC_STATUS'] == 1 && $rowEmp['FIRST_CHANGE_PW'] == 1) {
 
@@ -123,13 +130,6 @@
                 		$message .= "This account is not recognized by the Faculty Association. Please contact the administrator.";
 
                 	}
-
-                }
-
-                else if ($rowEmp['MEMBER_ID'] == 000000001) { /* sir meltons ID number */
-
-                    header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/ADMIN dashboard.php");
-                    $_SESSION['usertype'] = "3";
 
                 }
 
