@@ -305,100 +305,115 @@
                     <div class="col-lg-12">
 
                         <h1 class="page-header">
-                            View Bank Loan Details
+                            Health Aid Fees Collected for December 2017
                         </h1>
                     
                     </div>
                     
                 </div>
                 <!-- alert -->
+
                 <div class="row">
+
+                    <div class="col-lg-4">
+
+                        <div class="panel panel-green">
+
+                            <div class="panel-heading">
+
+                                <b>View Report for (Month & Year)</b>
+
+                            </div>
+
+                            <div class="panel-body">
+
+                                <div class="row">
+
+                                    <div class="col-lg-7">
+
+                                    <form action="POST" method="#">
+
+                                        <select class="form-control">
+                                        
+                                            <option>This Current Date</option>
+                                            <option>November 2017</option>
+                                            <option>October 2017</option>
+
+                                        </select>
+
+                                    </form>
+
+                                    </div>
+
+                                    <div class="col-lg-5" align="left">
+
+                                        <input type="submit" class="btn btn-success" name="select_bank" value="Generate Report">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
                     <div class="col-lg-12">
 
                        <div class="row">
 
                             <div class="col-lg-12">
 
-                                <form action="#" method="POST"> <!-- SERVER SELF -->
+                                <form action="ADMIN BANK appdetails.html" method="POST"> <!-- SERVER SELF -->
 
-                                    <div class="panel panel-green">
+                                <table id="table" class="table table-bordered table-striped">
+                                    
+                                    <thead>
 
-                                        <div class="panel-heading">
+                                        <tr>
 
-                                            <b>Personal Information</b>
+                                        <td align="center" width="250px"><b>ID Number</b></td>
+                                        <td align="center"><b>Name</b></td>
+                                        <td align="center"><b>Loan Completed</b></td>
 
-                                        </div>
+                                        </tr>
 
-                                        <div class="panel-body"><p>
+                                    </thead>
 
-                                            <b>ID Number:</b> <p>
-                                            <b>First Name:</b> <p>
-                                            <b>Last Name:</b> <p>
-                                            <b>Middle Name:</b> <p>
-                                            
-                                        </div>
+                                    <tbody>
 
-                                    </div>
+                                        <tr>
 
+                                        <td align="center">11436786</td>
+                                        <td align="center">James Patrick Mijares</td>
+                                        <td align="center">FALP Loan</td>
 
-                                    <div class="panel panel-green">
+                                        </tr>
 
-                                        <div class="panel-heading">
+                                        <tr>
 
-                                            <b>Bank Loan Details</b>
+                                        <td align="center">11436786</td>
+                                        <td align="center">James Patrick Mijares</td>
+                                        <td align="center">Bank Loan</td>
 
-                                        </div>
+                                        </tr>
 
-                                        <div class="panel-body"><p>
+                                        <tr>
 
-                                            <b>Bank of Choice:</b> <p>
-                                            <b>Amount to Borrow:</b> <p>
-                                            <b>Amount Payable:</b> <p>
-                                            <b>Payment Terms:</b> <p>
-                                            <b>Monthly Deductions:</b> <p>
-                                            <b>Number of Payments:</b> <p>
-                                            <b>Per Payment Deduction:</b> <p>
+                                        <td align="center">11436786</td>
+                                        <td align="center">James Patrick Mijares</td>
+                                        <td align="center">FALP Loan</td>
 
-                                        </div>
+                                        </tr>
 
-                                    </div>
+                                    </tbody>
 
-                                    <div class="panel panel-green">
-
-                                        <div class="panel-heading">
-
-                                            <b>Download Uploaded Requirements</b>
-
-                                        </div>
-
-                                        <div class="panel-body"><p>
-
-                                            <input type="submit" class="btn btn-primary" name="accept" value="Download Income Tax Return">
-                                            <input type="submit" class="btn btn-primary" name="accept" value="Download Payslip">
-                                            <input type="submit" class="btn btn-primary" name="accept" value="Download Government ID">
-                                            <input type="submit" class="btn btn-primary" name="accept" value="Download Employee ID">
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="panel panel-primary">
-
-                                        <div class="panel-heading">
-
-                                            <b>Actions</b>
-
-                                        </div>
-
-                                        <div class="panel-body"><p>
-
-                                            <input type="submit" class="btn btn-success" name="accept" value="Accept Application">
-                                            <input type="submit" class="btn btn-danger" name="reject" value="Reject Application">
-
-                                        </div>
-
-                                    </div>
+                                </table>
 
                                 </form>
 

@@ -145,18 +145,18 @@
 
                     <li>
 
-                        <a href="ADMIN addaccount.html"><i class="fa fa-dollar" aria-hidden="true"></i> Add Admin Account</a>
+                        <a href="ADMIN addaccount.html"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Admin Account</a>
 
                     </li>
 
                     <li>
 
-                    <a href="javascript:;" data-toggle="collapse" data-target="#applications"><i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i>&nbsp;Applications<i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#applications"><i class="fa fa-wpforms" aria-hidden="true"></i>&nbsp;Applications<i class="fa fa-fw fa-caret-down"></i></a>
 
                         <ul id="applications" class="collapse">
 
                             <li>
-                                <a href="ADMIN MEMBERSHIP applications.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Membership Pending Applications</a>
+                                <a href="ADMIN MEMBERSHIP applications.html"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;Membership Pending Applications</a>
                             </li>
 
                             <li>
@@ -164,11 +164,11 @@
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK applications.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan Pending Applications</a>
+                                <a href="ADMIN BANK applications.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan Pending Applications</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN HEALTHAID applications.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Pending Applications</a>
+                                <a href="ADMIN HEALTHAID applications.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Pending Applications</a>
                             </li>
 
                         </ul>
@@ -177,13 +177,13 @@
 
                     <li>
 
-                        <a href="ADMIN LIFETIME addmember.html"><i class="fa fa-dollar" aria-hidden="true"></i> Add Lifetime Member</a>
+                        <a href="ADMIN LIFETIME addmember.html"><i class="fa fa-id-card-o" aria-hidden="true"></i> Add Lifetime Member</a>
 
                     </li>
 
                     <li>
 
-                    <a href="javascript:;" data-toggle="collapse" data-target="#bankloans"><i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i>&nbsp;Bank Loans<i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#bankloans"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;Bank Loans<i class="fa fa-fw fa-caret-down"></i></a>
 
                         <ul id="bankloans" class="collapse">
 
@@ -192,7 +192,7 @@
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK editbank.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Enable/Disable Partner Bank</a>
+                                <a href="ADMIN BANK editbank.html"><i class="fa fa-gears" aria-hidden="true"></i>&nbsp;&nbsp;Enable/Disable Partner Bank</a>
                             </li>
 
                             <li>
@@ -200,7 +200,7 @@
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK editplan.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Enable/Disable Bank Loan Plan</a>
+                                <a href="ADMIN BANK editplan.html"><i class="fa fa-gears" aria-hidden="true"></i>&nbsp;&nbsp;Enable/Disable Bank Loan Plan</a>
                             </li>
 
                         </ul>
@@ -209,16 +209,16 @@
 
                     <li>
 
-                    <a href="javascript:;" data-toggle="collapse" data-target="#members"><i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i>&nbsp;Member Database<i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#members"><i class="fa fa-group aria-hidden="true"></i>&nbsp;Member Database<i class="fa fa-fw fa-caret-down"></i></a>
 
                         <ul id="members" class="collapse">
 
                             <li>
-                                <a href="ADMIN MEMBERS viewmembers.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;View All Members</a>
+                                <a href="ADMIN MEMBERS viewmembers.html"><i class="fa fa-group" aria-hidden="true"></i>&nbsp;&nbsp;View All Members</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN MEMBERS viewstatus.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Member's Services</a>
+                                <a href="ADMIN MEMBERS viewstatus.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Member's Services</a>
                             </li>
 
                         </ul>
@@ -227,16 +227,16 @@
 
                     <li>
 
-                    <a href="javascript:;" data-toggle="collapse" data-target="#loans"><i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i>&nbsp;On-going Loans<i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#loans"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;On-going Loans<i class="fa fa-fw fa-caret-down"></i></a>
 
                         <ul id="loans" class="collapse">
 
                             <li>
-                                <a href="ADMIN FALP viewactive.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loans</a>
+                                <a href="ADMIN FALP viewactive.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loans</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK viewactive.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loans</a>
+                                <a href="ADMIN BANK viewactive.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loans</a>
                             </li>
 
                         </ul>
@@ -245,16 +245,16 @@
 
                     <li>
 
-                    <a href="javascript:;" data-toggle="collapse" data-target="#dreports"><i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i>&nbsp;Deduction Reports<i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#dreports"><i class="fa fa-minus" aria-hidden="true"></i>&nbsp;Deduction Reports<i class="fa fa-fw fa-caret-down"></i></a>
 
                         <ul id="dreports" class="collapse">
 
                             <li>
-                                <a href="ADMIN DREPORT general.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;General Deductions</a>
+                                <a href="ADMIN DREPORT general.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;General Deductions</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN DREPORT detailed.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Detailed Deductions</a>
+                                <a href="ADMIN DREPORT detailed.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;Detailed Deductions</a>
                             </li>
 
                         </ul>
@@ -263,57 +263,41 @@
 
                     <li>
 
-                    <a href="javascript:;" data-toggle="collapse" data-target="#preports"><i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i>&nbsp;Periodical Reports<i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#preports"><i class="fa fa-table" aria-hidden="true"></i>&nbsp;Periodical Reports<i class="fa fa-fw fa-caret-down"></i></a>
 
                         <ul id="preports" class="collapse">
 
                             <li>
-                                <a href="ADMIN PREPORT completed.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Completed Loans</a>
+                                <a href="ADMIN PREPORT completed.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;Completed Loans</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN PREPORT new.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;New Deductions</a>
+                                <a href="ADMIN PREPORT new.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;New Deductions</a>
                             </li>
 
                         </ul>
 
                     </li>
 
-                    <li>
+                                        <li>
 
-                    <a href="javascript:;" data-toggle="collapse" data-target="#mreports"><i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i>&nbsp;Monthly Reports<i class="fa fa-fw fa-caret-down"></i></a>
-
-                        <ul id="mreports" class="collapse">
-
-                            <li>
-                                <a href="ADMIN MREPORT memberfees.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Membership Fees</a>
-                            </li>
-
-                            <li>
-                                <a href="ADMIN MREPORT healthfees.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Fees</a>
-                            </li>
-
-                            <li>
-                                <a href="ADMIN MREPORT falpincome.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;FALP Income</a>
-                            </li>
-
-                        </ul>
+                        <a href="ADMIN MREPORT report.html"><i class="fa fa-table" aria-hidden="true"></i> Monthly Report</a>
 
                     </li>
 
                     <li>
 
-                    <a href="javascript:;" data-toggle="collapse" data-target="#repo"><i class="fa fa-fw fa-file-text-o" aria-hidden="true"></i>&nbsp;File Repository<i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#repo"><i class="fa fa-folder-open-o" aria-hidden="true"></i>&nbsp;File Repository<i class="fa fa-fw fa-caret-down"></i></a>
 
                         <ul id="repo" class="collapse">
 
                             <li>
-                                <a href="ADMIN FILEREPO.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;View Documents</a>
+                                <a href="ADMIN FILEREPO.html"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;&nbsp;View Documents</a>
                             </li>
 
                             <li>
 
-                                <a href="ADMIN FILEREPO upload.html"><i class="fa fa-dollar" aria-hidden="true"></i> Upload Documents</a>
+                                <a href="ADMIN FILEREPO upload.html"><i class="fa fa-upload" aria-hidden="true"></i> Upload Documents</a>
 
                             </li>
 
@@ -323,7 +307,7 @@
 
                     <li>
 
-                        <a href="ADMIN MANAGE.html"><i class="fa fa-dollar" aria-hidden="true"></i> Admin Management</a>
+                        <a href="ADMIN MANAGE.html"><i class="fa fa-gears" aria-hidden="true"></i> Admin Management</a>
 
                     </li>
 
