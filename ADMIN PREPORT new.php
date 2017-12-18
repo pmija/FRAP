@@ -5,17 +5,20 @@ require_once('mysql_connect_FA.php');
 $flag=0;
 if(isset($_POST['print'])){
     $_SESSION['date']=$_POST['date'];
-    header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/generateCD.php");
+    header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/generateND.php");
 }
 if(!isset($_POST['select_date'])){
    
-        $query="SELECT m.member_id as 'ID',m.firstName as 'First',m.middlename as 'Middle', m.lastname as 'Last',l.LOAN_DETAIL_ID as 'Ref',l.LOAN_ID
-from loans l 
- 
-join member m
-on l.member_id = m.member_id
-join (SELECT max(date_matured) as 'Date' from loans) latest 
-where l.LOAN_STATUS = 3 and latest.Date = l.Date_Matured";
+        $query="SELECT m.member_ID as 'ID', firstname as 'First',lastname as 'Last',middlename as 'Middle',t.service_type as 'service_type',t.amount as 'Amount',s.service
+        from member m
+        
+        join txn_reference t
+        on t.MEMBER_ID = m.MEMBER_ID
+        join service_type s
+        on s.SERVICE_ID = t.service_type
+        join (SELECT max(txn_date) as 'Date' from txn_reference where txn_type = 2) latest
+        where TXN_TYPE =2 and latest.Date = txn_date
+        group by m.member_ID";
 
 }
 else {
@@ -24,22 +27,27 @@ else {
         $day = substr($date,0,strpos($date," "));
         $month = substr($date,(strpos($date," ")+1),strpos($date,"-")-strpos($date," ")-1);
         $year = substr($date,strpos($date,"-")+1);
-        $query="SELECT m.member_id as 'ID',m.firstName as 'First',m.middlename as 'Middle', m.lastname as 'Last',l.LOAN_DETAIL_ID as 'Ref',l.LOAN_ID
-from loans l  
-
-join member m
-on l.member_id = m.member_id
-where l.LOAN_STATUS = 3 AND $day = day(l.Date_Matured) AND $month = month(l.Date_Matured) AND $year = Year(l.Date_Matured)
-group by l.loan_id";
+        $query="SELECT m.member_ID as 'ID', firstname as 'First',lastname as 'Last',middlename as 'Middle',t.service_type as 'service_type',t.amount as 'Amount',s.service
+        from member m
+        
+        join txn_reference t
+        on t.MEMBER_ID = m.MEMBER_ID
+        join service_type s
+        on s.SERVICE_ID = t.service_type
+        where TXN_TYPE =2 and $month = Month(txn_date) AND $year = Year(txn_date) AND $day = DAY(txn_date)
+        group by m.member_ID";
     }
     else{
-        $query="SELECT m.member_id as 'ID',m.firstName as 'First',m.middlename as 'Middle', m.lastname as 'Last',l.LOAN_DETAIL_ID as 'Ref',l.LOAN_ID
-from loans l 
- 
-join member m
-on l.member_id = m.member_id
-join (SELECT max(date_matured) as 'Date' from loans) latest 
-where l.LOAN_STATUS = 3 and latest.Date = l.Date_Matured";
+        $query="SELECT m.member_ID as 'ID', firstname as 'First',lastname as 'Last',middlename as 'Middle',t.service_type as 'service_type',t.amount as 'Amount',s.service
+        from member m
+        
+        join txn_reference t
+        on t.MEMBER_ID = m.MEMBER_ID
+        join service_type s
+        on s.SERVICE_ID = t.service_type
+        join (SELECT max(txn_date) as 'Date' from txn_reference where txn_type = 2) latest
+        where TXN_TYPE =2 and latest.Date = txn_date
+        group by m.member_ID";
     }
 }
 $result=mysqli_query($dbc,$query);
@@ -350,8 +358,7 @@ $result=mysqli_query($dbc,$query);
                     <div class="col-lg-12">
 
                         <h1 class="page-header">
-                            Completed Deductions 
-                            
+                           New Deductions for December 15, 2017
                         </h1>
                     
                     </div>
@@ -377,15 +384,14 @@ $result=mysqli_query($dbc,$query);
 
                                     <div class="col-lg-6">
 
-                                       <form action="ADMIN PREPORT completed.php" method="POST">
+                                   <form action="ADMIN PREPORT new.php" method="POST">
 
                                         <select class="form-control" name = "date">
-                                        
                                             <option value = "0">This Current Date</option>  
                                         <?php
-                                        $query="SELECT DISTINCT MONTH(Date_Matured) as 'Month',YEAR(Date_Matured) as 'Year', Day(Date_Matured) as 'Day' from loans 
-                                            where loan_status = 3
-                                            order by Date_Matured desc";
+                                        $query="SELECT DISTINCT MONTH(txn_date) as 'Month',YEAR(txn_date) as 'Year', DAY(txn_date) as 'Day' from txn_reference
+                                            where txn_type = 2
+                                            order by txn_date desc";
                                         $result1 = mysqli_query($dbc,$query);
 
                                         while($ans = mysqli_fetch_assoc($result1)){?>
@@ -439,11 +445,9 @@ $result=mysqli_query($dbc,$query);
 
                                                 echo $ans['Day']." ".$month." ".$ans['Year']?></option>
                                         <?php }?>
-
-
                                         </select>
 
-                                    
+                                   
 
                                     </div>
 
@@ -456,7 +460,7 @@ $result=mysqli_query($dbc,$query);
                                     <div class="col-lg-3" align="left">
 
                                         <input type="submit" class="btn btn-default" name="print" value="Print Report">
-                                    </form>
+                                         </form>
                                     </div>
 
                                 </div>
@@ -487,15 +491,16 @@ $result=mysqli_query($dbc,$query);
 
                                         <td align="center" width="250px"><b>ID Number</b></td>
                                         <td align="center"><b>Name</b></td>
-                                        <td align="center"><b>Loan Completed</b></td>
+                                        <td align="center" width="200px"><b>Loan Type</b></td>
+                                        <td align="center" width="200px"><b>Deduction Amount</b></td>
+                                        <td align="center" width="200px"><b>Deduction Frequency</b></td>
 
                                         </tr>
 
                                     </thead>
 
                                     <tbody>
-
-                                     <?php 
+                                        <?php 
                                         while($ans = mysqli_fetch_assoc($result)){
 
 
@@ -504,17 +509,18 @@ $result=mysqli_query($dbc,$query);
 
                                         <td align="center"><?php echo $ans['ID'];?></td>
                                         <td align="center"><?php echo $ans['First']." ".$ans['Middle']." ".$ans['Last'];?></td>
-                                        <td align="center">
-                                        <?php if($ans['Ref']=="1"){
-                                            echo "FALP Loan";
+                                        <td align="center"> <?php echo $ans['service'];?></td>
+                                        <td align="center"><?php echo sprintf("%.2f",(float)$ans['Amount']);?></td>
+                                        <td align="center"><?php if((int)$ans['service_type']<3){
+                                            echo "Per Month";
 
                                         }
                                         else
-                                            echo "BANK Loan";?></td>
-                                        
+                                            echo "Per Payday";?></td>
 
                                         </tr>
-                                        <?php } ?>
+
+                                        <?php }?>
 
                                     </tbody>
 
