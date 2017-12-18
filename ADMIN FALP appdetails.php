@@ -36,7 +36,7 @@
      //Test value
     $_SESSION['idnum']=1141231234;
     $_SESSION['curFALPAmount'] = Null;
-    //$message = "MEM ID" . $_SESSION['showFMID'] . " Loan ID " . $_SESSION['showFID'];
+    $message = "MEM ID" . $_SESSION['showFMID'] . " Loan ID " . $_SESSION['showFID'] . " Admin " . $_SESSION['adminidnum'];
     if(isset($_POST['action'])){
         $query = "SELECT AMOUNT FROM LOANS WHERE LOAN_ID =". $_SESSION['showFID'] .";";
         $result = mysqli_query($dbc, $query);
@@ -48,10 +48,10 @@
 
            //Insert into transaction table
             $queryTnx = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF, EMP_ID, SERVICE_TYPE) 
-            VALUES({$_SESSION['idnum']}, '1', 'FALP Approved', 0, NOW(), {SESSION['showFID']}, {$_SESSION['adminidnum']}, '2'); ";
+            VALUES({$_SESSION['idnum']}, '1', 'FALP Approved', 0, NOW(), {$_SESSION['showFID']}, {$_SESSION['adminidnum']}, '2'); ";
             $resultTnx = mysqli_query($dbc, $queryTnx);
 
-            $message = "Accepted";
+            $message = "Accepted" . $queryTnx;
         }
         else if($_POST['action'] == "Reject Application"){
             //Change the status into Approved (APP_STATUS =2)
@@ -60,7 +60,7 @@
 
            //Insert into transaction table
             $queryTnx = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF, EMP_ID, SERVICE_TYPE) 
-            VALUES({$_SESSION['idnum']}, '1', 'FALP Rejected', 0, NOW(), {SESSION['showFID']}, {$_SESSION['adminidnum']}, '2'); ";
+            VALUES({$_SESSION['idnum']}, '1', 'FALP Rejected', 0, NOW(), {$_SESSION['showFID']}, {$_SESSION['adminidnum']}, '2'); ";
             $resultTnx = mysqli_query($dbc, $queryTnx);
 
             $message = "Rejected";
