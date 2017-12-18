@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+session_start();
+
 require_once('mysql_connect_FA.php');
 $flag=0;
 if(isset($_POST['print'])){
