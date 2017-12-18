@@ -129,7 +129,7 @@
                 $sex = 1;
 
                }else{
-                $sex = 2;
+                $sex = 0;
                 }               
 
                $dept = $_POST['dept'];
