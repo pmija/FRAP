@@ -117,7 +117,6 @@ $requirementID3 = $requirementID2;
 
 
 
-
         $loan_id; 
 
         $query = "SELECT MAX(LOAN_ID) as 'loan_id' from loans where member_id = '{$_SESSION['idnum']}'";
@@ -347,10 +346,6 @@ $requirementID3 = $requirementID2;
                     
                     values({$loan_id},{$user_id},'{$incomeTaxDirectory}','{$payslipDirectory}','{$emp_IDDirectory}','{$gov_IDDirectory}')";
 
-
-
-
-
                     if (!mysqli_query($dbc,$query2)){ // error checking
 
                       echo("Error description: " . mysqli_error($dbc) . "<br>");
@@ -364,6 +359,25 @@ $requirementID3 = $requirementID2;
 
                     }
 
+                    // then updates the transaction table to reflect that I have done this transaction already 
+
+
+                    $query3 = "INSERT INTO txn_reference(MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF, SERVICE_ID) 
+                                                values({$user_id}, 1 ,'Pending','".$_POST["amount"]."',DATE(NOW()),{$loan_id}, 4) ";
+
+
+                   if (!mysqli_query($dbc,$query3)){ // error checking
+
+                      echo("Error description: " . mysqli_error($dbc) . "<br>");
+
+                    }else{
+
+                        echo'Sucessfully inserted into Transaction referrences without any problems!';
+
+                        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/MEMBER BANKLOAN appsent.php");
+
+
+                    }
 
 
                 
