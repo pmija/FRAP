@@ -368,15 +368,29 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                                         <?php foreach ($resultMem as $rowMem) { ?>
 
-                                        <tr>
+                                            <?php
 
-                                        <td align="center"><?php echo $rowMem['DATE_HIRED'] ?></td>
-                                        <td align="center"><?php echo $rowMem['MEMBER_ID'] ?></td>
-                                        <td align="center"><?php echo $rowMem['FIRSTNAME'] . " " . $rowMem['LASTNAME'] ?></td>
-                                        <td align="center"><?php echo $rowMem['DEPT_NAME'] ?></td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<button type="submit" name="submit" class="btn btn-success" value="<?php echo $rowMem['MEMBER_ID'] ?>">Details</button>&nbsp;&nbsp;&nbsp;</td>
+                                                $queryLifetime = "SELECT MEMBER_ID FROM LIFETIME 
+                                                                  WHERE MEMBER_ID = '{$rowMem['MEMBER_ID']}' AND (APP_STATUS = 2 OR APP_STATUS = 3);";
 
-                                        </tr>
+                                                $resultLifetime = mysqli_query($dbc, $queryLifetime);
+                                                $rowLifetime = mysqli_fetch_array($resultLifetime);
+
+                                                if (empty($rowLifetime)) {
+
+                                            ?>
+
+                                            <tr>
+
+                                            <td align="center"><?php echo $rowMem['DATE_HIRED'] ?></td>
+                                            <td align="center"><?php echo $rowMem['MEMBER_ID'] ?></td>
+                                            <td align="center"><?php echo $rowMem['FIRSTNAME'] . " " . $rowMem['LASTNAME'] ?></td>
+                                            <td align="center"><?php echo $rowMem['DEPT_NAME'] ?></td>
+                                            <td align="center">&nbsp;&nbsp;&nbsp;<button type="submit" name="submit" class="btn btn-success" value="<?php echo $rowMem['MEMBER_ID'] ?>">Details</button>&nbsp;&nbsp;&nbsp;</td>
+
+                                            </tr>
+
+                                            <?php } ?>
 
                                         <?php } ?>
 

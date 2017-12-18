@@ -77,28 +77,50 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
          $businessadd = "No business address";
     }
 
-    if (isset($_POST['accept'])) {
+    if (isset($_POST['accept']) && isset($_POST['selected'])) {
 
-        $queryAccept = "INSERT INTO LIFETIME (MEMBER_ID, PRIMARY, SECONDARY, APP_STATUS, DATE_ADDED, EMP_ID)";
+        if ($_POST['selected'] == 1) { /* Chose human */
 
-        $resultAccept = mysqli_query($dbc, $queryAccept);
+            $queryAccept = "INSERT INTO LIFETIME (MEMBER_ID, BPRIMARY, BSECONDARY, APP_STATUS, DATE_ADDED, EMP_ID)
+                            VALUES ('{$_SESSION['lifetime_selected_id']}', '{$_POST['primary']}', '{$_POST['secondary']}', 2, DATE(NOW()), '{$_SESSION['idnum']}')";
 
-        $queryTxn = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, EMP_ID, SERVICE_TYPE) 
-                     VALUES ('{$_SESSION['memapp_selected_id']}', 1, 'Membership Application Approved', 0, NOW(), '{$_SESSION['idnum']}', 1);";
+            $resultAccept = mysqli_query($dbc, $queryAccept);
 
-        $resultAccept = mysqli_query($dbc, $queryTxn);
+            $queryTxn = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, EMP_ID, SERVICE_TYPE) 
+                        VALUES ('{$_SESSION['lifetime_selected_id']}', 1, 'Lifetime Membership Application Approved', 0, NOW(), '{$_SESSION['idnum']}', 1);";
+
+            $resultAccept = mysqli_query($dbc, $queryTxn);
+
+        }
+
+        else if ($_POST['selected'] == 2) { /* Chose organization */
+
+            $queryAccept = "INSERT INTO LIFETIME (MEMBER_ID, ORG, APP_STATUS, DATE_ADDED, EMP_ID)
+                            VALUES ('{$_SESSION['lifetime_selected_id']}', '{$_POST['org']}', 2, NOW(), '{$_SESSION['idnum']}');";
+
+            $resultAccept = mysqli_query($dbc, $queryAccept);
+
+            $queryTxn = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, EMP_ID, SERVICE_TYPE) 
+                        VALUES ('{$_SESSION['lifetime_selected_id']}', 1, 'Lifetime Membership Application Approved', 0, NOW(), '{$_SESSION['idnum']}', 5);";
+
+            $resultAccept = mysqli_query($dbc, $queryTxn);
+
+        }
 
     }
 
     else if (isset($_POST['reject'])) {
 
-        $queryReject = "DELETE FROM MEMBER_ACCOUNT WHERE MEMBER_ID = '{$_SESSION['memapp_selected_id']}';";
+        $queryReject = "INSERT INTO LIFETIME (MEMBER_ID, ORG, APP_STATUS, DATE_ADDED, EMP_ID)
+                            VALUES ('{$_SESSION['lifetime_selected_id']}', '{$_POST['org']}', 3, NOW(), '{$_SESSION['idnum']}');";
 
-        $resultReject = mysqli_query($dbc, $queryReject);
+        $resultAccept = mysqli_query($dbc, $queryReject);
 
-        $queryReject = "DELETE FROM MEMBER WHERE MEMBER_ID = '{$_SESSION['memapp_selected_id']}';";
+    }
 
-        $resultReject = mysqli_query($dbc, $queryReject);
+    else {
+
+
 
     }
 
@@ -400,7 +422,7 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                             <div class="col-lg-12">
 
-                                <form action="ADMIN MEMBERSHIP addaccount.php" method="POST"> <!-- SERVER SELF -->
+                                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> <!-- SERVER SELF -->
 
                                     <div class="panel panel-green">
 
@@ -485,7 +507,21 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                                                         <div class="panel-body">
 
-                                                            <input type="radio" name="selected" value="1"> Select This
+                                                            <input type="radio" name="selected" value="1"> Select This<p>
+
+                                                            <div class="row">
+
+                                                                <div class="col-lg-12">
+
+                                                                    <b>Primary Beneficiary:</b> <input type="text" name="primary" class="form-control">
+
+                                                                    <p><p>
+
+                                                                    <b>Secondary Beneficiary:</b> <input type="text" name="secondary" class="form-control">
+
+                                                                </div>
+
+                                                            </div>
 
                                                         </div>
 
@@ -511,7 +547,7 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                                                                 <div class="col-lg-12">
 
-                                                                    Organization Name: <input type="text" name="org" class="form-control">
+                                                                    <b>Organization Name:</b> <input type="text" name="org" class="form-control">
 
                                                                 </div>
 
