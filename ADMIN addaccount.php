@@ -30,6 +30,18 @@
 
 </head>
 
+<?php
+
+session_start();
+require_once("mysql_connect_FA.php");
+if ($_SESSION['usertype'] == 1||!isset($_SESSION['usertype'])) {
+
+header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF'])."/index.php");
+
+}
+
+?>
+
 <body>
 
     <div id="wrapper">
@@ -333,21 +345,29 @@
 
                             	<div class="col-lg-3">
 
-                            		
+                            		<b>First Name:</b> <input type="text" class="form-control" placeholder="First Name">
 
                             	</div>
 
                             	<div class="col-lg-3">
 
-
+                                    <b>Last Name:</b> <input type="text" class="form-control" placeholder="Last Name">
 
                             	</div>
 
-                            </div>
+                            </div>&nbsp;
 
-                            <div id="subbutton">
+                            <div class="row">
 
-                                <input type="submit" id="submitbutton" value="Create Admin" class="btn btn-success">
+                                <div class="col-lg-3">
+
+                                    <div id="subbutton">
+
+                                        <input type="submit" value="Create Admin" class="btn btn-success">
+
+                                    </div>
+
+                                </div>
 
                             </div>
 

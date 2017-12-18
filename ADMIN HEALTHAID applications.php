@@ -42,7 +42,7 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
     $_SESSION['showHAID'] = NULL;   // Health ID
     $_SESSION['showHAMID'] = NULL;  // Member ID of the loan
 
-    $query = "SELECT MEMBER_ID FROM LOANS WHERE LOAN_ID = ". $_SESSION['showHAID'] .";";
+    $query = "SELECT MEMBER_ID FROM LOANS WHERE LOAN_ID = '{$_SESSION['showHAID']}'";
     $result = mysqli_query($dbc, $query);
     $row = mysqli_fetch_array($result);
 
