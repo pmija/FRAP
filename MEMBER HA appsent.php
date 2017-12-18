@@ -375,7 +375,7 @@
                                 <tr>
 
                                 <?php 
-                                    $query = "SELECT * FROM SPOUSE WHERE MEMBER_ID =" . $_SESSION['idnum'].";";
+                                    $query = "SELECT * FROM SPOUSE S JOIN MEMBER M ON S.MEMBER_ID = M. MEMBER_ID WHERE S.MEMBER_ID =" . $_SESSION['idnum'].";";
                                     $result = mysqli_query($dbc, $query);
                                     $row = mysqli_fetch_array($result);
                                 ?>
@@ -383,12 +383,17 @@
                                 <td align="center"><?php echo $row["LASTNAME"]; ?></td>
                                 <td align="center"><?php echo $row["FIRSTNAME"]; ?></td>
                                 <td align="center"><?php echo $row["MIDDLENAME"]; ?></td>
-                                <td align="center">Male</td>
+                                <td align="center">
+                                    <?php
+                                        if($row['SEX'] == 1) echo "Female";
+                                        else if($row['SEX'] === 0) echo "Male";
+                                    ?>
+                                </td>
                                 <td align="center"><?php echo $row["BIRTHDATE"]; ?></td>
                                 <td align="center">
                                     <?php
                                         if($row["STATUS"] == 1) echo"Alive";
-                                        else if ($row["STATUS"] == 0) echo "Deceased";
+                                        else if ($row["STATUS"] === 0) echo "Deceased";
                                     ?>        
                                 </td>
 
@@ -427,22 +432,27 @@
                                     $result = mysqli_query($dbc, $query);
                                     
                                     foreach ($result as $resultRow) {
-                                        echo"
+                                ?>
+                                    
                                             <tr>
-                                                <td align='center'>". $resultRow['LASTNAME'] ."</td>
-                                                <td align='center'>". $resultRow['FIRSTNAME'] ."</td>
-                                                <td align='center'>". $resultRow['MIDDLENAME'] ."</td>
-                                                <td align='center'>". $resultRow['SEX'] ."</td>
-                                                <td align='center'>". $resultRow['BIRTHDATE'] ."</td>
-                                                <td align='center'>";
-
+                                                <td align='center'><?php $resultRow['LASTNAME'] ?></td>
+                                                <td align='center'><?php $resultRow['FIRSTNAME'] ?></td>
+                                                <td align='center'><?php $resultRow['MIDDLENAME'] ?></td>
+                                                <td align='center'>
+                                                    <?php
+                                                        if($row['SEX'] == 1) echo "Female";
+                                                        else if($row['SEX'] === 0) echo "Male";
+                                                    ?>
+                                                </td>
+                                                <td align='center'><?php $resultRow['BIRTHDATE'] ?></td>
+                                                <td align='center'>
+                                                    <?php
                                                         if($resultRow['STATUS'] == 1) echo"Alive";
                                                         else if ($resultRow['STATUS'] == 0) echo "Deceased";
-
-                                                echo "       
+                                                    ?>     
                                                 </td>
                                             </tr>
-                                        ";
+                                <?php
                                     }
                                 ?>
 
@@ -483,20 +493,21 @@
                                     
 
                                     foreach ($result as $resultRow) {
-                                        echo"
+                                ?>
                                             <tr>
-                                                <td align='center'>". $resultRow['LASTNAME'] ."</td>
-                                                <td align='center'>". $resultRow['FIRSTNAME'] ."</td>
-                                                <td align='center'>". $resultRow['MIDDLENAME'] ."</td>
-                                                <td align='center'>". $resultRow['SEX'] ."</td>
-                                                <td align='center'>". $resultRow['BIRTHDATE'] ."</td>
-                                                <td align='center'>";
+                                                <td align='center'><?php $resultRow['LASTNAME'] ?></td>
+                                                <td align='center'><?php $resultRow['FIRSTNAME'] ?></td>
+                                                <td align='center'><?php $resultRow['MIDDLENAME'] ?></td>
+                                                <td align='center'><?php $resultRow['SEX'] ?></td>
+                                                <td align='center'><?php $resultRow['BIRTHDATE'] ?></td>
+                                                <td align='center'>
+                                                    <?php
                                                         if($resultRow['STATUS'] == 1) echo"Alive";
                                                         else if ($resultRow['STATUS'] == 0) echo "Deceased";
-                                                echo "       
+                                                    ?>       
                                                 </td>
                                             </tr>
-                                        ";
+                                <?php
                                     }
                                 ?>
 

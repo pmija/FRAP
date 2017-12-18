@@ -519,7 +519,7 @@
 				
             $queryMem = "INSERT INTO HEALTH_AID (MEMBER_ID, APP_STATUS, DATE_APPLIED, DATE_APPROVED, EMP_ID) 
 
-            VALUES('{$idnum}', '1', NOW(), NULL, '{$idnum}'); ";
+            VALUES('{$idnum}', '1', NOW(), NULL, NULL); ";
 
             $resultMem = mysqli_query($dbc, $queryMem);
 		
