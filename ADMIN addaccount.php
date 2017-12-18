@@ -333,7 +333,7 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                             <div class="addaccountdiv">
                                 <label class="signfieldlabel">Admin ID Number</label><big class="req"> *</big>
-                                <input type="text" id="singupID" class="form-control signupfield" placeholder="e.g. 09700000">
+                                <input name = "ID" type="text" id="singupID" class="form-control signupfield" placeholder="e.g. 09700000">
                             </div><p>
 
                             <div class="addaccountdiv">

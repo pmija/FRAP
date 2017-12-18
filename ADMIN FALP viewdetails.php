@@ -310,7 +310,7 @@ require_once("mysql_connect_FA.php");
                                         $ans2 = mysqli_fetch_assoc($result2);
 
                         ?>
-                        <h1 class="page-header"><?php echo $ans['First']." ".$ans['Last'];?> 's FALP Loan Summary</h1>
+                        <h1 class="page-header"><?php echo $ans2['First']." ".$ans2['Last'];?> 's FALP Loan Summary</h1>
                     
                     </div>
 
