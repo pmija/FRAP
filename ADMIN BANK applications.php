@@ -1,6 +1,8 @@
 <?php
-
+session_start();
 require_once("mysql_connect_FA.php");
+
+$_SESSION['user_id'] ='';
 
 $_SESSION['bank_loan_id'] = ''; 
 
@@ -11,6 +13,7 @@ $_SESSION['bank_loan_id'] = '';
         
         $_SESSION['bank_loan_id'] =  $_POST['loan_id'];
 
+        $_SESSION['user_id'] = 99999999;
 
         header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/ADMIN BANK appdetails.php"); // sends it to the page 
 
@@ -356,7 +359,7 @@ $_SESSION['bank_loan_id'] = '';
                                on l.loan_detail_id = ld.loan_id
                                join banks b
                                on ld.bank_id = b.bank_id
-                               where ld.bank_id != 1";
+                               where ld.bank_id != 1 && l.app_status = 1";
         
                                 $result= mysqli_query($dbc,$query);
                                 
