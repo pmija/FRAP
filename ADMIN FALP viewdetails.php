@@ -298,8 +298,14 @@ require_once("mysql_connect_FA.php");
                 <div class="row">
                 
                     <div class="col-lg-12">
+                        <?php
+                            $query2 = "SELECT m.firstname as 'First',m.lastname as 'Last' FROM LOANS l join member m on l.member_id = m.member_id where LOAN_ID = {$_POST['details']} 
+                                                  AND loan_detail_id = 1 AND    loan_status != 3";
+                                        $result2 = mysqli_query($dbc,$query2);
+                                        $ans2 = mysqli_fetch_assoc($result2);
 
-                        <h1 class="page-header">Patrick Mijares' FALP Loan Summary</h1>
+                        ?>
+                        <h1 class="page-header"><?php echo $ans['First']." ".$ans['Last'];?> 's FALP Loan Summary</h1>
                     
                     </div>
 
