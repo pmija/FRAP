@@ -39,7 +39,7 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
 }
     //Test Value
-    $_SESSION['adminidnum']=970121234;
+    //$_SESSION['adminidnum']=970121234;
     //Connect DB
     require_once('mysql_connect_FA.php');
 
@@ -63,7 +63,7 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
         if(!isset($message)){
             $query="INSERT INTO BANKS (BANK_NAME, BANK_ABBV, STATUS,EMP_ID_ADDED, DATE_ADDED, DATE_REMOVED) 
             
-            VALUES('{$aBankName}','{$aBankAbbv}',1,'{$_SESSION['adminidnum']}',NOW(),NULL);";
+            VALUES('{$aBankName}','{$aBankAbbv}',1,'{$_SESSION['idnum']}',NOW(),NULL);";
             $resultMPB=mysqli_query($dbc,$query);
             $message="<b><p>Product Name: {$aBankName} added!</b>";
         }

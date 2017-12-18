@@ -41,7 +41,7 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
 }
     //Test Value
-    $_SESSION['adminidnum']=970121234;
+    //$_SESSION['adminidnum']=970121234;
     //Connect DB
     require_once('mysql_connect_FA.php');
 
@@ -51,13 +51,13 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
         if($_POST['action'] == "Enable Partner Bank" ){
             //Change the status into Active (APP_STATUS =1)
-            $query = "UPDATE BANKS SET STATUS = '1', EMP_ID_ADDED =". $_SESSION['adminidnum'] .", DATE_REMOVED = NULL WHERE BANK_ID =" . $_POST['bankID'].";";
+            $query = "UPDATE BANKS SET STATUS = '1', EMP_ID_ADDED =". $_SESSION['idnum'] .", DATE_REMOVED = NULL WHERE BANK_ID =" . $_POST['bankID'].";";
             $result = mysqli_query($dbc, $query);
             $message="Bank Enabled!";
         }                           
         else if($_POST['action'] == "Disable Partner Bank"){
              //Change the status into Inactive (APP_STATUS =2)
-            $query = "UPDATE BANKS SET STATUS = '2', EMP_ID_ADDED =". $_SESSION['adminidnum'] .", DATE_REMOVED = NOW() WHERE BANK_ID =" . $_POST['bankID'].";";
+            $query = "UPDATE BANKS SET STATUS = '2', EMP_ID_ADDED =". $_SESSION['idnum'] .", DATE_REMOVED = NOW() WHERE BANK_ID =" . $_POST['bankID'].";";
             $result = mysqli_query($dbc, $query);
             $message="Bank Disabled!";
         }
