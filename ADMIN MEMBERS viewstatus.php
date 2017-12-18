@@ -8,6 +8,19 @@ if ($_SESSION['usertype'] == 1||!isset($_SESSION['usertype'])) {
 header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF'])."/index.php");
 
 }
+ $query = "SELECT m.member_ID, m.FIRSTNAME,m.LASTNAME,ha.Record_ID as 'has_HA', f.Amount as 'FFee', b.Amount as 'BFee'
+              from member m
+              left join health_aid ha
+              on m.member_id = ha.member_id
+              left join (SELECT member_id,sum(PER_PAYMENT) as 'Amount' 
+                         from Loans where LOAN_DETAIL_ID = 1 AND LOAN_STATUS = 2 group by member_id) f
+              on f.member_id = m.member_id
+              left join (SELECT member_id,sum(PER_PAYMENT) as 'Amount' 
+                         from Loans where LOAN_DETAIL_ID != 1 AND LOAN_STATUS = 2 group by member_id ) b
+              on b.member_id = m.member_id";
+$result = mysqli_query($dbc,$query);
+
+
 ?>
 <head>
 
@@ -340,7 +353,7 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
                                         <td align="center" width="100px"><b>FALP</b></td>
                                         <td align="center" width="100px"><b>Bank Loan</b></td>
                                         <td align="center" width="100px"><b>Health Aid</b></td>
-                                        <td align="center" width="100px"><b>Lifetime Member</b></td>
+                                       <!-- <td align="center" width="100px"><b>Lifetime Member</b></td> -->
 
                                         </tr>
 
@@ -349,38 +362,46 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
                                     <tbody>
 
                                         <tr>
+                                        <?php 
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            $ha = false;
+                                            $ffee = false;
+                                            $bfee = false;
+                                            if(!empty($row['has_HA'])){
+                                                $ha = true;
+                                            }
+                                            if(!empty($row['FFee'])){
+                                                $ffee = true;
+                                            }
+                                            if(!empty($row['BFee'])){
+                                                $bfee = true;
+                                            }
 
-                                        <td align="center">11436786</td>
-                                        <td align="center">Patrick Mijares </td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
+
+
+                                            ?>
+                                        <td align="center"><?php echo $row['member_ID'];?></td>
+                                        <td align="center"><?php echo $row['FIRSTNAME']." ".$row['LASTNAME'];?> </td>
+                                        <td align="center"><?php if($ha){
+                                            echo '<i class="fa fa-check fa-lg statusO"></i>';
+                                        }
+                                        else
+                                            echo '<i class="fa fa-close fa-lg statusX"></i>';?>&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="center"><?php if($ffee){
+                                            echo '<i class="fa fa-check fa-lg statusO"></i>';
+                                        }
+                                        else
+                                            echo '<i class="fa fa-close fa-lg statusX"></i>';?>&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="center"><?php if($bfee){
+                                            echo '<i class="fa fa-check fa-lg statusO"></i>';
+                                        }
+                                        else
+                                            echo '<i class="fa fa-close fa-lg statusX"></i>';?>&nbsp;&nbsp;&nbsp;</td>
+                                        
 
                                         </tr>
-
-                                        <tr>
-
-                                        <td align="center">11436786</td>
-                                        <td align="center">Patrick Mijares </td>
-                                        <td align="center"><i class="fa fa-close fa-lg statusX"></i></td>
-                                        <td align="center"><i class="fa fa-close fa-lg statusX"></i></td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-
-                                        </tr>
-
-                                        <tr>
-
-                                        <td align="center">11436786</td>
-                                        <td align="center">Patrick Mijares </td>
-                                        <td align="center"><i class="fa fa-close fa-lg statusX"></i></td>
-                                        <td align="center"><i class="fa fa-close fa-lg statusX"></i></td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-
-                                        </tr>
-
+                                        <?php }?>
+                                        
                                     </tbody>
 
                                 </table>
