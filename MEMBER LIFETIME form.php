@@ -300,7 +300,37 @@
                     </div>
 
                 </div>
+                <div class = "row">
 
+                    <div align="center">
+                    <div class="col-lg-2">
+
+                    
+                    </div>
+
+                    <div class = "col-lg-8">
+
+                         <div class="well">
+
+                            <p class="text-center">
+
+                            <h3> 
+                                You can download the Lifetime application form here once you are Eligible, at least 10 years of being a member of the Faculty Association.
+                            </h3>
+
+                            </p>
+                        </div>
+                    </div>
+
+
+                     <div class="col-lg-2">
+
+                    
+                    </div>
+                </div>
+
+
+                </div>
 
                 <div class="row"> <!-- Well -->
 
@@ -314,7 +344,7 @@
 
                         <form action="#" method="POST" > 
 
-                        <img class="pdficon10" src="images/pdficon.png">
+                        <img class="pdficon10" src="images/pdficon.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                          <input type = "submit" class="btn btn-success  btn-lg" name="download" value = "Download Lifetime Application Form">
 
