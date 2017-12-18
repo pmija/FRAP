@@ -333,7 +333,7 @@
 
                             <div align="center">
 
-                            <a href="MEMBER FALP summary.php" class="btn btn-default" role="button">Go Back</a>
+                            <a href="MEMBER BANKLOAN summary.php" class="btn btn-default" role="button">Go Back</a>
 
                             </div>
 

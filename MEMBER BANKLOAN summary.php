@@ -420,7 +420,7 @@
                                     <tr>
 
                                     <td>Outstanding Balance</td>
-                                    <td><?php echo $loan_info['amount']-$loan_info['amount_paid']; ?></td>
+                                    <td><?php echo $loan_info['payable']-$loan_info['amount_paid']; ?></td>
 
                                     </tr>
 

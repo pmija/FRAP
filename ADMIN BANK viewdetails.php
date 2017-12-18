@@ -502,7 +502,7 @@
                             <div align="center">
 
                             <a href="ADMIN BANK viewactivity.php" class="btn btn-success" role="button">View Payment Activity</a>
-                            <a href="ADMIN dashboard.php" class="btn btn-default" role="button">Go Back</a>
+                            <a href="ADMIN viewactive.php" class="btn btn-default" role="button">Go Back</a>
 
                             </div>
 

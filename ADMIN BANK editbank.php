@@ -62,7 +62,7 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
             $message="Bank Disabled!";
         }
     }
-    else if(!isset($_POST['bankID']) && $_POST['action']){
+    else if(!isset($_POST['bankID']) && isset($_POST['action'])){
         $message="You forgot to choose a bank to modify!";
     }
 

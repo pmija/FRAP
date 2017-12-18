@@ -8,7 +8,7 @@ require_once('mysql_connect_FA.php');
         
     }
     
-    $query1 = "SELECT * from loans where member_id = ".$_SESSION['idnum']." AND (loan_status = 1 OR loan_status = 2)" ; 
+    $query1 = "SELECT * from loans where member_id = ".$_SESSION['idnum']." AND (loan_status = 1 OR loan_status = 2) && loan_detail_id != 1" ; 
    
     $result1 = mysqli_query($dbc,$query1);
 
