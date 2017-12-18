@@ -2,7 +2,7 @@
 <html lang="en">
 <?php 
 session_start();
-require_once('mysql_connect.php');
+require_once('mysql_connect_FA.php');
 
     if ($_SESSION['usertype'] != 1) {
 

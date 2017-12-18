@@ -39,6 +39,79 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
 </head>
 
+<?php
+
+    $queryMem = "SELECT M.MEMBER_ID, M.LASTNAME, M.FIRSTNAME, M.MIDDLENAME, C.STATUS, M.DATE_HIRED, D.DEPT_NAME, M.HOME_ADDRESS, 
+                 M.BUSINESS_ADDRESS, M.HOME_NUM, M.BUSINESS_NUM, M.BIRTHDATE, M.SEX
+                 FROM MEMBER AS M
+                 JOIN REF_DEPARTMENT AS D
+                 ON M.DEPT_ID = D.DEPT_ID
+                 JOIN CIV_STATUS AS C
+                 ON M.CIV_STATUS = C.STATUS_ID
+                 WHERE M.MEMBER_ID = '{$_SESSION['lifetime_selected_id']}';";
+
+    $resultMem = mysqli_query($dbc, $queryMem);
+    $rowMem = mysqli_fetch_array($resultMem);
+
+    if ($rowMem['SEX'] == 1) {
+        $sex = "Male";
+    }
+
+    else {
+        $sex = "Female";
+    }
+
+    if (!empty($rowMem['BUSINESS_NUM'])) {
+        $businessnum = $rowMem['BUSINESS_NUM'];
+    }
+
+    else {
+         $businessnum = "No business number";
+    }
+
+    if (!empty($rowMem['BUSINESS_ADDRESS'])) {
+        $businessaddress = $rowMem['BUSINESS_ADDRESS'];
+    }
+
+    else {
+         $businessadd = "No business address";
+    }
+
+    if (isset($_POST['accept'])) {
+
+        $queryAccept = "INSERT INTO LIFETIME (MEMBER_ID, PRIMARY, SECONDARY, APP_STATUS, DATE_ADDED, EMP_ID)";
+
+        $resultAccept = mysqli_query($dbc, $queryAccept);
+
+        $queryTxn = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, EMP_ID, SERVICE_TYPE) 
+                     VALUES ('{$_SESSION['memapp_selected_id']}', 1, 'Membership Application Approved', 0, NOW(), '{$_SESSION['idnum']}', 1);";
+
+        $resultAccept = mysqli_query($dbc, $queryTxn);
+
+    }
+
+    else if (isset($_POST['reject'])) {
+
+        $queryReject = "DELETE FROM MEMBER_ACCOUNT WHERE MEMBER_ID = '{$_SESSION['memapp_selected_id']}';";
+
+        $resultReject = mysqli_query($dbc, $queryReject);
+
+        $queryReject = "DELETE FROM MEMBER WHERE MEMBER_ID = '{$_SESSION['memapp_selected_id']}';";
+
+        $resultReject = mysqli_query($dbc, $queryReject);
+
+    }
+
+?>
+
+<style>
+
+    input[type=radio] {
+        transform: scale(1.2);
+    }
+
+</style>
+
 <body>
 
     <div id="wrapper">
@@ -339,13 +412,13 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                                         <div class="panel-body"><p>
 
-                                            <b>ID Number:</b> <p>
-                                            <b>First Name:</b> <p>
-                                            <b>Last Name:</b> <p>
-                                            <b>Middle Name:</b> <p>
-                                            <b>Civil Status:</b> <p>
-                                            <b>Date of Birth:</b> <p>
-                                            <b>Sex:</b> <p>
+                                            <b>ID Number: </b><?php echo $rowMem['MEMBER_ID']; ?> <p>
+                                            <b>First Name: </b><?php echo $rowMem['FIRSTNAME']; ?> <p>
+                                            <b>Last Name: </b><?php echo $rowMem['LASTNAME']; ?> <p>
+                                            <b>Middle Name: </b><?php echo $rowMem['MIDDLENAME']; ?> <p>
+                                            <b>Civil Status: </b><?php echo $rowMem['STATUS']; ?> <p>
+                                            <b>Date of Birth: </b><?php echo $rowMem['BIRTHDATE']; ?> <p>
+                                            <b>Sex: </b><?php echo $sex; ?> <p>
                                             
                                         </div>
 
@@ -361,8 +434,8 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                                         <div class="panel-body"><p>
 
-                                            <b>Date of Hiring:</b> <p>
-                                            <b>Department:</b> <p>
+                                            <b>Date of Hiring: </b><?php echo $rowMem['DATE_HIRED']; ?> <p>
+                                            <b>Department: </b><?php echo $rowMem['DEPT_NAME']; ?> <p>
 
                                         </div>
 
@@ -378,11 +451,79 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                                         <div class="panel-body"><p>
 
-                                            <b>Contact Number:</b> <p>
-                                            <b>Home Phone Number:</b> <p>
-                                            <b>Business Phone Number:</b> <p>
-                                            <b>Home Address:</b> <p>
-                                            <b>Business Address:</b> <p>
+                                            <b>Home Phone Number: </b><?php echo $rowMem['HOME_NUM']; ?> <p>
+                                            <b>Business Phone Number: </b><?php echo $businessnum ?> <p>
+                                            <b>Home Address: </b><?php echo $rowMem['HOME_ADDRESS']; ?> <p>
+                                            <b>Business Address: </b><?php echo $businessadd ?> <p>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="panel panel-primary">
+
+                                        <div class="panel-heading">
+
+                                            <b>Beneficiaries</b>
+
+                                        </div>
+
+                                        <div class="panel-body"><p>
+
+                                            <div class="row">
+
+                                                <div class="col-lg-6">
+
+                                                    <div class="panel panel-info">
+
+                                                        <div class="panel-heading">
+
+                                                            <b>Human Beneficiaries</b>
+
+                                                        </div>
+
+                                                        <div class="panel-body">
+
+                                                            <input type="radio" name="selected" value="1"> Select This
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-lg-6">
+
+                                                    <div class="panel panel-info">
+
+                                                        <div class="panel-heading">
+
+                                                            <b>Organization Beneficiary</b>
+
+                                                        </div>
+
+                                                        <div class="panel-body">
+
+                                                            <input type="radio" name="selected" value="2"> Select This<p>
+
+                                                            <div class="row">
+
+                                                                <div class="col-lg-12">
+
+                                                                    Organization Name: <input type="text" name="org" class="form-control">
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
 
                                         </div>
 

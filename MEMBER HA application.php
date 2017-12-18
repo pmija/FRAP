@@ -45,7 +45,7 @@
     $_SESSION['SI_Sibling'] == 0;
 
     //This retrieves the Sibling's maximum 
-    $querySISIB = "SELECT MAX(SIBLING_ID) FROM SIBLINGS;";
+    $querySISIB = "SELECT MAX(SIBLING_ID) as SIBLING_ID FROM SIBLINGS;";
     $resultSISIB = mysqli_query($dbc, $querySISIB);
     $rowSISIB = mysqli_fetch_array($resultSISIB);
 
@@ -60,7 +60,7 @@
     $_SESSION['CI_Child'] == 0;
 
     //This retrieves the Child's maximum 
-    $queryCIC = "SELECT MAX(CHILD_ID) FROM CHILDREN;";
+    $queryCIC = "SELECT MAX(CHILD_ID) as CHILD_ID FROM CHILDREN;";
     $resultCIC = mysqli_query($dbc, $queryCIC);
     $rowCIC = mysqli_fetch_array($resultCIC);
 
@@ -824,15 +824,6 @@
                     
                     <div class="col-lg-12">
                         <h1 class="page-header">Health Aid Application Form</h1>
-						<?php
-                            if($flag != 0){
-                                echo"  
-                                <div class='alert alert-warning'>
-                                    ". $message ."
-                                </div>
-                                ";
-                            }
-                        ?>
                     </div>
 
                 </div>

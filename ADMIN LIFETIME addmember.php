@@ -39,6 +39,24 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
 </head>
 
+<?php
+
+    $queryMem = "SELECT M.MEMBER_ID, M.LASTNAME, M.FIRSTNAME, M.DATE_HIRED, RD.DEPT_NAME FROM MEMBER AS M
+                 JOIN REF_DEPARTMENT AS RD ON RD.DEPT_ID = M.DEPT_ID
+                 WHERE YEAR(NOW()) - YEAR(DATE_HIRED) >= 10 AND MEMBERSHIP_STATUS = 2 AND USER_STATUS = 1;";
+
+    $resultMem = mysqli_query($dbc, $queryMem);
+
+    if (isset($_POST['submit'])) {
+
+        $_SESSION['lifetime_selected_id'] = $_POST['submit'];
+
+        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/ADMIN LIFETIME appdetails.php");
+
+    }
+
+?>
+
 <body>
 
     <div id="wrapper">
@@ -327,7 +345,7 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                             <div class="col-lg-12">
 
-                                <form action="ADMIN LIFETIME appdetails.php" method="POST"> <!-- SERVER SELF -->
+                                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> <!-- SERVER SELF -->
 
                                 <table id="table" class="table table-bordered table-striped">
                                     
@@ -337,8 +355,7 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                                         <td align="center"><b>Date Applied</b></td>
                                         <td align="center"><b>ID Number</b></td>
-                                        <td align="center"><b>Last Name</b></td>
-                                        <td align="center"><b>First Name</b></td>
+                                        <td align="center"><b>Name</b></td>
                                         <td align="center"><b>Department</b></td>
                                         <td align="center"><b>Actions</b></td>
 
@@ -349,38 +366,19 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                                     <tbody>
 
-                                        <tr>
-
-                                        <td align="center">December 1, 2017 11:02:58 AM</td>
-                                        <td align="center">11436786</td>
-                                        <td align="center">Mijares </td>
-                                        <td align="center">James Patrick</td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-
-                                        </tr>
+                                        <?php foreach ($resultMem as $rowMem) { ?>
 
                                         <tr>
 
-                                        <td align="center">December 1, 2017 11:02:58 AM</td>
-                                        <td align="center">11436786</td>
-                                        <td align="center">Mijares </td>
-                                        <td align="center">James Patrick</td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="center"><?php echo $rowMem['DATE_HIRED'] ?></td>
+                                        <td align="center"><?php echo $rowMem['MEMBER_ID'] ?></td>
+                                        <td align="center"><?php echo $rowMem['FIRSTNAME'] . " " . $rowMem['LASTNAME'] ?></td>
+                                        <td align="center"><?php echo $rowMem['DEPT_NAME'] ?></td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<button type="submit" name="submit" class="btn btn-success" value="<?php echo $rowMem['MEMBER_ID'] ?>">Details</button>&nbsp;&nbsp;&nbsp;</td>
 
                                         </tr>
 
-                                        <tr>
-
-                                        <td align="center">December 1, 2017 11:02:58 AM</td>
-                                        <td align="center">11436786</td>
-                                        <td align="center">Mijares </td>
-                                        <td align="center">James Patrick</td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-
-                                        </tr>
+                                        <?php } ?>
 
                                     </tbody>
 
