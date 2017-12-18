@@ -30,7 +30,38 @@
     <![endif]-->
 
 </head>
+<?php 
 
+    //User Validation 
+    session_start();
+    //Test Value
+    $_SESSION['adminidnum']=970121234;
+    //Connect DB
+    require_once('mysql_connect_FA.php');
+
+    if(isset($_POST['action'])){
+
+        $message.="Bank Statment entered" . $_POST['action'];
+
+        if($_POST['action'] == "Enable Partner Bank" ){
+            //Change the status into Active (APP_STATUS =1)
+            $query = "UPDATE BANKS SET STATUS = '1', EMP_ID_ADDED =". $_SESSION['adminidnum'] .", DATE_REMOVED = NULL WHERE BANK_ID =" . $_POST['bankID'].";";
+            $result = mysqli_query($dbc, $query);
+            $message="Bank Enabled!";
+        }                           
+        else if($_POST['action'] == "Disable Partner Bank"){
+             //Change the status into Inactive (APP_STATUS =2)
+            $query = "UPDATE BANKS SET STATUS = '2', EMP_ID_ADDED =". $_SESSION['adminidnum'] .", DATE_REMOVED = NOW() WHERE BANK_ID =" . $_POST['bankID'].";";
+            $result = mysqli_query($dbc, $query);
+            $message="Bank Disabled!";
+        }
+    }
+    else if(!isset($_POST['bankID']) && $_POST['action']){
+        $message="You forgot to choose a bank to modify!";
+    }
+
+    
+?>
 <body>
 
     <div id="wrapper">
@@ -307,7 +338,15 @@
                         <h1 class="page-header">
                             Edit Partner Bank
                         </h1>
-                    
+                        <?php
+                            if(isset($message)){
+                                echo"  
+                                <div class='alert alert-warning'>
+                                    ". $message ."
+                                </div>
+                                ";
+                            }
+                        ?>
                     </div>
                     
                 </div>
@@ -319,7 +358,7 @@
 
                             <div class="col-lg-12">
 
-                                <form action="ADMIN LIFETIME appdetails.html" method="POST"> <!-- SERVER SELF -->
+                                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> <!-- SERVER SELF -->
 
                                 <table id="table" class="table table-bordered table-striped">
                                     
@@ -337,32 +376,29 @@
                                     </thead>
 
                                     <tbody>
-
+                                        <?php
+                                            $query = "SELECT BANK_ID, BANK_NAME, STATUS FROM BANKS WHERE BANK_ID != 1;";
+                                            $result = mysqli_query($dbc, $query);
+                                            foreach ($result as $resultRow) {
+                                                //Count loan plans
+                                                $querylp = "SELECT COUNT(LOAN_ID) AS numLoans FROM LOAN_PLAN";
+                                                $resultlp = mysqli_query($dbc, $querylp);
+                                                $rowlp = mysqli_fetch_array($resultlp);
+                                        ?>
                                         <tr>
-
-                                        <td align="center"><input type="radio" name="selected[]"></td>
-                                        <td align="center">Banco de Oro</td>
-                                        <td align="center">15</td>
-                                        <td align="center">Enabled </td>
+                                            <td align='center'><input type='radio' name='bankID' value='<?php echo $resultRow['BANK_ID']; ?>'></td>
+                                            <td align="center"><?php echo $resultRow['BANK_NAME']; ?></td>
+                                            <td align="center"><?php echo $rowlp['numLoans']; ?></td>
+                                            <td align="center"><?php 
+                                                if($resultRow['STATUS'] == 1) echo "Active";
+                                                else echo "Disabled";
+                                            ?></td>
                                         </tr>
-
-                                        <tr>
-
-                                        <td align="center"><input type="radio" name="selected[]"></td>
-                                        <td align="center">Philippine National Bank</td>
-                                        <td align="center">8</td>
-                                        <td align="center">Disabled </td>
-
-                                        </tr>
-
-                                        <tr>
-
-                                        <td align="center"><input type="radio" name="selected[]"></td>
-                                        <td align="center">Metropolitan Bank and Trust Company</td>
-                                        <td align="center">14</td>
-                                        <td align="center">Enabled </td>
-
-                                        </tr>
+                                                
+                                        <?php
+                                            } ?>
+                                        
+                                        
 
                                     </tbody>
 
@@ -377,9 +413,8 @@
                                         </div>
 
                                         <div class="panel-body"><p>
-
-                                            <input type="submit" class="btn btn-success" name="accept" value="Enable Partner Bank">
-                                            <input type="submit" class="btn btn-danger" name="reject" value="Disable Partner Bank">
+                                            <input type="submit" class="btn btn-success" name="action" value="Enable Partner Bank" />
+                                            <input type="submit" class="btn btn-danger" name="action" value="Disable Partner Bank" />
 
                                         </div>
 
