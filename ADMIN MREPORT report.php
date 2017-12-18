@@ -2,7 +2,11 @@
 <html lang="en">
 <?php
 session_start();
+ if ($_SESSION['usertype'] == 1||!isset($_SESSION['usertype'])) {
 
+        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index.php");
+            
+    }
 require_once('mysql_connect_FA.php');
 if(!isset($_POST['select_date'])){
    $query = "SELECT max(day(txn_date)) as 'Day',max(month(txn_date)) as 'Month',max(Year(txn_date)) as 'Year' from txn_reference where txn_type = 2";

@@ -1,7 +1,11 @@
 <?php
 session_start();
 require_once("mysql_connect_FA.php");
+if ($_SESSION['usertype'] == 1||!isset($_SESSION['usertype'])) {
 
+header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF'])."/index.php");
+
+}
 $_SESSION['bank_loan_id'] = ''; 
 
 

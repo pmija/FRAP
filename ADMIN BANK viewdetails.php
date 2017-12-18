@@ -1,7 +1,11 @@
 <?php
     session_start();
     require_once('mysql_connect_FA.php');
+    if ($_SESSION['usertype'] == 1||!isset($_SESSION['usertype'])) {
 
+    header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF'])."/index.php");
+
+    }
     $bank_loan_id = $_SESSION['bank_loan_id'];
 
     $query = "select m.member_id,m.firstname, m.lastname, l.amount, l.payable, l.payment_terms, l.per_payment, l.date_approved, l.payments_made, l.amount_paid, ls.status

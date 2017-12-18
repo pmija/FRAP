@@ -1,5 +1,10 @@
 <?php
 session_start();
+ if ($_SESSION['usertype'] == 1||!isset($_SESSION['usertype'])) {
+
+        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index.php");
+            
+    }
 require('fpdf/fpdf.php');
 
 class PDF extends FPDF
