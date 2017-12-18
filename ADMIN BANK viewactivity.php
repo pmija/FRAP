@@ -1,34 +1,13 @@
-<?php
-    session_start();
-    require_once('mysql_connect_FA.php');
-
-    $bank_loan_id = $_SESSION['bank_loan_id'];
-
-    $query = "select m.member_id,m.firstname, m.lastname, l.amount, l.payable, l.payment_terms, l.per_payment, l.date_approved, l.payments_made, l.amount_paid, ls.status
-    from loans l
-    join member m
-    on l.member_id = m.member_id
-    join loan_status ls
-    on l.loan_status = ls.status_id
-    where l.loan_id ={$bank_loan_id}" ;
-            
-    $result= mysqli_query($dbc,$query);
-
-    $loan_info = mysqli_fetch_array($result,MYSQLI_ASSOC); // use this when referring to the personal information of the person
-
-    // first we would want to get the loan information
+<!DOCTYPE html>
+<html lang="en">
+<?php 
+session_start();
+require_once('mysql_connect_FA.php');
 
 
 
 
 ?>
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -37,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>FRAP | Bank Loan Summary</title>
+    <title>FRAP | Falp Summary</title>
 
     <link href="css/montserrat.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
@@ -116,6 +95,31 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
 
                     <ul class="dropdown-menu">
+
+                        <li>
+
+                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+            </ul>
+            </div>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+                <ul class="nav navbar-nav side-nav">
+
+                    <li>
+
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+
+                        </li>
+
+                        <li class="divider"></li>
 
                         <li>
 
@@ -323,7 +327,7 @@
                 
                     <div class="col-lg-12">
 
-                        <h1 class="page-header"><?php echo $loan_info['firstname']." ".$loan_info['lastname'] ?> 's Bank Loan Summary</h1>
+                        <h1 class="page-header">FALP Loan Activity<?php echo $query; ?></h1>
                     
                     </div>
 
@@ -331,157 +335,56 @@
 
                     <div class="row">
 
-                        <div class="col-lg-6">
-
-                            <div class="panel panel-primary">
-
-                                <div class="panel-heading">
-
-                                    <b>Current Bank Loan Plan</b>
-
-                                </div>
-
-                                <div class="panel-body">
-
-                                <table class="table table-bordered" style="width: 100%;">
-                                
-                                <thread>
-
-                                    <tr>
-
-                                    <td align="center"><b>Description</b></td>
-                                    <td align="center"><b>Amount</b></td>
-
-                                    </tr>
-
-                                </thread>
-
-                                <tbody>
-
-                                    <tr>
-
-                                    <td>Amount to Borrow</td>
-                                    <td><?php echo $loan_info['amount']; ?></td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Amount Payable</td>
-                                    <td><?php echo $loan_info['payable']; ?></td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Payment Terms</td>
-                                    <td><?php echo $loan_info['payment_terms']; ?></td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Monthly Deduction</td>
-                                    <td><?php echo $loan_info['per_payment']*2; ?></td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Number of Payments</td>
-                                    <td><?php echo $loan_info['payment_terms']*2; ?></td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Per Payment Deduction</td>
-                                    <td><?php echo $loan_info['per_payment']; ?></td>
-
-                                    </tr>
-
-                                </tbody>
-
-                                </table>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
 
                             <div class="panel panel-green">
 
                                 <div class="panel-heading">
 
-                                    <b>Current Bank Loan Summary</b>
+                                    <b>FALP Loan Payment Activity</b>
 
                                 </div>
 
                                 <div class="panel-body">
 
-                                    <table class="table table-bordered" style="width: 100%;">
-                                
-                                <thread>
+                                    <table class="table table-bordered">
+                                        
+                                        <thread>
 
-                                    <tr>
+                                            <tr>
 
-                                    <td align="center"><b>Description</b></td>
-                                    <td align="center"><b>Amount</b></td>
+                                            <td align="center"><b>Date</b></td>
+                                            <td align="center"><b>Deducted Amount</b></td>
+                                            <td align="center"><b>Status</b></td>
 
-                                    </tr>
+                                            </tr>
 
-                                </thread>
+                                        </thread>
 
-                                <tbody>
+                                        <tbody>
 
-                                    <tr>
+                                            <?php
+                                            
+                                            
+                                            while($ans= mysqli_fetch_assoc($result)){
+                                            $dt = new DateTime($ans['TXN_DATE']);
+                                            $date = $dt->format('d/m/Y');
+                                            $amount = $ans['AMOUNT'];
+                                            $status = "Complete";
+                                            
+                                            ?>
+                                            <tr>
+                                            
+                                            <td align="center"><?php echo $date;?></td>
+                                            <td align="center">₱ <?php echo $amount;?></td>
+                                            <td align="center">Completed</td>
+                                            
+                                            </tr>
+                                            <?php } ?>
 
-                                    <td>Date Approved</td>
-                                    <td><?php echo DATE($loan_info['date_approved']); ?></td>
+                                        </tbody>
 
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Payments Made</td>
-                                    <td><?php echo $loan_info['payments_made']; ?></td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Payments Left</td>
-                                    <td><?php echo $loan_info['payment_terms']*2-$loan_info['payments_made']; ?></td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Total Amount Paid</td>
-                                    <td><?php echo $loan_info['amount_paid']; ?></td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Outstanding Balance</td>
-                                    <td><?php echo $loan_info['amount']-$loan_info['amount_paid']; ?></td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Status</td>
-                                    <td><?php echo $loan_info['status']; ?></td>
-
-                                    </tr>
-
-                                </tbody>
-
-                                </table>
+                                    </table>
 
                                 </div>
 
@@ -499,8 +402,7 @@
 
                             <div align="center">
 
-                            <a href="ADMIN BANK viewactivity.php" class="btn btn-success" role="button">View Payment Activity</a>
-                            <a href="ADMIN dashboard.php" class="btn btn-default" role="button">Go Back</a>
+                            <a href="ADMIN FALP viewdetails.html" class="btn btn-default" role="button">Go Back</a>
 
                             </div>
 

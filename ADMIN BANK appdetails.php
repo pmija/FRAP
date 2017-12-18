@@ -43,17 +43,69 @@ $result3= mysqli_query($dbc,$query3);
 $directories = mysqli_fetch_array($result3,MYSQLI_ASSOC);
 
 
-
-
     if(isset($_POST['Accept'])){     // checks if it was the accept/reject
 
-            // just update the loans condition to accepted or something
+        // updates the condition to 2 - which is accepted 
+        $query="UPDATE loans SET APP_STATUS = 2 WHERE '".$_SESSION['bank_loan_id']."' = loan_id";
+            
+        mysqli_query($dbc,$query);
+
+        $query5 = "INSERT INTO txn_reference(MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF,EMP_ID , SERVICE_ID) 
+                        values('".$personal_info['member_id']."', 1 ,'Approved','".$loan_info["amount"]."',DATE(NOW()),{$bank_loan_id}, '".$_SESSION['user_id']."' ,4) ";
 
 
+         if (!mysqli_query($dbc,$query5)){ // error checking
+
+             echo("Error description: " . mysqli_error($dbc) . "<br>");
+
+            }else{
+
+                 echo'Sucessfully inserted into Transaction referrences without any problems!';
+
+                 header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/MEMBER BANKLOAN appsent.php");
+
+
+        }
+        //updates user's transaction shit list
+
+        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/ADMIN BANK applications.php");
 
     }else if(isset($_POST['Reject'])){ // checks if it was reject
 
-               // just update the loans condition to rejected and shit 
+            // updates the condition to 2 - which is accepted 
+        $query="UPDATE loans SET APP_STATUS = 3 WHERE '".$_SESSION['bank_loan_id']."' = loan_id";
+            
+        mysqli_query($dbc,$query); 
+
+
+        //updates user's transaction shit list
+
+         $query5 = "INSERT INTO txn_reference(MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF,EMP_ID , SERVICE_ID) 
+                        values('".$personal_info['member_id']."', 1 ,'Rejected','".$loan_info["amount"]."',DATE(NOW()),{$bank_loan_id}, '".$_SESSION['user_id']."' ,4) ";
+
+
+
+         if (!mysqli_query($dbc,$query5)){ // error checking
+
+             echo("Error description: " . mysqli_error($dbc) . "<br>");
+
+            }else{
+
+                 echo'Sucessfully inserted into Transaction referrences without any problems!';
+
+                 header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/MEMBER BANKLOAN appsent.php");
+
+
+            }
+
+
+
+
+
+
+        //redirection 
+
+        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/ADMIN BANK applications.php");
 
 
     }else if(isset($_POST['ITR'])){ // if the icr was clicked

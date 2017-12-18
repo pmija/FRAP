@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <?php 
 session_start();
-require_once('mysql_connect.php');
+require_once('mysql_connect_FA.php');
 $query = "SELECT * FROM LOANS 
           where LOAN_ID = {$_POST['details']} 
           AND loan_detail_id = 1 AND    loan_status != 3";
