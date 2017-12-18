@@ -105,7 +105,7 @@ require_once('mysql_connect_FA.php');
 
                         <li>
 
-                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -130,7 +130,7 @@ require_once('mysql_connect_FA.php');
 
                         <li>
 
-                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 

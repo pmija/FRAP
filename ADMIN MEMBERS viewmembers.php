@@ -112,7 +112,7 @@ $result = mysqli_query($dbc,$query);
 
                         <li>
 
-                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 

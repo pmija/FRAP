@@ -109,7 +109,7 @@ $ans = mysqli_fetch_assoc($result1)
 
                         <li>
 
-                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -134,7 +134,7 @@ $ans = mysqli_fetch_assoc($result1)
 
                         <li>
 
-                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
