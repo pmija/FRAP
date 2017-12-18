@@ -8,7 +8,7 @@ if ($_SESSION['usertype'] == 1||!isset($_SESSION['usertype'])) {
 header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF'])."/index.php");
 
 }
- $query = "SELECT m.member_ID, m.FIRSTNAME,m.LASTNAME,ha.Record_ID as 'has_HA', f.Amount as 'FFee', b.Amount as 'BFee'
+ $query = "SELECT m.member_ID, m.FIRSTNAME,m.LASTNAME,ha.Record_ID as 'has_HA', f.Amount as 'FFee', b.Amount as 'BFee', l.date_added as 'has_L'
               from member m
               left join (SELECT * from health_aid where app_status = 2) ha
               on m.member_id = ha.member_id
@@ -18,6 +18,8 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
               left join (SELECT member_id,sum(PER_PAYMENT) as 'Amount' 
                          from Loans where LOAN_DETAIL_ID != 1 AND LOAN_STATUS = 2 group by member_id ) b
               on b.member_id = m.member_id
+               left join (SELECT * from lifetime where app_status = 2) l
+              on m.member_id = l.member_id
               ";
 $result = mysqli_query($dbc,$query);
 
@@ -354,7 +356,7 @@ $result = mysqli_query($dbc,$query);
                                         <td align="center" width="100px"><b>FALP</b></td>
                                         <td align="center" width="100px"><b>Bank Loan</b></td>
                                         <td align="center" width="100px"><b>Health Aid</b></td>
-                                       <!-- <td align="center" width="100px"><b>Lifetime Member</b></td> -->
+                                        <td align="center" width="100px"><b>Lifetime Member</b></td>
 
                                         </tr>
 
@@ -368,6 +370,7 @@ $result = mysqli_query($dbc,$query);
                                             $ha = false;
                                             $ffee = false;
                                             $bfee = false;
+                                            $l = false;
                                             if(!empty($row['has_HA'])){
                                                 $ha = true;
                                             }
@@ -376,6 +379,9 @@ $result = mysqli_query($dbc,$query);
                                             }
                                             if(!empty($row['BFee'])){
                                                 $bfee = true;
+                                            }
+                                            if(!empty($row['has_L'])){
+                                                $l = true;
                                             }
 
 
@@ -394,6 +400,11 @@ $result = mysqli_query($dbc,$query);
                                         else
                                             echo '<i class="fa fa-close fa-lg statusX"></i>';?>&nbsp;&nbsp;&nbsp;</td>
                                         <td align="center"><?php if($ha){
+                                            echo '<i class="fa fa-check fa-lg statusO"></i>';
+                                        }
+                                        else
+                                            echo '<i class="fa fa-close fa-lg statusX"></i>';?>&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="center"><?php if($l){
                                             echo '<i class="fa fa-check fa-lg statusO"></i>';
                                         }
                                         else
