@@ -30,7 +30,27 @@
     <![endif]-->
 
 </head>
+<?php 
+    session_start();
+    require_once('mysql_connect_FA.php');
+     //Test value
+    $_SESSION['idnum']=1141231234;
+    $_SESSION['adminidnum']=970121234;
+    $_SESSION['showFID'] = NULL; //Loan ID
+    $_SESSION['showFMID'] = NULL; // Member ID of the loan
 
+    If(isset($_POST['Fdetails'])){
+         $_SESSION['showFID'] = $_POST['Fdetails'];
+         
+        $query = "SELECT MEMBER_ID FROM LOANS WHERE LOAN_ID = ". $_SESSION['showFID'] .";";
+        $result = mysqli_query($dbc, $query);
+        $row = mysqli_fetch_array($result);
+
+        $_SESSION['showFMID'] = $row['MEMBER_ID'];
+       
+        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/ADMIN FALP appdetails.php");
+    }
+?>
 <body>
 
     <div id="wrapper">
@@ -307,7 +327,6 @@
                         <h1 class="page-header">
                             Pending FALP Applications
                         </h1>
-                    
                     </div>
                     
                 </div>
@@ -319,7 +338,7 @@
 
                             <div class="col-lg-12">
 
-                                <form action="ADMIN FALP appdetails.html" method="POST"> <!-- SERVER SELF -->
+                                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> <!-- SERVER SELF -->
 
                                 <table id="table" class="table table-bordered table-striped">
                                     
@@ -339,36 +358,25 @@
 
                                     <tbody>
 
-                                        <tr>
+                                        <?php 
 
-                                        <td align="center">December 1, 2017 11:02:58 AM</td>
-                                        <td align="center">Patrick Mijares</td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">1000.00</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-
-                                        </tr>
+                                            $query = "SELECT L.DATE_APPLIED, M.MEMBER_ID, M.FIRSTNAME, M.LASTNAME, RD.DEPT_NAME, L.AMOUNT, L.LOAN_ID FROM MEMBER M JOIN LOANS L ON M.MEMBER_ID = L.MEMBER_ID JOIN REF_DEPARTMENT RD ON M.DEPT_ID = RD.DEPT_ID WHERE L.APP_STATUS='1' AND L.LOAN_STATUS='1' AND L.LOAN_DETAIL_ID ='1';";
+                                            $result = mysqli_query($dbc, $query);
+                                            
+                                            foreach ($result as $resultRow) {
+                                        ?>
 
                                         <tr>
 
-                                        <td align="center">December 1, 2017 11:02:58 AM</td>
-                                        <td align="center">Patrick Mijares</td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">1000.00</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="center"><?php echo $resultRow['DATE_APPLIED']; ?></td>
+                                        <td align="center"><?php echo $resultRow['FIRSTNAME'] ." ". $resultRow['LASTNAME']; ?></td>
+                                        <td align="center"><?php echo $resultRow['DEPT_NAME']; ?></td>
+                                        <td align="center"><?php echo $resultRow['AMOUNT']; ?></td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<button type='submit' class='btn-xs btn-success' name='Fdetails' value='<?php echo $resultRow['LOAN_ID']; ?>'>Details</button>&nbsp;&nbsp;&nbsp;</td>
 
                                         </tr>
 
-                                        <tr>
-
-                                        <td align="center">December 1, 2017 11:02:58 AM</td>
-                                        <td align="center">Patrick Mijares</td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">1000.00</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-
-                                        </tr>
-
+                                        <?php }?>
                                     </tbody>
 
                                 </table>
