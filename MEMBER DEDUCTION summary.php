@@ -32,11 +32,34 @@
 
 <?php
     session_start();
+
     if ($_SESSION['usertype'] != 1) {
 
         header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index.php");
         
     }
+    $choice = 1;
+    if(isset($_POST['Period'])){
+        
+            $choice = $_POST['Period'];
+        
+    }
+    require_once('mysql_connect_FA.php');
+    $query = "SELECT ha.Record_ID as 'has_HA', f.Amount as 'FFee', b.Amount as 'BFee'
+              from member m
+              left join health_aid ha
+              on m.member_id = ha.member_id
+              left join (SELECT member_id,sum(PER_PAYMENT) as 'Amount' 
+                         from Loans
+                         where member_id = {$_SESSION['idnum']} and loan_status = 2 and loan_detail_id = 1) f
+              on f.member_id = m.member_id
+              left join (SELECT member_id,sum(PER_PAYMENT) as 'Amount' 
+                         from Loans
+                         where member_id = {$_SESSION['idnum']} and loan_status = 2 and loan_detail_id != 1) b
+              on b.member_id = m.member_id
+              where m.member_id = {$_SESSION['idnum']}";
+    $result = mysqli_query($dbc,$query);
+    $ans = mysqli_fetch_assoc($result);
 
 ?>
 
@@ -263,8 +286,10 @@
                             </div>
 
                             <div class="panel-body">
-
-                                ₱ 100.00
+                                <?php if($choice == 1)
+                                        echo "₱ 100.00";
+                                      else
+                                        echo "₱ 0.00";?>
 
                             </div>
 
@@ -283,9 +308,14 @@
                             </div>
 
                             <div class="panel-body">
+                                <?php
 
-                                ₱ 100.00
 
+                                if(!empty($ans['has_HA']) && $choice == 1)
+                                    echo "₱ 100.00";
+                                else
+                                    echo "₱ 0.00";
+                                ?>
                             </div>
 
                         </div>
@@ -304,7 +334,12 @@
 
                             <div class="panel-body">
 
-                                ₱ 2,100.00
+                                ₱ <?php 
+
+                                if($choice==2)
+                                echo sprintf("%.2f",(float)$ans['FFee']);
+                            else
+                                echo sprintf("%.2f",((float)$ans['FFee'])*2);?>
 
                             </div>
 
@@ -324,7 +359,11 @@
 
                             <div class="panel-body">
 
-                                ₱ 4,200.00
+                                ₱ <?php 
+                                if($choice==2)
+                                echo sprintf("%.2f",(float)$ans['BFee']);
+                                 else
+                                    echo sprintf("%.2f",((float)$ans['BFee'])*2);?>
 
                             </div>
 
@@ -345,16 +384,16 @@
 
                         <div class="row">
 
-                            <form action="#" method="POST">
+                            <form action="MEMBER DEDUCTION summary.php" method="POST">
 
                                 <div class="col-lg-3">
 
                                     <label>View Summary As</label>
 
-                                    <select class="form-control" style="margin-bottom: 20px;"> 
+                                    <select name = "Period" class="form-control" style="margin-bottom: 20px;"> 
 
-                                        <option>Per Month</option>
-                                        <option>Per Pay Period</option>
+                                        <option value = 1 <?php if($choice == 1) echo "selected"?>>Per Month</option>
+                                        <option value = 2 <?php if($choice == 2) echo "selected"?>>Per Pay Period</option>
 
                                     </select>
 
@@ -384,35 +423,71 @@
                             <tr>
 
                             <td>FA Membership Fee</td>
-                            <td>₱ 100.00</td>
+                            <td><?php $mf = 0;
+                                if($choice == 1){
+                                        echo "₱ 100.00";
+                                        $mf = 100;
+                                    }
+                                      else
+                                        echo "₱ 0.00";?></td>
 
                             </tr>
 
                             <tr>
 
                             <td>Health Aid Program Fee</td>
-                            <td>₱ 100.00</td>
+                            <td><?php
+
+                                $ha = 0;
+                                if(!empty($ans['has_HA']) && $choice == 1){
+                                    echo "₱ 100.00";
+                                    $ha = 100;
+                                }
+                                else{
+                                    echo "₱ 0.00";
+                                }
+                                ?></td>
 
                             </tr>
 
                             <tr>
 
                             <td>FALP Loan</td>
-                            <td>₱ 2,100.00</td>
+                            <td id = "FALP">₱ <?php 
+                                if ($choice==2){
+                                    $ff = (float)$ans['FFee'];
+                                echo sprintf("%.2f",(float)$ans['FFee']);
+                            }
+                                 else{
+                                    $ff = (float)$ans['FFee']*2;
+                                    echo sprintf("%.2f",((float)$ans['FFee'])*2);}?></td>
+                            
 
                             </tr>
 
                             <tr>
 
                             <td>Bank Loan</td>
-                            <td>₱ 4,200.00</td>
+                            <td id = "Bank">₱ <?php 
+                                if ($choice==2){
+                                echo sprintf("%.2f",(float)$ans['BFee']);
+                                $bf = (float)$ans['BFee'];
+                            }
+                                 else{
+                                    echo sprintf("%.2f",((float)$ans['BFee'])*2);
+
+                                    $bf = (float)$ans['BFee']*2;
+                                }
+                                    ?></td>
+
+                                
 
                             </tr>
 
                             <tr>
 
                             <td><b>TOTAL</td>
-                            <td><b>₱ 6,500.00</td>
+                            <td><b>₱ <?php echo sprintf("%.2f",$mf+$ha+$ff+$bf);?></td>
 
                             </tr>
 
