@@ -1,6 +1,12 @@
 <?php session_start();
 require_once('mysql_connect_FA.php');
 
+    if ($_SESSION['usertype'] != 1) {
+
+        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index.php");
+        
+    }
+
 if(isset($_POST['choice'])){
     $id = $_POST['choice'];
     $query = "SELECT LOAN_ID as 'ID',BANK_ID as 'BID', MIN_AMOUNT,MAX_AMOUNT,INTEREST,MIN_TERM,MAX_TERM,MINIMUM_SALARY 

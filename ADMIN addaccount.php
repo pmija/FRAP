@@ -321,8 +321,29 @@
 
                             <div class="addaccountdiv">
                                 <label class="signfieldlabel">Admin ID Number</label><big class="req"> *</big>
-                                <input type="text" id="singupID" class="form-control signupfield" placeholder="e.g. 09700000" name="idnum">
+                                <input type="text" id="singupID" class="form-control signupfield" placeholder="e.g. 09700000">
                             </div><p>
+
+                            <div class="addaccountdiv">
+                                <label class="signfieldlabel">Password</label><big class="req"> *</big>
+                                <input type="password" class="form-control signupfield" placeholder="Enter Password">
+                            </div><p>
+
+                            <div class="row">
+
+                            	<div class="col-lg-3">
+
+                            		
+
+                            	</div>
+
+                            	<div class="col-lg-3">
+
+
+
+                            	</div>
+
+                            </div>
 
                             <div id="subbutton">
 

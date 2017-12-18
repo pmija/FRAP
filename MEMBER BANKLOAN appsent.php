@@ -2,6 +2,12 @@
 session_start();
 require_once('mysql_connect_FA.php');
 
+    if ($_SESSION['usertype'] != 1) {
+
+        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index.php");
+        
+    }
+
 $query2 = "SELECT MAX(REQ_ID) from bank_requirements";
 
 $user_id = $_SESSION['idnum'];

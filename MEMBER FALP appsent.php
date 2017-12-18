@@ -3,6 +3,13 @@
 <?php
 session_start();
 require_once('mysql_connect_FA.php');
+
+    if ($_SESSION['usertype'] != 1) {
+
+        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index.php");
+        
+    }
+
 $id = $_POST['details'];
 $query = "INSERT INTO loans(MEMBER_ID,LOAN_DETAIL_ID,AMOUNT,INTEREST,PAYMENT_TERMS,PAYABLE,PER_PAYMENT,APP_STATUS,LOAN_STATUS,DATE_APPLIED,PICKUP_STATUS)
 values({$_SESSION['idnum']},1,{$_POST['amount']},{$_POST['interest']},{$_POST['payT']},{$_POST['amountP']},{$_POST['monD']}/2,1,1,DATE(now()),1);";

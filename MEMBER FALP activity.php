@@ -3,6 +3,13 @@
 <?php 
 session_start();
 require_once('mysql_connect.php');
+
+    if ($_SESSION['usertype'] != 1) {
+
+        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index.php");
+        
+    }
+    
 $query = "SELECT * FROM LOANS where MEMBER_ID = {$_SESSION['idnum']} 
 		  AND loan_detail_id = 1 AND 	loan_status != 3";
 $result = mysqli_query($dbc,$query);
