@@ -34,8 +34,8 @@
     session_start();
     require_once('mysql_connect_FA.php');
      //Test value
-    $_SESSION['idnum']=1141231234;
-    $_SESSION['adminidnum']=970121234;
+    //$_SESSION['idnum']=1141231234;
+    //$_SESSION['adminidnum']=970121234;
     $_SESSION['showFID'] = NULL; //Loan ID
     $_SESSION['showFMID'] = NULL; // Member ID of the loan
 

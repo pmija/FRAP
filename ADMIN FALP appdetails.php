@@ -34,9 +34,9 @@
     session_start();
     require_once('mysql_connect_FA.php');
      //Test value
-    $_SESSION['idnum']=1141231234;
+    //$_SESSION['idnum']=1141231234;
     $_SESSION['curFALPAmount'] = Null;
-    $message = "MEM ID" . $_SESSION['showFMID'] . " Loan ID " . $_SESSION['showFID'] . " Admin " . $_SESSION['adminidnum'];
+    //$message = "MEM ID" . $_SESSION['showFMID'] . " Loan ID " . $_SESSION['showFID'] . " Admin " . $_SESSION['adminidnum'];
     if(isset($_POST['action'])){
         $query = "SELECT AMOUNT FROM LOANS WHERE LOAN_ID =". $_SESSION['showFID'] .";";
         $result = mysqli_query($dbc, $query);
@@ -48,7 +48,7 @@
 
            //Insert into transaction table
             $queryTnx = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF, EMP_ID, SERVICE_TYPE) 
-            VALUES({$_SESSION['idnum']}, '1', 'FALP Approved', 0, NOW(), {$_SESSION['showFID']}, {$_SESSION['adminidnum']}, '2'); ";
+            VALUES({$_SESSION['showFMID']}, '1', 'FALP Approved', 0, NOW(), {$_SESSION['showFID']}, {$_SESSION['idnum']}, '2'); ";
             $resultTnx = mysqli_query($dbc, $queryTnx);
 
             $message = "Accepted" . $queryTnx;
@@ -60,7 +60,7 @@
 
            //Insert into transaction table
             $queryTnx = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF, EMP_ID, SERVICE_TYPE) 
-            VALUES({$_SESSION['idnum']}, '1', 'FALP Rejected', 0, NOW(), {$_SESSION['showFID']}, {$_SESSION['adminidnum']}, '2'); ";
+            VALUES({$_SESSION['showFMID']}, '1', 'FALP Rejected', 0, NOW(), {$_SESSION['showFID']}, {$_SESSION['idnum']}, '2'); ";
             $resultTnx = mysqli_query($dbc, $queryTnx);
 
             $message = "Rejected";

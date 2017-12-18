@@ -40,7 +40,7 @@
         
     }*/
     //Test value
-    $_SESSION['idnum']=1141231234;
+    //$_SESSION['idnum']=1141231234;
 	
 	
     $_SESSION['HA_RecordID'] == 0;

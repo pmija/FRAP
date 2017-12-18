@@ -34,7 +34,7 @@
     session_start();
     require_once('mysql_connect_FA.php');
      //Test value
-    $_SESSION['idnum']=1141231234;
+    //$_SESSION['idnum']=1141231234;
 
     if(isset($_POST['action'])){
         if($_POST['action'] == "Accept Application"){
