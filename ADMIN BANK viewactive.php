@@ -2,8 +2,6 @@
 session_start();
 require_once('mysql_connect_FA.php');
 
-$_SESSION['user_id'] ='';
-
 $_SESSION['bank_loan_id'] = ''; 
 
 
@@ -13,7 +11,7 @@ $_SESSION['bank_loan_id'] = '';
         
         $_SESSION['bank_loan_id'] =  $_POST['loan_id'];
 
-        $_SESSION['user_id'] = 99999999;
+        $_SESSION['idnum'] = 99999999;
 
         header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/ADMIN BANK viewdetails.php"); // sends it to the page 
 

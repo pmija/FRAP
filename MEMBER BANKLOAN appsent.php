@@ -4,7 +4,7 @@ require_once('mysql_connect_FA.php');
 
 $query2 = "SELECT MAX(REQ_ID) from bank_requirements";
 
-$user_id = 11443081;
+$user_id = $_SESSION['idnum'];
 
 $requirementID = mysqli_fetch_assoc(mysqli_query($dbc,$query2));
 
