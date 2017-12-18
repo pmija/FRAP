@@ -537,7 +537,7 @@ $directories = mysqli_fetch_array($result3,MYSQLI_ASSOC);
                                         <div class="panel-heading">
 
                                             <b>Actions</b>
-                                            <?php echo $bank_loan_id; ?>
+                                      
                                         </div>
 
                                         <div class="panel-body"><p>

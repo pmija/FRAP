@@ -33,12 +33,61 @@
 <?php
 
     session_start();
+    require_once("mysql_connect_FA.php");
 
     if ($_SESSION['usertype'] != 1) {
 
         header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index.php");
         
     }
+
+    // compute the date first 
+        
+
+
+
+        if(isset($_POST['download'])){
+
+            $query = "SELECT YEAR(DATE_HIRED) AS 'YEAR' from member where member_id = ".$_SESSION['idnum']." ";
+
+            $hireDate = mysqli_fetch_assoc(mysqli_query($dbc,$query));
+
+            $yearHired = $hireDate['YEAR'];
+
+            $yearNOW = date('Y');
+
+            echo '<script language="javascript">';
+
+            echo 'alert("CLICKED ME")';
+
+            echo '</script>';
+
+            if(($yearNOW - $yearHired) >= 10 ){
+
+                $ITR = "Lifetime_Document/Lifetime_Membership_Application_Form.pdf";
+
+                header("Location:http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/downloadLifetime.php?loanID=".urlencode(''.$ITR) );
+
+            }else{
+
+                echo '<script language="javascript">';
+
+                echo 'alert("You cant since youre not Old enough LOL")';
+
+                echo '</script>';
+
+            }
+
+
+        }
+
+
+        
+
+
+    // then once the download has been clicked g it my amigo 
+
+    // 
 
 ?>
 
@@ -252,21 +301,6 @@
 
                 </div>
 
-                <div class="row"> <!-- Well -->
-
-                    <div class="col-lg-1 col-1">
-
-
-
-                    </div>
-
-                    <div class="col-lg-10 col-2 well">
-
-                    <p class="welltext justify">Congratulations! You are eligible for a Lifetime Membership and its benefits! Please download, print, and fill out the forms below. Be sure to submit a NOTARIZED hard copy to the Faculty Association Office at the Faculty Center within the year. Thank you for the cooperation!</p>
-
-                    </div>
-
-                </div>
 
                 <div class="row"> <!-- Well -->
 
@@ -278,8 +312,14 @@
 
                         <div align="center">
 
-                        <img class="pdficon10" src="images/pdficon.png"> 
-                        <a class="dlform" href="#">Lifetime Membership Application Form.pdf</a>
+                        <form action="#" method="POST" > 
+
+                        <img class="pdficon10" src="images/pdficon.png">
+
+                         <input type = "submit" class="btn btn-success  btn-lg" name="download" value = "Download Lifetime Application Form">
+
+                         </form>
+
 
                         </div>
 
