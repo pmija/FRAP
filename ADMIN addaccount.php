@@ -39,7 +39,13 @@ if ($_SESSION['usertype'] == 1||!isset($_SESSION['usertype'])) {
 header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF'])."/index.php");
 
 }
-
+$success = null;
+if(isset($_POST['submit'])){
+    $query="insert into employee(EMP_ID,PASSWORD,FIRSTNAME,LASTNAME,DATE_CREATED,ACC_STATUS,FIRST_CHANGE_PW)
+values({$_POST['ID']},password({$_POST['password']}),'{$_POST['First']}','{$_POST['Last']}',date(now()),1,0)";
+mysqli_query($dbc,$query);
+$success = "yes";
+}
 ?>
 
 <body>
@@ -329,7 +335,7 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
                         <p><i>Fields with <big class="req">*</big> are required to be filled out and those without are optional.</i></p>
 
                         <!--Insert success page--> 
-                        <form method="POST" action=" " id="addAccount">
+                        <form method="POST" action="ADMIN addaccount.php" id="addAccount">
 
                             <div class="addaccountdiv">
                                 <label class="signfieldlabel">Admin ID Number</label><big class="req"> *</big>
@@ -338,20 +344,20 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                             <div class="addaccountdiv">
                                 <label class="signfieldlabel">Password</label><big class="req"> *</big>
-                                <input type="password" class="form-control signupfield" placeholder="Enter Password">
+                                <input name = "password" type="password" class="form-control signupfield" placeholder="Enter Password">
                             </div><p>
 
                             <div class="row">
 
                             	<div class="col-lg-3">
 
-                            		<b>First Name:</b> <input type="text" class="form-control" placeholder="First Name">
+                            		<b>First Name:</b> <input name = "First" type="text" class="form-control" placeholder="First Name">
 
                             	</div>
 
                             	<div class="col-lg-3">
 
-                                    <b>Last Name:</b> <input type="text" class="form-control" placeholder="Last Name">
+                                    <b>Last Name:</b> <input name = "Last" type="text" class="form-control" placeholder="Last Name">
 
                             	</div>
 
@@ -363,7 +369,7 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                                     <div id="subbutton">
 
-                                        <input type="submit" value="Create Admin" class="btn btn-success">
+                                        <input type="submit" name = "submit" value="Create Admin" class="btn btn-success">
 
                                     </div>
 
@@ -384,7 +390,9 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
     </div>
     <!-- /#wrapper -->
-
+    <?php if (!empty($success)){
+    echo "<script type='text/javascript'>alert('Success!');</script>";
+}?>
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
