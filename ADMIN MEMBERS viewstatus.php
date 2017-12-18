@@ -10,14 +10,15 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 }
  $query = "SELECT m.member_ID, m.FIRSTNAME,m.LASTNAME,ha.Record_ID as 'has_HA', f.Amount as 'FFee', b.Amount as 'BFee'
               from member m
-              left join health_aid ha
+              left join (SELECT * from health_aid where app_status = 2) ha
               on m.member_id = ha.member_id
               left join (SELECT member_id,sum(PER_PAYMENT) as 'Amount' 
                          from Loans where LOAN_DETAIL_ID = 1 AND LOAN_STATUS = 2 group by member_id) f
               on f.member_id = m.member_id
               left join (SELECT member_id,sum(PER_PAYMENT) as 'Amount' 
                          from Loans where LOAN_DETAIL_ID != 1 AND LOAN_STATUS = 2 group by member_id ) b
-              on b.member_id = m.member_id";
+              on b.member_id = m.member_id
+              ";
 $result = mysqli_query($dbc,$query);
 
 
@@ -382,17 +383,17 @@ $result = mysqli_query($dbc,$query);
                                             ?>
                                         <td align="center"><?php echo $row['member_ID'];?></td>
                                         <td align="center"><?php echo $row['FIRSTNAME']." ".$row['LASTNAME'];?> </td>
-                                        <td align="center"><?php if($ha){
-                                            echo '<i class="fa fa-check fa-lg statusO"></i>';
-                                        }
-                                        else
-                                            echo '<i class="fa fa-close fa-lg statusX"></i>';?>&nbsp;&nbsp;&nbsp;</td>
                                         <td align="center"><?php if($ffee){
                                             echo '<i class="fa fa-check fa-lg statusO"></i>';
                                         }
                                         else
                                             echo '<i class="fa fa-close fa-lg statusX"></i>';?>&nbsp;&nbsp;&nbsp;</td>
                                         <td align="center"><?php if($bfee){
+                                            echo '<i class="fa fa-check fa-lg statusO"></i>';
+                                        }
+                                        else
+                                            echo '<i class="fa fa-close fa-lg statusX"></i>';?>&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="center"><?php if($ha){
                                             echo '<i class="fa fa-check fa-lg statusO"></i>';
                                         }
                                         else

@@ -47,7 +47,7 @@
     require_once('mysql_connect_FA.php');
     $query = "SELECT ha.Record_ID as 'has_HA', f.Amount as 'FFee', b.Amount as 'BFee'
               from member m
-              left join health_aid ha
+              left join (SELECT * from health_aid where app_status = 2) ha
               on m.member_id = ha.member_id
               left join (SELECT member_id,sum(PER_PAYMENT) as 'Amount' 
                          from Loans
