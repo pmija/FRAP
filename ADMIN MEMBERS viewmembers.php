@@ -8,6 +8,10 @@ if ($_SESSION['usertype'] == 1||!isset($_SESSION['usertype'])) {
 header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF'])."/index.php");
 
 }
+
+$query = "SELECT * FROM member m join ref_department d
+          on m.dept_id = d.dept_id where m.user_status = 1";
+$result = mysqli_query($dbc,$query);
 ?>
 <head>
 
@@ -346,36 +350,21 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
                                     </thead>
 
                                     <tbody>
+                                        <?php 
+                                        while($row = mysqli_fetch_assoc($result)){
 
+                                            ?>
                                         <tr>
 
-                                        <td align="center">11436786</td>
-                                        <td align="center">Patrick Mijares </td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">December 1, 2017</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
+                                        <td align="center"><?php echo $row['MEMBER_ID'];?></td>
+                                        <td align="center"><?php echo $row['FIRSTNAME']." ".$row['LASTNAME'];?> </td>
+                                        <td align="center"><?php echo $row['DEPT_NAME'];?></td>
+                                        <td align="center"><?php echo $row['DATE_APPROVED'];?></td>
+                                        <td align="center">&nbsp;&nbsp;&nbsp;<button type="submit" name="details" class="btn btn-success" value=<?php echo $row['MEMBER_ID'];?>>Details</button>&nbsp;&nbsp;&nbsp;</td>
 
                                         </tr>
-
-                                        <tr>
-
-                                        <td align="center">11436786</td>
-                                        <td align="center">Patrick Mijares </td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">December 1, 2017</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-
-                                        </tr>
-
-                                        <tr>
-
-                                        <td align="center">11436786</td>
-                                        <td align="center">Patrick Mijares </td>
-                                        <td align="center">Information Technology</td>
-                                        <td align="center">December 1, 2017</td>
-                                        <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-
-                                        </tr>
+                                        <?php }?>
+                                        
 
                                     </tbody>
 

@@ -335,16 +335,16 @@ $success = "yes";
                         <p><i>Fields with <big class="req">*</big> are required to be filled out and those without are optional.</i></p>
 
                         <!--Insert success page--> 
-                        <form method="POST" action="ADMIN addaccount.php" id="addAccount">
+                        <form method="POST" action="ADMIN addaccount.php" id="addAccount" onSubmit="return checkform()">
 
                             <div class="addaccountdiv">
                                 <label class="signfieldlabel">Admin ID Number</label><big class="req"> *</big>
-                                <input name = "ID" type="text" id="singupID" class="form-control signupfield" placeholder="e.g. 09700000">
+                                <input name = "ID" type="text" id="ID" class="form-control signupfield" placeholder="e.g. 09700000">
                             </div><p>
 
                             <div class="addaccountdiv">
                                 <label class="signfieldlabel">Password</label><big class="req"> *</big>
-                                <input name = "password" type="password" class="form-control signupfield" placeholder="Enter Password">
+                                <input name = "password" type="password" id = "password" class="form-control signupfield" placeholder="Enter Password">
                             </div><p>
 
                             <div class="row">
@@ -390,15 +390,38 @@ $success = "yes";
 
     </div>
     <!-- /#wrapper -->
+    
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+       
+        
+   
     <?php if (!empty($success)){
     echo "<script type='text/javascript'>alert('Success!');</script>";
 }?>
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+<script>
+     function checkform(){
 
+            
+            var ID = document.getElementById("ID").value;
+            var pass = document.getElementById("password").value;
+            
+            if(isEmpty(ID)||isEmpty(pass)){
+                alert("A required field is empty!");
+                return false;
+                
+            }
+            return true;
+            
+        }
+
+        function isEmpty(str) {
+    return (!str || 0 === str.length);
+}
+
+    </script>
 </body>
 
 </html>
