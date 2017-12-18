@@ -9,7 +9,14 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
 }
 
-$query = "";
+
+
+
+$query = "select TXN_DATE, AMOUNT, TXN_DESC from txn_reference 
+            where  LOAN_REF  = '".$_SESSION['bank_loan_id']."' && TXN_TYPE = 2";
+
+$result= mysqli_query($dbc,$query);
+
 
 
 
@@ -23,7 +30,7 @@ $query = "";
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>FRAP | Falp Summary</title>
+    <title>Bank Loan Activity for </title>
 
     <link href="css/montserrat.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
@@ -334,7 +341,7 @@ $query = "";
                 
                     <div class="col-lg-12">
 
-                        <h1 class="page-header">FALP Loan Activity<?php echo $query; ?></h1>
+                        <h1 class="page-header">FALP Loan Activity </h1>
                     
                     </div>
 
@@ -362,7 +369,7 @@ $query = "";
 
                                             <td align="center"><b>Date</b></td>
                                             <td align="center"><b>Deducted Amount</b></td>
-                                            <td align="center"><b>Status</b></td>
+                                            <td align="center"><b>Description</b></td>
 
                                             </tr>
 
@@ -372,19 +379,21 @@ $query = "";
 
                                             <?php
                                             
-                                            
-                                            while($ans= mysqli_fetch_assoc($result)){
-                                            $dt = new DateTime($ans['TXN_DATE']);
+                                            while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                                            $dt = new DateTime($row['TXN_DATE']);
                                             $date = $dt->format('d/m/Y');
-                                            $amount = $ans['AMOUNT'];
-                                            $status = "Complete";
+
+                                            $amount = $row['AMOUNT'];
+
+                                            $status = $row['TXN_DESC'];
                                             
                                             ?>
+
                                             <tr>
                                             
                                             <td align="center"><?php echo $date;?></td>
                                             <td align="center">₱ <?php echo $amount;?></td>
-                                            <td align="center">Completed</td>
+                                            <td align="center"><?php echo $status;?></td>
                                             
                                             </tr>
                                             <?php } ?>

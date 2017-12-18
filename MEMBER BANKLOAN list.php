@@ -1,11 +1,39 @@
 <?php session_start();
 require_once('mysql_connect_FA.php');
 
+
     if ($_SESSION['usertype'] != 1) {
 
         header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index.php");
         
     }
+    
+    $query1 = "SELECT * from loans where member_id = ".$_SESSION['idnum']." AND (loan_status = 1 OR loan_status = 2)" ; 
+   
+    $result1 = mysqli_query($dbc,$query1);
+
+    $checks = mysqli_fetch_array($result1,MYSQLI_ASSOC);
+
+    // runs under the assumption that the member can only have 1 active/pending loan. 
+
+    if(!empty($checks)){ // checks if you have a pending loan  then sends an alert that you either have a pending loan app or an ongoing aplication
+
+        if($checks['LOAN_STATUS'] == 1){ // redirects the user to pending 
+
+            header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/MEMBER BANKLOAN pending.php");
+
+        }else if($checks['LOAN_STATUS'] == 2){ // redirects the user to summary 
+
+            header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/MEMBER BANKLOAN summary.php");
+
+        }
+
+    }
+
+    
+
+
+
 
 if(isset($_POST['choice'])){
     $id = $_POST['choice'];

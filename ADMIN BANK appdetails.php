@@ -50,12 +50,12 @@ $directories = mysqli_fetch_array($result3,MYSQLI_ASSOC);
     if(isset($_POST['Accept'])){     // checks if it was the accept/reject
 
         // updates the condition to 2 - which is accepted 
-        $query="UPDATE loans SET APP_STATUS = 2 WHERE '".$_SESSION['bank_loan_id']."' = loan_id";
-            
+        $query="UPDATE loans SET APP_STATUS = 2, LOAN_STATUS = 2 WHERE '".$_SESSION['bank_loan_id']."' = loan_id";
+        
         mysqli_query($dbc,$query);
 
-        $query5 = "INSERT INTO txn_reference(MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF,EMP_ID , SERVICE_ID) 
-                        values('".$personal_info['member_id']."', 1 ,'Approved','".$loan_info["amount"]."',DATE(NOW()),{$bank_loan_id}, '".$_SESSION['user_id']."' ,4) ";
+        $query5 = "INSERT INTO txn_reference(MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF,EMP_ID , DATE_APPROVED, SERVICE_ID) 
+                    values('".$personal_info['member_id']."', 1 ,'Approved','".$loan_info["amount"]."',DATE(NOW()),{$bank_loan_id}, '".$_SESSION['user_id']."' ,NOW(),4) ";
 
 
          if (!mysqli_query($dbc,$query5)){ // error checking

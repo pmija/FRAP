@@ -33,12 +33,41 @@
 <?php
 
     session_start();
+    require_once("mysql_connect_FA.php");
 
     if ($_SESSION['usertype'] != 1) {
 
         header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index.php");
         
     }
+
+    //check first if the user 
+    $query = "select * from loans where member_id = ".$_SESSION['idnum']." && loan_status = 2 "; 
+
+    $result = mysqli_query($dbc,$query);
+
+    $bank_loan = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+    $bank_loan_id = $bank_loan['LOAN_ID']; 
+
+    $_SESSION['loanID'] = $bank_loan['LOAN_ID'];
+
+
+    $query1 = "select m.member_id,m.firstname, m.lastname, l.amount, l.payable, l.payment_terms, l.per_payment, l.date_approved, l.payments_made, l.amount_paid, ls.status
+    from loans l
+    join member m
+    on l.member_id = m.member_id
+    join loan_status ls
+    on l.loan_status = ls.status_id
+    where l.loan_id ={$bank_loan_id}" ;
+            
+    $result1 = mysqli_query($dbc,$query1);
+
+    $loan_info = mysqli_fetch_array($result1 ,MYSQLI_ASSOC);
+
+
+
+
 
 ?>
 
@@ -252,7 +281,7 @@
 
                 </div>
 
-                    <div class="row">
+                     <div class="row">
 
                         <div class="col-lg-6">
 
@@ -284,42 +313,42 @@
                                     <tr>
 
                                     <td>Amount to Borrow</td>
-                                    <td>₱ 20,000.00</td>
+                                    <td><?php echo $loan_info['amount']; ?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Amount Payable</td>
-                                    <td>₱ 21,000.00</td>
+                                    <td><?php echo $loan_info['payable']; ?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Payment Terms</td>
-                                    <td>5 months</td>
+                                    <td><?php echo $loan_info['payment_terms']; ?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Monthly Deduction</td>
-                                    <td>₱ 4,200.00</td>
+                                    <td><?php echo $loan_info['per_payment']*2; ?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Number of Payments</td>
-                                    <td>10 payments</td>
+                                    <td><?php echo $loan_info['payment_terms']*2; ?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Per Payment Deduction</td>
-                                    <td>₱ 2,100.00</td>
+                                    <td><?php echo $loan_info['per_payment']; ?></td>
 
                                     </tr>
 
@@ -363,42 +392,42 @@
                                     <tr>
 
                                     <td>Date Approved</td>
-                                    <td>10/23/2017</td>
+                                    <td><?php echo DATE($loan_info['date_approved']); ?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Payments Made</td>
-                                    <td>2 Payments</td>
+                                    <td><?php echo $loan_info['payments_made']; ?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Payments Left</td>
-                                    <td>8 Payments</td>
+                                    <td><?php echo $loan_info['payment_terms']*2-$loan_info['payments_made']; ?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Total Amount Paid</td>
-                                    <td>₱ 4,200.00</td>
+                                    <td><?php echo $loan_info['amount_paid']; ?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Outstanding Balance</td>
-                                    <td>₱ 16,800.00</td>
+                                    <td><?php echo $loan_info['amount']-$loan_info['amount_paid']; ?></td>
 
                                     </tr>
 
                                     <tr>
 
                                     <td>Status</td>
-                                    <td>Active</td>
+                                    <td><?php echo $loan_info['status']; ?></td>
 
                                     </tr>
 

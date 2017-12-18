@@ -6,6 +6,7 @@ if ($_SESSION['usertype'] == 1||!isset($_SESSION['usertype'])) {
 header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF'])."/index.php");
 
 }
+
 $_SESSION['bank_loan_id'] = ''; 
 
 
@@ -14,8 +15,6 @@ $_SESSION['bank_loan_id'] = '';
     if(isset($_POST["goToDetails"])){ // first it will save the server value of the selected shit before sending it to app details for identification 
         
         $_SESSION['bank_loan_id'] =  $_POST['loan_id'];
-
-        $_SESSION['idnum'] = 99999999;
 
         header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/ADMIN BANK appdetails.php"); // sends it to the page 
 

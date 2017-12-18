@@ -6,9 +6,11 @@
     header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF'])."/index.php");
 
     }
+    
+
     $bank_loan_id = $_SESSION['bank_loan_id'];
 
-    $query = "select m.member_id,m.firstname, m.lastname, l.amount, l.payable, l.payment_terms, l.per_payment, l.date_approved, l.payments_made, l.amount_paid, ls.status
+    $query1 = "select m.member_id,m.firstname, m.lastname, l.amount, l.payable, l.payment_terms, l.per_payment, l.date_approved, l.payments_made, l.amount_paid, ls.status
     from loans l
     join member m
     on l.member_id = m.member_id
@@ -16,13 +18,9 @@
     on l.loan_status = ls.status_id
     where l.loan_id ={$bank_loan_id}" ;
             
-    $result= mysqli_query($dbc,$query);
+    $result1 = mysqli_query($dbc,$query1);
 
-    $loan_info = mysqli_fetch_array($result,MYSQLI_ASSOC); // use this when referring to the personal information of the person
-
-    // first we would want to get the loan information
-
-
+    $loan_info = mysqli_fetch_array($result1 ,MYSQLI_ASSOC); // use this when referring to the personal information of the person
 
 
 ?>
