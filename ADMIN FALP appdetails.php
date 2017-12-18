@@ -43,7 +43,7 @@
 
         if($_POST['action'] == "Accept Application"){
             //Change the status into Approved (APP_STATUS =2)
-            $query = "UPDATE LOANS SET APP_STATUS = '2', LOAN_STATUS= '2', DATE_APPROVED = NOW() WHERE LOAN_ID =" . $_SESSION['showFID'].";";
+            $query = "UPDATE LOANS SET APP_STATUS = '2', LOAN_STATUS= '2', DATE_APPROVED = NOW(), EMP_ID =". $_SESSION['idnum'] ." WHERE LOAN_ID =" . $_SESSION['showFID'].";";
             $result = mysqli_query($dbc, $query);
 
            //Insert into transaction table
@@ -55,7 +55,7 @@
         }
         else if($_POST['action'] == "Reject Application"){
             //Change the status into Approved (APP_STATUS =2)
-            $query = "UPDATE LOANS SET APP_STATUS = '1', LOAN_STATUS= '1', DATE_APPROVED = NOW() WHERE LOAN_ID =" . $_SESSION['showFID'].";";
+            $query = "UPDATE LOANS SET APP_STATUS = '1', LOAN_STATUS= '1', DATE_APPROVED = NOW(), EMP_ID =". $_SESSION['idnum'] ." WHERE LOAN_ID =" . $_SESSION['showFID'].";";
             $result = mysqli_query($dbc, $query);
 
            //Insert into transaction table

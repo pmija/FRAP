@@ -35,7 +35,14 @@
     require_once('mysql_connect_FA.php');
      //Test value
     //$_SESSION['idnum']=1141231234;
-    $_SESSION['showHAID'] = NULL;
+    $_SESSION['showHAID'] = NULL;   // Health ID
+    $_SESSION['showHAMID'] = NULL;  // Member ID of the loan
+
+    $query = "SELECT MEMBER_ID FROM LOANS WHERE LOAN_ID = ". $_SESSION['showHAID'] .";";
+    $result = mysqli_query($dbc, $query);
+    $row = mysqli_fetch_array($result);
+
+    $_SESSION['showHAMID'] = $row['MEMBER_ID'];
 
     If(isset($_POST['details'])){
         $_SESSION['showHAID'] = $_POST['details'];

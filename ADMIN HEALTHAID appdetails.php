@@ -39,23 +39,23 @@
     if(isset($_POST['action'])){
         if($_POST['action'] == "Accept Application"){
             //Change the status into Approved (APP_STATUS =2)
-            $query = "UPDATE HEALTH_AID SET APP_STATUS = '2', DATE_APPROVED = NOW() WHERE MEMBER_ID =" . $_SESSION['showHAID'].";";
+            $query = "UPDATE HEALTH_AID SET APP_STATUS = '2', DATE_APPROVED = NOW(), EMP_ID =". $_SESSION['idnum'] ." WHERE MEMBER_ID =" . $_SESSION['showHAID'].";";
             $result = mysqli_query($dbc, $query);
 
            //Insert into transaction table
             $queryTnx = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF, EMP_ID, SERVICE_TYPE) 
-            VALUES({$_SESSION['idnum']}, '1', 'Health Aid Approved', 0, NOW(), NULL, NULL, '2'); ";
+            VALUES({$_SESSION['showHAMID']}, '1', 'Health Aid Approved', 0, NOW(), NULL, {$_SESSION['idnum']}, '2'); ";
             $resultTnx = mysqli_query($dbc, $queryTnx);
 
         }
         else if($_POST['action'] == "Reject Application"){
             //Change the status into Approved (APP_STATUS =2)
-            $query = "UPDATE HEALTH_AID SET APP_STATUS = '3' WHERE MEMBER_ID =" . $_SESSION['showHAID'].";";
+            $query = "UPDATE HEALTH_AID SET APP_STATUS = '3', EMP_ID =". $_SESSION['idnum'] ." WHERE MEMBER_ID =" . $_SESSION['showHAID'].";";
             $result = mysqli_query($dbc, $query);
 
            //Insert into transaction table
             $queryTnx = "INSERT INTO TXN_REFERENCE (MEMBER_ID, TXN_TYPE, TXN_DESC, AMOUNT, TXN_DATE, LOAN_REF, EMP_ID, SERVICE_TYPE) 
-            VALUES('{$_SESSION['idnum']}', '1', 'Health Aid Rejected', 0, NOW(), NULL, NULL, '2'); ";
+            VALUES('{$_SESSION['showHAMID']}', '1', 'Health Aid Rejected', 0, NOW(), NULL, {$_SESSION['idnum']}, '2'); ";
             $resultTnx = mysqli_query($dbc, $queryTnx);
         }
     }

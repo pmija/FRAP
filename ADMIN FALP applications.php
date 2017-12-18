@@ -36,8 +36,8 @@
      //Test value
     //$_SESSION['idnum']=1141231234;
     //$_SESSION['adminidnum']=970121234;
-    $_SESSION['showFID'] = NULL; //Loan ID
-    $_SESSION['showFMID'] = NULL; // Member ID of the loan
+    $_SESSION['showFID'] = NULL;    //Loan ID
+    $_SESSION['showFMID'] = NULL;   // Member ID of the loan
 
     If(isset($_POST['Fdetails'])){
          $_SESSION['showFID'] = $_POST['Fdetails'];
