@@ -6,6 +6,37 @@ if ($_SESSION['usertype'] == 1||!isset($_SESSION['usertype'])) {
 header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF'])."/index.php");
 
 }
+
+if(isset($_POST['action'])){
+    if($_POST['action']=="Enable Loan Plan"){
+        $query = "UPDATE loan_plan
+                  set STATUS = 1
+                  where LOAN_ID = {$_POST['details']}";
+        mysqli_query($dbc,$query);
+    }
+    else if($_POST['action']=="Disable Loan Plan"){
+        $query = "UPDATE loan_plan
+                  set STATUS = 2
+                  where LOAN_ID = {$_POST['details']}";
+        mysqli_query($dbc,$query);
+    }
+}
+
+if(isset($_POST['choice'])){
+    $id = $_POST['choice'];
+    $query = "SELECT LOAN_ID as 'ID',BANK_ID as 'BID', MIN_AMOUNT,MAX_AMOUNT,INTEREST,MIN_TERM,MAX_TERM,MINIMUM_SALARY,STATUS
+                from loan_plan
+                where bank_id = $id ";
+    
+}
+else{
+    $query = "SELECT LOAN_ID as 'ID',l.BANK_ID as 'BID', MIN_AMOUNT,MAX_AMOUNT,INTEREST,MIN_TERM,MAX_TERM,MINIMUM_SALARY,STATUS
+from loan_plan l 
+join (SELECT bank_id,status as 'Bank_Status' from Banks) b
+on l.BANK_ID = b.bank_id
+where l.bank_id != 1 AND b.Bank_Status = 1";
+}
+$result = mysqli_query($dbc,$query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -340,24 +371,34 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                                     <div class="col-lg-9">
 
-                                    <form action="POST" method="#">
+                                   <form action="ADMIN BANK editplan.php" method="POST">
 
-                                        <select class="form-control">
-                                        
-                                            <option>BDO (Banco de Oro)</option>
-                                            <option>UCPB (United Coconut Planters Bank)</option>
-                                            <option>MBTC (Metropolitan Bank and Trust Company)</option>
-
+                                        <select class="form-control" name = "choice">
+                                            <?php 
+                                            
+                                            $query1 = "SELECT * 
+                                                            from banks
+                                                            where bank_id != 1 AND status != 2";
+                                            $result1 = mysqli_query($dbc,$query1);
+                                            while($ans = mysqli_fetch_assoc($result1)){
+                                            ?>
+                                            <option value = <?php echo $ans['BANK_ID'];
+                                            if(isset($_POST['choice'])){
+                                                if($ans['BANK_ID']==$_POST['choice']){
+                                                    echo " selected";
+                                                }
+                                            }?>><?php echo $ans['BANK_NAME'];echo " ";echo $ans['BANK_ABBV'];?></option>
+                                            <?php }; ?>
                                         </select>
 
-                                    </form>
+                                    
 
                                     </div>
 
                                     <div class="col-lg-3">
 
-                                        <input type="submit" class="btn btn-success" name="select_bank" value="Refresh Table">
-
+                                        <input type="submit" class="btn btn-success" name="select_date" value="Refresh Table">
+</form>
                                     </div>
 
                                 </div>
@@ -395,49 +436,23 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                             <tbody>
 
+                                <?php while($ans = mysqli_fetch_assoc($result)){?>
                                 <tr>
+                                <td align="center">&nbsp;&nbsp;&nbsp;<input type="radio" name="details" value=<?php echo $ans['ID'];?>>&nbsp;&nbsp;&nbsp;</td>
 
-                                <td align="center"><input type="radio" name="selected[]"></td>
-                                <td align="center">₱ 20,000.00 - ₱ 50,000.00</td>
-                                <td align="center">10%</td>
-                                <td align="center">12 months - 24 months</td>
-                                <td align="center">₱ 30,000.00</td>
-                                <td align="center">Enabled</td>
-
+                                <td align="center">₱ <?php echo $ans['MIN_AMOUNT'];?><input type = "text" name = "min" value = <?php echo $ans['MIN_AMOUNT'];?> hidden> - ₱ <?php echo $ans['MAX_AMOUNT'];?><input type = "text" name = "max" value = <?php echo $ans['MAX_AMOUNT'];?> hidden></td>
+                                <td align="center"><?php echo $ans['INTEREST'];?>%</td>
+                                <td align="center"><?php echo $ans['MIN_TERM'];?> months - <?php echo $ans['MAX_TERM'];?> months</td>
+                                <td align="center">₱ <?php echo $ans['MINIMUM_SALARY'];?>
+                                <td align="center"><?php if($ans['STATUS']=="1")
+                                                                echo "Enabled";
+                                                                else
+                                                                    echo "Disabled";?>
+                                </td>
+                                
+                                
                                 </tr>
-
-                                <tr>
-
-                                <td align="center"><input type="radio" name="selected[]"></td>
-                                <td align="center">₱ 20,000.00 - ₱ 50,000.00</td>
-                                <td align="center">10%</td>
-                                <td align="center">12 months - 24 months</td>
-                                <td align="center">₱ 30,000.00</td>
-                                <td align="center">Enabled</td>
-
-                                </tr>
-
-                                <tr>
-
-                                <td align="center"><input type="radio" name="selected[]"></td>
-                                <td align="center">₱ 20,000.00 - ₱ 50,000.00</td>
-                                <td align="center">10%</td>
-                                <td align="center">12 months - 24 months</td>
-                                <td align="center">₱ 30,000.00</td>
-                                <td align="center">Disabled</td>
-
-                                </tr>
-
-                                <tr>
-
-                                <td align="center"><input type="radio" name="selected[]"></td>
-                                <td align="center">₱ 20,000.00 - ₱ 50,000.00</td>
-                                <td align="center">10%</td>
-                                <td align="center">12 months - 24 months</td>
-                                <td align="center">₱ 30,000.00</td>
-                                <td align="center">Disabled</td>
-
-                                </tr>
+                                <?php };?>
 
                             </tbody>
 
@@ -453,8 +468,8 @@ header("Location: http://".$_SERVER['HTTP_HOST']. dirname($_SERVER['PHP_SELF']).
 
                             <div class="panel-body"><p>
 
-                                <input type="submit" class="btn btn-success" name="enable" value="Enable Loan Plan">
-                                <input type="submit" class="btn btn-danger" name="disable" value="Disable Loan Plan">
+                                <input type="submit" class="btn btn-success" name="action" value="Enable Loan Plan">
+                                <input type="submit" class="btn btn-danger" name="action" value="Disable Loan Plan">
 
                             </div>
 
