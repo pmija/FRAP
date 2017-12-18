@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>FRAP | Bank Loan Application</title>
+    <title>FRAP | Lifetime Membership Application</title>
 
     <link href="css/montserrat.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
@@ -20,8 +20,6 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -93,7 +91,7 @@
 
                         <li>
 
-                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -118,7 +116,7 @@
 
                         <li>
 
-                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -135,7 +133,7 @@
 
                     <li id="top">
 
-                        <a href="MEMBER dashboard.html"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
+                        <a href="MEMBER dashboard.php"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
 
                     </li>
 
@@ -146,15 +144,15 @@
                         <ul id="applicationformsdd" class="collapse">
 
                             <li>
-                                <a href="MEMBER FALP application.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Application</a>
+                                <a href="MEMBER FALP application.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Application</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER HA application.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Application</a>
+                                <a href="MEMBER HA application.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Application</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER LIFETIME form.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Member Application</a>
+                                <a href="MEMBER LIFETIME form.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Member Application</a>
                             </li>
 
                         </ul>
@@ -163,13 +161,13 @@
 
                     <li>
 
-                        <a href="MEMBER BANKLOAN list.html"><i class="fa fa-dollar" aria-hidden="true"></i> Bank Loans</a>
+                        <a href="MEMBER BANKLOAN list.php"><i class="fa fa-dollar" aria-hidden="true"></i> Bank Loans</a>
 
                     </li>
 
                     <li>
 
-                    <a href="MEMBER DEDUCTION summary.html"><i class="fa fa-book" aria-hidden="true"></i> Salary Deduction Summary</a>
+                    <a href="MEMBER DEDUCTION summary.php"><i class="fa fa-book" aria-hidden="true"></i> Salary Deduction Summary</a>
 
                     </li>
 
@@ -180,11 +178,11 @@
                         <ul id="loantrackingdd" class="collapse">
 
                             <li>
-                                <a href="MEMBER FALP summary.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loan</a>
+                                <a href="MEMBER FALP summary.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loan</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER BANKLOAN summary.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan</a>
+                                <a href="MEMBER BANKLOAN summary.php"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan</a>
                             </li>
 
                         </ul>
@@ -198,11 +196,11 @@
                         <ul id="servicessummarydd" class="collapse">
 
                             <li>
-                                <a href="MEMBER HA summary.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Summary</a>
+                                <a href="MEMBER HA summary.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Summary</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER LIFETIME summary.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Membership Summary</a>
+                                <a href="MEMBER LIFETIME summary.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Membership Summary</a>
                             </li>
 
                         </ul>
@@ -211,13 +209,13 @@
 
                     <li>
 
-                        <a href="MEMBER AUDITRAIL.html"><i class="fa fa-backward" aria-hidden="true"></i> Audit Trail</a>
+                        <a href="MEMBER AUDITRAIL.php"><i class="fa fa-backward" aria-hidden="true"></i> Audit Trail</a>
 
                     </li>
 
                     <li>
 
-                        <a href="MEMBER FILEREPO.html"><i class="fa fa-folder" aria-hidden="true"></i> File Repository</a>
+                        <a href="MEMBER FILEREPO.php"><i class="fa fa-folder" aria-hidden="true"></i> File Repository</a>
 
                     </li>
 
@@ -236,53 +234,40 @@
                 
                     <div class="col-lg-12">
 
-                        <h1 class="page-header">Bank Loan List</h1>
+                        <h1 class="page-header">Lifetime Membership Application</h1>
                     
                     </div>
 
                 </div>
 
-                <div class="row">
+                <div class="row"> <!-- Well -->
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-1 col-1">
 
-                        <div class="panel panel-green">
 
-                            <div class="panel-heading">
 
-                                <b>Select Bank</b>
+                    </div>
 
-                            </div>
+                    <div class="col-lg-10 col-2 well">
 
-                            <div class="panel-body">
+                    <p class="welltext justify">Congratulations! You are eligible for a Lifetime Membership and its benefits! Please download, print, and fill out the forms below. Be sure to submit a NOTARIZED hard copy to the Faculty Association Office at the Faculty Center within the year. Thank you for the cooperation!</p>
 
-                                <div class="row">
+                    </div>
 
-                                    <div class="col-lg-9">
+                </div>
 
-                                    <form action="POST" method="#">
+                <div class="row"> <!-- Well -->
 
-                                        <select class="form-control">
-                                        
-                                            <option>BDO (Banco de Oro)</option>
-                                            <option>UCPB (United Coconut Planters Bank)</option>
-                                            <option>MBTC (Metropolitan Bank and Trust Company)</option>
+                    <div class="col-lg-1 col-1">
 
-                                        </select>
+                    </div>
 
-                                    </form>
+                    <div class="col-lg-10 col-2">
 
-                                    </div>
+                        <div align="center">
 
-                                    <div class="col-lg-3">
-
-                                        <input type="submit" class="btn btn-success" name="select_bank" value="Refresh Table">
-
-                                    </div>
-
-                                </div>
-
-                            </div>
+                        <img class="pdficon10" src="images/pdficon.png"> 
+                        <a class="dlform" href="#">Lifetime Membership Application Form.pdf</a>
 
                         </div>
 
@@ -290,75 +275,17 @@
 
                 </div>
 
+                <p>&nbsp;
+
                 <div class="row">
 
                     <div class="col-lg-12">
 
-                        <form action="MEMBER BANKLOAN calculator.html" method="POST"> <!-- SERVER SELF -->
+                        <div align="center">
 
-                        <table id="table" class="table table-bordered table-striped">
-                            
-                            <thead>
+                            <a href="MEMBER dashboard.php" class="btn btn-success" role="button">OK</a>
 
-                                <tr>
-
-                                <td align="center"><b>Amount to Borrow (Range)</b></td>
-                                <td align="center"><b>Interest (Fixed)</b></td>
-                                <td align="center"><b>Payment Terms (Range)</b></td>
-                                <td align="center"><b>Minimum Monthly Salary</b></td>
-                                <td align="center"><b>Actions</b></td>
-
-                                </tr>
-
-                            </thead>
-
-                            <tbody>
-
-                                <tr>
-
-                                <td align="center">₱ 20,000.00 - ₱ 50,000.00</td>
-                                <td align="center">10%</td>
-                                <td align="center">12 months - 24 months</td>
-                                <td align="center">₱ 30,000.00</td>
-                                <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-
-                                </tr>
-
-                                <tr>
-
-                                <td align="center">₱ 20,000.00 - ₱ 50,000.00</td>
-                                <td align="center">10%</td>
-                                <td align="center">12 months - 24 months</td>
-                                <td align="center">₱ 30,000.00</td>
-                                <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-
-                                </tr>
-
-                                <tr>
-
-                                <td align="center">₱ 20,000.00 - ₱ 50,000.00</td>
-                                <td align="center">10%</td>
-                                <td align="center">12 months - 24 months</td>
-                                <td align="center">₱ 30,000.00</td>
-                                <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-
-                                </tr>
-
-                                <tr>
-
-                                <td align="center">₱ 20,000.00 - ₱ 50,000.00</td>
-                                <td align="center">10%</td>
-                                <td align="center">12 months - 24 months</td>
-                                <td align="center">₱ 30,000.00</td>
-                                <td align="center">&nbsp;&nbsp;&nbsp;<input type="submit" name="details" class="btn btn-success" value="Details">&nbsp;&nbsp;&nbsp;</td>
-
-                                </tr>
-
-                            </tbody>
-
-                        </table>
-
-                        </form>
+                        </div>
 
                     </div>
 
@@ -380,17 +307,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
-    <script>
-
-        $(document).ready(function(){
-    
-            $('#table').DataTable();
-
-        });
-
-    </script>
 
 </body>
 

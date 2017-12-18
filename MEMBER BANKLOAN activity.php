@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>FRAP | Falp Summary</title>
+    <title>FRAP | Bank Loan Summary</title>
 
     <link href="css/montserrat.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
@@ -91,7 +91,7 @@
 
                         <li>
 
-                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -116,7 +116,7 @@
 
                         <li>
 
-                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -133,7 +133,7 @@
 
                     <li id="top">
 
-                        <a href="MEMBER dashboard.html"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
+                        <a href="MEMBER dashboard.php"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
 
                     </li>
 
@@ -144,15 +144,15 @@
                         <ul id="applicationformsdd" class="collapse">
 
                             <li>
-                                <a href="MEMBER FALP application.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Application</a>
+                                <a href="MEMBER FALP application.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Application</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER HA application.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Application</a>
+                                <a href="MEMBER HA application.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Application</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER LIFETIME form.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Member Application</a>
+                                <a href="MEMBER LIFETIME form.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Member Application</a>
                             </li>
 
                         </ul>
@@ -161,13 +161,13 @@
 
                     <li>
 
-                        <a href="MEMBER BANKLOAN list.html"><i class="fa fa-dollar" aria-hidden="true"></i> Bank Loans</a>
+                        <a href="MEMBER BANKLOAN list.php"><i class="fa fa-dollar" aria-hidden="true"></i> Bank Loans</a>
 
                     </li>
 
                     <li>
 
-                    <a href="MEMBER DEDUCTION summary.html"><i class="fa fa-book" aria-hidden="true"></i> Salary Deduction Summary</a>
+                    <a href="MEMBER DEDUCTION summary.php"><i class="fa fa-book" aria-hidden="true"></i> Salary Deduction Summary</a>
 
                     </li>
 
@@ -178,11 +178,11 @@
                         <ul id="loantrackingdd" class="collapse">
 
                             <li>
-                                <a href="MEMBER FALP summary.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loan</a>
+                                <a href="MEMBER FALP summary.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loan</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER BANKLOAN summary.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan</a>
+                                <a href="MEMBER BANKLOAN summary.php"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan</a>
                             </li>
 
                         </ul>
@@ -196,11 +196,11 @@
                         <ul id="servicessummarydd" class="collapse">
 
                             <li>
-                                <a href="MEMBER HA summary.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Summary</a>
+                                <a href="MEMBER HA summary.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Summary</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER LIFETIME summary.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Membership Summary</a>
+                                <a href="MEMBER LIFETIME summary.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Membership Summary</a>
                             </li>
 
                         </ul>
@@ -209,13 +209,13 @@
 
                     <li>
 
-                        <a href="MEMBER AUDITRAIL.html"><i class="fa fa-backward" aria-hidden="true"></i> Audit Trail</a>
+                        <a href="MEMBER AUDITRAIL.php"><i class="fa fa-backward" aria-hidden="true"></i> Audit Trail</a>
 
                     </li>
 
                     <li>
 
-                        <a href="MEMBER FILEREPO.html"><i class="fa fa-folder" aria-hidden="true"></i> File Repository</a>
+                        <a href="MEMBER FILEREPO.php"><i class="fa fa-folder" aria-hidden="true"></i> File Repository</a>
 
                     </li>
 
@@ -234,7 +234,7 @@
                 
                     <div class="col-lg-12">
 
-                        <h1 class="page-header">FALP Loan Summary</h1>
+                        <h1 class="page-header">Bank Loan Activity</h1>
                     
                     </div>
 
@@ -242,157 +242,117 @@
 
                     <div class="row">
 
-                        <div class="col-lg-6">
-
-                            <div class="panel panel-primary">
-
-                                <div class="panel-heading">
-
-                                    <b>Current FALP Loan Plan</b>
-
-                                </div>
-
-                                <div class="panel-body">
-
-                                <table class="table table-bordered" style="width: 100%;">
-                                
-                                <thread>
-
-                                    <tr>
-
-                                    <td align="center"><b>Description</b></td>
-                                    <td align="center"><b>Amount</b></td>
-
-                                    </tr>
-
-                                </thread>
-
-                                <tbody>
-
-                                    <tr>
-
-                                    <td>Amount to Borrow</td>
-                                    <td>₱ 20,000.00</td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Amount Payable</td>
-                                    <td>₱ 21,000.00</td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Payment Terms</td>
-                                    <td>5 months</td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Monthly Deduction</td>
-                                    <td>₱ 4,200.00</td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Number of Payments</td>
-                                    <td>10 payments</td>
-
-                                    </tr>
-
-                                    <tr>
-
-                                    <td>Per Payment Deduction</td>
-                                    <td>₱ 2,100.00</td>
-
-                                    </tr>
-
-                                </tbody>
-
-                                </table>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
 
                             <div class="panel panel-green">
 
                                 <div class="panel-heading">
 
-                                    <b>Current FALP Loan Summary</b>
+                                    <b>Bank Loan Payment Activity</b>
 
                                 </div>
 
                                 <div class="panel-body">
 
-                                    <table class="table table-bordered" style="width: 100%;">
-                                
-                                <thread>
+                                    <table class="table table-bordered">
+                                        
+                                        <thread>
 
-                                    <tr>
+                                            <tr>
 
-                                    <td align="center"><b>Description</b></td>
-                                    <td align="center"><b>Amount</b></td>
+                                            <td align="center"><b>Date</b></td>
+                                            <td align="center"><b>Deducted Amount</b></td>
+                                            <td align="center"><b>Status</b></td>
 
-                                    </tr>
+                                            </tr>
 
-                                </thread>
+                                        </thread>
 
-                                <tbody>
+                                        <tbody>
 
-                                    <tr>
+                                            <tr>
 
-                                    <td>Date Approved</td>
-                                    <td>10/23/2017</td>
+                                            <td align="center">12/15/2016</td>
+                                            <td align="center">₱ 2,100.00</td>
+                                            <td align="center">Completed</td>
 
-                                    </tr>
+                                            </tr>
 
-                                    <tr>
+                                            <tr>
 
-                                    <td>Payments Made</td>
-                                    <td>2 Payments</td>
+                                            <td align="center">12/31/2016</td>
+                                            <td align="center">₱ 2,100.00</td>
+                                            <td align="center">Completed</td>
 
-                                    </tr>
+                                            </tr>
 
-                                    <tr>
+                                            <tr>
 
-                                    <td>Payments Left</td>
-                                    <td>8 Payments</td>
+                                            <td align="center">04/15/2017</td>
+                                            <td align="center">--</td>
+                                            <td align="center">Incomplete</td>
 
-                                    </tr>
+                                            </tr>
 
-                                    <tr>
+                                            <tr>
 
-                                    <td>Total Amount Paid</td>
-                                    <td>₱ 4,200.00</td>
+                                            <td align="center">04/15/2017</td>
+                                            <td align="center">--</td>
+                                            <td align="center">Incomplete</td>
 
-                                    </tr>
+                                            </tr>
 
-                                    <tr>
+                                            <tr>
 
-                                    <td>Outstanding Balance</td>
-                                    <td>₱ 16,800.00</td>
+                                            <td align="center">04/15/2017</td>
+                                            <td align="center">--</td>
+                                            <td align="center">Incomplete</td>
 
-                                    </tr>
+                                            </tr>
 
-                                    <tr>
+                                            <tr>
 
-                                    <td>Status</td>
-                                    <td>Active</td>
+                                            <td align="center">04/15/2017</td>
+                                            <td align="center">--</td>
+                                            <td align="center">Incomplete</td>
 
-                                    </tr>
+                                            </tr>
 
-                                </tbody>
+                                            <tr>
 
-                                </table>
+                                            <td align="center">04/15/2017</td>
+                                            <td align="center">--</td>
+                                            <td align="center">Incomplete</td>
+
+                                            </tr>
+
+                                            <tr>
+
+                                            <td align="center">04/15/2017</td>
+                                            <td align="center">--</td>
+                                            <td align="center">Incomplete</td>
+
+                                            </tr>
+
+                                            <tr>
+
+                                            <td align="center">04/15/2017</td>
+                                            <td align="center">--</td>
+                                            <td align="center">Incomplete</td>
+
+                                            </tr>
+
+                                            <tr>
+
+                                            <td align="center">04/30/2017</td>
+                                            <td align="center">--</td>
+                                            <td align="center">Incomplete</td>
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
 
                                 </div>
 
@@ -410,8 +370,7 @@
 
                             <div align="center">
 
-                            <a href="MEMBER FALP activity.html" class="btn btn-success" role="button">View Payment Activity</a>
-                            <a href="MEMBER dashboard.html" class="btn btn-default" role="button">Go Back</a>
+                            <a href="MEMBER FALP summary.php" class="btn btn-default" role="button">Go Back</a>
 
                             </div>
 

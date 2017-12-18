@@ -87,7 +87,7 @@
 
                 	}
 
-                	else if ($rowPending['MEMBERSHIP_STATUS'] == 2 && $rowPending['USER_STATUS'] == 1 && $queryMem['FIRST_CHANGE_PW'] === 0) {
+                	else if ($rowPending['MEMBERSHIP_STATUS'] == 2 && $rowPending['USER_STATUS'] == 1 && $queryMem['FIRST_CHANGE_PW'] == 0) {
 
                 		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/MEMBER changepw.php");
                     	$_SESSION['usertype'] = "1";

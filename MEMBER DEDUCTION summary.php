@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>FRAP | Bank Loan Application</title>
+    <title>FRAP | Falp Application</title>
 
     <link href="css/montserrat.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
@@ -91,7 +91,7 @@
 
                         <li>
 
-                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -116,7 +116,7 @@
 
                         <li>
 
-                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -133,7 +133,7 @@
 
                     <li id="top">
 
-                        <a href="MEMBER dashboard.html"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
+                        <a href="MEMBER dashboard.php"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
 
                     </li>
 
@@ -144,15 +144,15 @@
                         <ul id="applicationformsdd" class="collapse">
 
                             <li>
-                                <a href="MEMBER FALP application.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Application</a>
+                                <a href="MEMBER FALP application.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Application</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER HA application.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Application</a>
+                                <a href="MEMBER HA application.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Application</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER LIFETIME form.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Member Application</a>
+                                <a href="MEMBER LIFETIME form.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Member Application</a>
                             </li>
 
                         </ul>
@@ -161,13 +161,13 @@
 
                     <li>
 
-                        <a href="MEMBER BANKLOAN list.html"><i class="fa fa-dollar" aria-hidden="true"></i> Bank Loans</a>
+                        <a href="MEMBER BANKLOAN list.php"><i class="fa fa-dollar" aria-hidden="true"></i> Bank Loans</a>
 
                     </li>
 
                     <li>
 
-                    <a href="MEMBER DEDUCTION summary.html"><i class="fa fa-book" aria-hidden="true"></i> Salary Deduction Summary</a>
+                    <a href="MEMBER DEDUCTION summary.php"><i class="fa fa-book" aria-hidden="true"></i> Salary Deduction Summary</a>
 
                     </li>
 
@@ -178,11 +178,11 @@
                         <ul id="loantrackingdd" class="collapse">
 
                             <li>
-                                <a href="MEMBER FALP summary.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loan</a>
+                                <a href="MEMBER FALP summary.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loan</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER BANKLOAN summary.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan</a>
+                                <a href="MEMBER BANKLOAN summary.php"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan</a>
                             </li>
 
                         </ul>
@@ -196,11 +196,11 @@
                         <ul id="servicessummarydd" class="collapse">
 
                             <li>
-                                <a href="MEMBER HA summary.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Summary</a>
+                                <a href="MEMBER HA summary.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Summary</a>
                             </li>
 
                             <li>
-                                <a href="MEMBER LIFETIME summary.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Membership Summary</a>
+                                <a href="MEMBER LIFETIME summary.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Lifetime Membership Summary</a>
                             </li>
 
                         </ul>
@@ -209,13 +209,13 @@
 
                     <li>
 
-                        <a href="MEMBER AUDITRAIL.html"><i class="fa fa-backward" aria-hidden="true"></i> Audit Trail</a>
+                        <a href="MEMBER AUDITRAIL.php"><i class="fa fa-backward" aria-hidden="true"></i> Audit Trail</a>
 
                     </li>
 
                     <li>
 
-                        <a href="MEMBER FILEREPO.html"><i class="fa fa-folder" aria-hidden="true"></i> File Repository</a>
+                        <a href="MEMBER FILEREPO.php"><i class="fa fa-folder" aria-hidden="true"></i> File Repository</a>
 
                     </li>
 
@@ -234,7 +234,7 @@
                 
                     <div class="col-lg-12">
 
-                        <h1 class="page-header">Bank Loan Application</h1>
+                        <h1 class="page-header">Deduction Summary</h1>
                     
                     </div>
 
@@ -242,19 +242,19 @@
 
                 <div class="row">
 
-                    <div class="col-lg-4 col-1">
+                    <div class="col-lg-3 col-1">
 
-                        <div class="panel panel-success" align="center">
+                        <div class="panel panel-green" align="center">
 
                             <div class="panel-heading">
 
-                            <b>Loan Amount Range</b>
+                                <b>FA Membership Fee</b>
 
                             </div>
 
                             <div class="panel-body">
 
-                                ₱ 20,000.00 - ₱ 50,000.00
+                                ₱ 100.00
 
                             </div>
 
@@ -262,19 +262,19 @@
 
                     </div>
 
-                    <div class="col-lg-4 col-2">
+                    <div class="col-lg-3 col-2">
 
-                        <div class="panel panel-success" align="center">
+                        <div class="panel panel-green" align="center">
 
                             <div class="panel-heading">
 
-                            <b>Interest Amount (Fixed)</b>
-                            
+                                <b>Health Aid Program Fee</b>
+
                             </div>
 
                             <div class="panel-body">
 
-                                10%
+                                ₱ 100.00
 
                             </div>
 
@@ -282,19 +282,39 @@
 
                     </div>
 
-                    <div class="col-lg-4 col-3">
+                    <div class="col-lg-3 col-3">
 
-                        <div class="panel panel-success" align="center">
+                        <div class="panel panel-green" align="center">
 
                             <div class="panel-heading">
 
-                            <b>Payment Terms </b>
-                            
+                                <b>FALP Loan</b>
+
                             </div>
 
                             <div class="panel-body">
 
-                                12 months - 24 months
+                                ₱ 2,100.00
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3 col-4">
+
+                        <div class="panel panel-green" align="center">
+
+                            <div class="panel-heading">
+
+                                <b>Bank Loan</b>
+
+                            </div>
+
+                            <div class="panel-body">
+
+                                ₱ 4,200.00
 
                             </div>
 
@@ -306,150 +326,99 @@
 
                 <div class="row">
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-3">
 
-                        <div class="panel panel-primary">
-
-                            <div class="panel-heading">
-
-                                <b>APPLICATION REQUIREMENTS</b>
-
-                            </div>
-
-                            <div class="panel-body">
-
-                            Requirements, upload on next page
-
-                            </div>
-
-                        </div>
 
                     </div>
 
-                </div>
+                    <div class="col-lg-6">
 
-                <hr>
+                        <div class="row">
 
-                <div class="row">
+                            <form action="#" method="POST">
 
-                    <div class="col-lg-2 col-1">
+                                <div class="col-lg-3">
 
-                    </div>
+                                    <label>View Summary As</label>
 
-                    <div class="col-lg-8 col-2">
+                                    <select class="form-control" style="margin-bottom: 20px;"> 
 
-                        <div class="panel panel-green">
+                                        <option>Per Month</option>
+                                        <option>Per Pay Period</option>
 
-                            <div class="panel-heading">
-
-                                <b>Loan Calculator</b>
-
-                            </div>
-
-                            <div class="panel-body">
-
-                            <form method="POST" action="MEMBER BANKLOAN requirements.html"> <!-- SERVERSELF, REDIRECT TO NEXT PAGE -->
-
-                                <div class="row">
-
-                                    <div class="col-lg-6 col-1">
-
-                                        <label>Enter Amount to Borrow</label>
-
-                                        <div class="form-group input-group">
-
-                                            <span class="input-group-addon"><b>₱</b></span>
-                                            <input type="text" class="form-control" placeholder="Enter Amount">
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-lg-4 col-2">
-
-                                        <div class="form-group">
-
-                                            <label>Payment Terms</label>
-
-                                            <select class="form-control">
-
-                                                <option>12</option>
-                                                <option>13</option>
-                                                <option>14</option>
-                                                <option>15</option>
-                                                <option>16</option>
-                                                <option>17</option>
-                                                <option>18</option>
-                                                <option>19</option>
-                                                <option>20</option>
-                                                <option>21</option>
-                                                <option>22</option>
-                                                <option>23</option>
-                                                <option>24</option>
-
-                                            </select>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-lg-2 col-3">
-
-                                        <input type="submit" name="compute" class="btn btn-success" value="Compute" id="falpcompute">
-
-                                    </div>
+                                    </select>
 
                                 </div>
 
-                                <div class="row">
-
-                                    <div class="col-lg-2 col-1">
-
-
-                                    </div>
-
-                                    <div class="col-lg-8 col-2">
-
-                                        <div class="well" align="center">
-
-                                            <b>Total Interest Payable: </b> ₱ 1,000.00 <p>
-                                            <p>
-                                            <b>Total Amount Payable: </b> ₱ 21,000.00 <p>
-                                            <p>
-                                            <b>Per Payment Period Payable: </b> ₱ 2,100.00 <p>
-                                            <p>
-                                            <b>Monthly Payable: </b> ₱ 4,200.00
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-lg-12">
-
-                                        <div align="center">
-
-                                        <input type="submit" name="apply" class="btn btn-success" value="Submit">
-                                        <a href="MEMBER dashboard.html" class="btn btn-default" role="button">Go Back</a>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                </div>
+                                <input type="submit" class="btn btn-success" value="View As" name="viewas" style="margin-top: 25px;">
 
                             </form>
 
                         </div>
 
+                        <table class="table table-bordered">
+                            
+                        <thread>
+
+                            <tr>
+
+                            <td align="center"><b>Payable</b></td>
+                            <td align="center" width="50%"><b>Amount</b></td>
+
+                            </tr>
+
+                        </thread>
+
+                         <tbody>
+
+                            <tr>
+
+                            <td>FA Membership Fee</td>
+                            <td>₱ 100.00</td>
+
+                            </tr>
+
+                            <tr>
+
+                            <td>Health Aid Program Fee</td>
+                            <td>₱ 100.00</td>
+
+                            </tr>
+
+                            <tr>
+
+                            <td>FALP Loan</td>
+                            <td>₱ 2,100.00</td>
+
+                            </tr>
+
+                            <tr>
+
+                            <td>Bank Loan</td>
+                            <td>₱ 4,200.00</td>
+
+                            </tr>
+
+                            <tr>
+
+                            <td><b>TOTAL</td>
+                            <td><b>₱ 6,500.00</td>
+
+                            </tr>
+
+                        </tbody>
+
+                        </table>
+
                     </div>
 
-                    <div class="col-lg-2 col-3">
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-12" align="center">
+
+                         <a href="MEMBER dashboard.php" class="btn btn-default" role="button">Go Back</a>
 
                     </div>
 

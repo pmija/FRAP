@@ -106,7 +106,7 @@ require_once('mysql_connect_FA.php');
 
                         <li>
 
-                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="login.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 
                         </li>
 
@@ -124,13 +124,13 @@ require_once('mysql_connect_FA.php');
 
                     <li id="top">
 
-                        <a href="ADMIN dashboard.html"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
+                        <a href="ADMIN dashboard.php"><i class="fa fa-area-chart" aria-hidden="true"></i> Overview</a>
 
                     </li>
 
                     <li>
 
-                        <a href="ADMIN addaccount.html"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Admin Account</a>
+                        <a href="ADMIN addaccount.php"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Admin Account</a>
 
                     </li>
 
@@ -141,19 +141,19 @@ require_once('mysql_connect_FA.php');
                         <ul id="applications" class="collapse">
 
                             <li>
-                                <a href="ADMIN MEMBERSHIP applications.html"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;Membership Pending Applications</a>
+                                <a href="ADMIN MEMBERSHIP applications.php"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;Membership Pending Applications</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN FALP applications.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;FALP Pending Applications</a>
+                                <a href="ADMIN FALP applications.php"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;FALP Pending Applications</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK applications.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan Pending Applications</a>
+                                <a href="ADMIN BANK applications.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loan Pending Applications</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN HEALTHAID applications.html"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Pending Applications</a>
+                                <a href="ADMIN HEALTHAID applications.php"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;&nbsp;Health Aid Pending Applications</a>
                             </li>
 
                         </ul>
@@ -162,7 +162,7 @@ require_once('mysql_connect_FA.php');
 
                     <li>
 
-                        <a href="ADMIN LIFETIME addmember.html"><i class="fa fa-id-card-o" aria-hidden="true"></i> Add Lifetime Member</a>
+                        <a href="ADMIN LIFETIME addmember.php"><i class="fa fa-id-card-o" aria-hidden="true"></i> Add Lifetime Member</a>
 
                     </li>
 
@@ -173,19 +173,19 @@ require_once('mysql_connect_FA.php');
                         <ul id="bankloans" class="collapse">
 
                             <li>
-                                <a href="ADMIN BANK addbank.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Add Partner Bank</a>
+                                <a href="ADMIN BANK addbank.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Add Partner Bank</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK editbank.html"><i class="fa fa-gears" aria-hidden="true"></i>&nbsp;&nbsp;Enable/Disable Partner Bank</a>
+                                <a href="ADMIN BANK editbank.php"><i class="fa fa-gears" aria-hidden="true"></i>&nbsp;&nbsp;Enable/Disable Partner Bank</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK addplan.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Add Bank Loan Plan</a>
+                                <a href="ADMIN BANK addplan.php"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;Add Bank Loan Plan</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK editplan.html"><i class="fa fa-gears" aria-hidden="true"></i>&nbsp;&nbsp;Enable/Disable Bank Loan Plan</a>
+                                <a href="ADMIN BANK editplan.php"><i class="fa fa-gears" aria-hidden="true"></i>&nbsp;&nbsp;Enable/Disable Bank Loan Plan</a>
                             </li>
 
                         </ul>
@@ -199,11 +199,11 @@ require_once('mysql_connect_FA.php');
                         <ul id="members" class="collapse">
 
                             <li>
-                                <a href="ADMIN MEMBERS viewmembers.html"><i class="fa fa-group" aria-hidden="true"></i>&nbsp;&nbsp;View All Members</a>
+                                <a href="ADMIN MEMBERS viewmembers.php"><i class="fa fa-group" aria-hidden="true"></i>&nbsp;&nbsp;View All Members</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN MEMBERS viewstatus.html"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Member's Services</a>
+                                <a href="ADMIN MEMBERS viewstatus.php"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Member's Services</a>
                             </li>
 
                         </ul>
@@ -217,11 +217,11 @@ require_once('mysql_connect_FA.php');
                         <ul id="loans" class="collapse">
 
                             <li>
-                                <a href="ADMIN FALP viewactive.html"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loans</a>
+                                <a href="ADMIN FALP viewactive.php"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;&nbsp;FALP Loans</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN BANK viewactive.html"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loans</a>
+                                <a href="ADMIN BANK viewactive.php"><i class="fa fa-institution" aria-hidden="true"></i>&nbsp;&nbsp;Bank Loans</a>
                             </li>
 
                         </ul>
@@ -235,11 +235,11 @@ require_once('mysql_connect_FA.php');
                         <ul id="dreports" class="collapse">
 
                             <li>
-                                <a href="ADMIN DREPORT general.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;General Deductions</a>
+                                <a href="ADMIN DREPORT general.php"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;General Deductions</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN DREPORT detailed.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;Detailed Deductions</a>
+                                <a href="ADMIN DREPORT detailed.php"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;Detailed Deductions</a>
                             </li>
 
                         </ul>
@@ -253,11 +253,11 @@ require_once('mysql_connect_FA.php');
                         <ul id="preports" class="collapse">
 
                             <li>
-                                <a href="ADMIN PREPORT completed.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;Completed Loans</a>
+                                <a href="ADMIN PREPORT completed.php"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;Completed Loans</a>
                             </li>
 
                             <li>
-                                <a href="ADMIN PREPORT new.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;New Deductions</a>
+                                <a href="ADMIN PREPORT new.php"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;New Deductions</a>
                             </li>
 
                         </ul>
@@ -266,7 +266,7 @@ require_once('mysql_connect_FA.php');
 
                                         <li>
 
-                        <a href="ADMIN MREPORT report.html"><i class="fa fa-table" aria-hidden="true"></i> Monthly Report</a>
+                        <a href="ADMIN MREPORT report.php"><i class="fa fa-table" aria-hidden="true"></i> Monthly Report</a>
 
                     </li>
 
@@ -277,12 +277,12 @@ require_once('mysql_connect_FA.php');
                         <ul id="repo" class="collapse">
 
                             <li>
-                                <a href="ADMIN FILEREPO.html"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;&nbsp;View Documents</a>
+                                <a href="ADMIN FILEREPO.php"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;&nbsp;View Documents</a>
                             </li>
 
                             <li>
 
-                                <a href="ADMIN FILEREPO upload.html"><i class="fa fa-upload" aria-hidden="true"></i> Upload Documents</a>
+                                <a href="ADMIN FILEREPO upload.php"><i class="fa fa-upload" aria-hidden="true"></i> Upload Documents</a>
 
                             </li>
 
@@ -292,7 +292,7 @@ require_once('mysql_connect_FA.php');
 
                     <li>
 
-                        <a href="ADMIN MANAGE.html"><i class="fa fa-gears" aria-hidden="true"></i> Admin Management</a>
+                        <a href="ADMIN MANAGE.php"><i class="fa fa-gears" aria-hidden="true"></i> Admin Management</a>
 
                     </li>
 
